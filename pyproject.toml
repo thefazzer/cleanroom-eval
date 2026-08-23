@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cleanroom-eval"
+version = "1.0.0"
+description = "Clean-room capital-markets agent evaluation: sealed synthetic episodes, task contracts, reward-hacking gates, hash-bound evidence"
+readme = "README.md"
+license = {file = "LICENSE"}
+requires-python = ">=3.11"
+dependencies = ["cryptography>=42", "jsonschema>=4.20"]
+
+[tool.setuptools]
+packages = ["cleanroom_eval", "cleanroom_eval.evidence", "cleanroom_eval.release", "cleanroom_corpus"]
+
+[tool.setuptools.package-data]
+cleanroom_eval = ["assets/**/*", "schemas/*", "mock_training/*", "README.md"]
