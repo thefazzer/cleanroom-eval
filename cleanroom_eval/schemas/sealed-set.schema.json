@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-sealed-set-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "set_id",
+    "classification",
+    "status",
+    "assets",
+    "asset_count",
+    "asset_list_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "cleanroom.sealed-set/v1"},
+    "set_id": {"pattern": "^cmo_cleanroom_sealed_v[0-9]+$"},
+    "classification": {"const": "CLEANROOM_SYNTHETIC"},
+    "status": {"const": "FROZEN"},
+    "assets": {
+      "type": "array",
+      "minItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": {"type": "string", "not": {"pattern": "(^/|\\.\\.)"}},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "asset_count": {"type": "integer", "minimum": 42},
+    "asset_list_sha256": {"pattern": "^[0-9a-f]{64}$"}
+  }
+}
+

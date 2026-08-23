@@ -1,0 +1,31 @@
+{
+  "schema": "cleanroom.evaluation-preregistration/v1",
+  "preregistration_id": "cmo_cleanroom_preregistration_v1",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "status": "FROZEN_BEFORE_RUN",
+  "episode_set_id": "cmo_cleanroom_sealed_v1",
+  "primary_metric": {
+    "id": "sealed_episode_deterministic_success_rate",
+    "unit": "episode",
+    "denominator": "all 40 sealed test episodes",
+    "success_rule": "An episode scores 1 only when deterministic replay, authorization, version, conservation, evidence sufficiency, unsupported-claim refusal and every committed adversarial mutation pass; otherwise it scores 0.",
+    "aggregation": "arithmetic mean across the complete sealed episode set",
+    "missing_result_policy": "score zero",
+    "direction": "higher_is_better"
+  },
+  "secondary_metrics": [
+    "competency-level deterministic success rate",
+    "unsupported economic-claim refusal rate",
+    "adversarial mutation rejection rate"
+  ],
+  "analysis_lock": {
+    "episode_exclusions_after_run": 0,
+    "metric_redefinition_after_run": false,
+    "required_causal_contrasts": [
+      "SFT-BASE",
+      "SFT-SFT_MATCHED_CONTROL",
+      "RL-SFT",
+      "RL-RL_MATCHED_CONTROL"
+    ]
+  }
+}

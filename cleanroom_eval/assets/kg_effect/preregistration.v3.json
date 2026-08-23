@@ -1,0 +1,116 @@
+{
+  "schema": "cleanroom.kg-effect-preregistration/v3",
+  "preregistration_id": "ficta_cleanroom_kg_effect_v3",
+  "supersedes_for_future_runs": "ficta_cleanroom_kg_effect_v2",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "status": "PROTOCOL_FROZEN_BEFORE_EXECUTION_WITH_UNMET_THREAD_GATE",
+  "frozen_at": "2026-07-31",
+  "purpose": "Correct the transfer-partition boundary before any provider call while inheriting the v2 arms, metrics, scenario population, model plan, semantic validator, budget contract and ten evaluation questions unchanged.",
+  "base_protocol": {
+    "path": "cleanroom_eval/assets/kg_effect/preregistration.v2.json",
+    "file_sha256": "98b4098ad926191d2b9e475701d84b0e570ad3f859869430aac214b674eeb765",
+    "canonical_self_sha256": "1f376963604aaaa3523541edad7df441264332cb8ec0d260af9a9c97f6d8ad01",
+    "inheritance": "All v2 provisions remain binding except scenario_population.transfer_partitions, scenario_population.partition_invariants and their transfer-boundary interpretation, which this document replaces."
+  },
+  "v2_transfer_disposition": {
+    "status": "INADMISSIBLE_PREEXECUTION_NO_PROVIDER_CALLS_ALLOWED",
+    "reason": "The v2 diagnostic joined lifecycle events transitively through shared actors and objects. Common institutional operators therefore connected all 500 scenarios into one component, which cannot fit a maximum partition capacity of 350.",
+    "known_component_count": 1,
+    "largest_known_component": 500,
+    "registered_maximum_partition": 350,
+    "catalogue_sha256": "56ba9d918a76880cec8dab1b59bc0e6876fdf2b2c0aeed7dbc1372ea54c87aea",
+    "assessment_sha256": "97d471eb1709fe2726ff0837ff18fd3f9e83d6da44adc9107902a4d3d237b147",
+    "interpretation": "This is a specification defect, not negative evidence about KG value and not a runtime failure. No v2 result may be reported."
+  },
+  "transfer_partition_contract": {
+    "population": 500,
+    "targets": {
+      "sealed_iid": 350,
+      "unseen_clients": 40,
+      "unseen_products": 30,
+      "unseen_staff_hierarchies": 30,
+      "unseen_scenario_families": 50
+    },
+    "assignment_unit": "An indivisible focal business-root closure component. The component contains the focal root, focal-root lifecycle events, focal source records, focal exact/near-duplicate derivatives, explicit focal message threads and the scenario family.",
+    "focal_boundary": {
+      "focal_business_root": "The typed trade, case, client, person or truth-atom subject named by the scenario cluster.",
+      "event_chain": "All lifecycle events whose subject is the focal business root. Shared actors and related objects are provenance context and never connect unrelated roots.",
+      "held_out_identity": "The client entity, product entity, complete focal employee reporting lineage, or scenario-family cluster selected by the assigned transfer dimension.",
+      "permitted_shared_context": "Institution, venue, system, shared operator, related object and non-selected identity context may recur. It cannot be promoted into the held-out focal identity or used to derive its answer.",
+      "provider_state": "Every call is isolated. Provider conversations, caches containing request content and model-visible state may not carry evidence or answers between scenarios."
+    },
+    "holdout_semantics": {
+      "unseen_clients": "Requires a resolved canonical client identity cluster and its full alias closure for the focal trade/case/client question.",
+      "unseen_products": "Requires a resolved canonical product entity identity and its full alias closure; a trade-product linkage or product text label is not a substitute.",
+      "unseen_staff_hierarchies": "Requires the complete reports_to lineage from the focal employee or case assignee to its reporting root, including every lineage identity alias closure.",
+      "unseen_scenario_families": "Requires the committed latent scenario-family cluster, never a generated question-string hash.",
+      "sealed_iid": "Contains no selected transfer identity and receives only components not assigned to another exact target."
+    },
+    "closure_invariants": [
+      "No focal business root crosses transfer partitions.",
+      "No focal source record crosses transfer partitions.",
+      "No focal exact-duplicate or near-duplicate cluster crosses transfer partitions.",
+      "No explicit focal message-thread cluster crosses transfer partitions.",
+      "No scenario-family cluster crosses transfer partitions.",
+      "Every non-IID assignment has a typed focal identity of the assigned dimension.",
+      "Alias closure is resolved from the content-addressed world entity catalogue for the focal root and selected held-out identity.",
+      "Source-reference truth atoms and artifact IDs must exactly match the content-addressed provenance span.",
+      "Subject-line similarity, question wording, generator knowledge and caller-authored empty arrays cannot establish message-thread closure."
+    ],
+    "fail_closed_fields": [
+      "focal root identity",
+      "focal alias closure",
+      "focal source-record closure",
+      "focal exact and near-duplicate closure",
+      "explicit message-thread closure",
+      "typed identity eligibility",
+      "exact target counts"
+    ]
+  },
+  "preexecution_assessment": {
+    "scenario_manifest_sha256": "5862d506be25e733b28b5ae57818b57be522713a715a90abc81b67c7700bfa44",
+    "focal_catalogue_sha256": "a22be1a0fad3eb7c3917192c586139b026f825253af27b50ff897df1a54f2910",
+    "provisional_partition_manifest_sha256": "464bfb790afbedf43c894cf940db0581b7c507594f063e4b06d71bd8b7f9c16c",
+    "known_component_count": 421,
+    "largest_known_component": 6,
+    "known_constraints_exactly_packable": true,
+    "provisional_counts": {
+      "sealed_iid": 350,
+      "unseen_clients": 40,
+      "unseen_products": 30,
+      "unseen_staff_hierarchies": 30,
+      "unseen_scenario_families": 50
+    },
+    "selected_focal_identity_cluster_count": 112,
+    "explicit_thread_closure": false,
+    "focal_message_artifacts_without_explicit_thread_metadata": 381,
+    "admissible": false,
+    "status": "PACKABLE_BUT_INADMISSIBLE_MISSING_EXPLICIT_THREAD_METADATA",
+    "consequence": "The exact split is now structurally feasible, but no smoke or target provider call may begin until explicit message-thread metadata is generated, content-addressed and the catalogue and assignment are rebuilt."
+  },
+  "additional_preexecution_commitments": {
+    "required_sha256_commitments": [
+      "focal_transfer_catalogue_sha256",
+      "focal_transfer_partition_manifest_sha256",
+      "explicit_message_thread_catalogue_sha256",
+      "method_development_identity_and_source_catalogue_sha256"
+    ],
+    "hard_gates": {
+      "exact_partition_counts": true,
+      "focal_closure_crossings": 0,
+      "missing_explicit_thread_ids": 0,
+      "typed_identity_assignment_failures": 0,
+      "provider_cross_call_state_reuse": 0
+    },
+    "binding_rule": "All additional commitments and v2 commitments must be present in one immutable signed preexecution manifest before the first smoke-prefix call. A provisional or incomplete partition manifest is not bindable."
+  },
+  "analysis_lock": {
+    "v2_results_permitted": false,
+    "v3_calls_before_thread_gate": false,
+    "target_counts_may_change_after_execution": false,
+    "focal_boundary_may_change_after_execution": false,
+    "protocol_change_rule": "Any further material change requires preregistration v4 with a new canonical self digest before execution."
+  },
+  "self_digest_algorithm": "sha256(canonical-json(document-without-self_sha256); UTF-8; keys sorted; separators comma+colon; ensure_ascii=false)",
+  "self_sha256": "b1603f58dc95bbdca0d26f74afbe0429caf4df3c6cebbd20898b3a9cb6e0175f"
+}

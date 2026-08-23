@@ -1,0 +1,166 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-citation-acceptance-run-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "provider",
+    "execution_mode",
+    "task_set",
+    "acceptance_status",
+    "metrics",
+    "gates",
+    "records",
+    "receipt_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "cleanroom.citation-acceptance-run/v1"},
+    "provider": {"type": "string", "minLength": 1},
+    "execution_mode": {"enum": ["MOCK_ONLY", "REAL_PROVIDER"]},
+    "task_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["set_id", "manifest_sha256", "task_list_sha256"],
+      "properties": {
+        "set_id": {"type": "string", "minLength": 1},
+        "manifest_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+        "task_list_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "acceptance_status": {"enum": ["PASS", "INCOMPLETE"]},
+    "metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "attempted_calls",
+        "completed_calls",
+        "completion_rate",
+        "schema_valid_selections",
+        "schema_valid_selection_rate",
+        "semantic_valid_selections",
+        "rendered_schema_valid_objects",
+        "rendered_schema_valid_rate",
+        "evidence_outside_set",
+        "unsupported_additions",
+        "rejected_refusals",
+        "other_validation_rejections",
+        "oracle_mismatches"
+      ],
+      "properties": {
+        "attempted_calls": {"type": "integer", "minimum": 1},
+        "completed_calls": {"type": "integer", "minimum": 0},
+        "completion_rate": {"type": "number", "minimum": 0, "maximum": 1},
+        "schema_valid_selections": {"type": "integer", "minimum": 0},
+        "schema_valid_selection_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "semantic_valid_selections": {"type": "integer", "minimum": 0},
+        "rendered_schema_valid_objects": {"type": "integer", "minimum": 0},
+        "rendered_schema_valid_rate": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "evidence_outside_set": {"type": "integer", "minimum": 0},
+        "unsupported_additions": {"type": "integer", "minimum": 0},
+        "rejected_refusals": {"type": "integer", "minimum": 0},
+        "other_validation_rejections": {"type": "integer", "minimum": 0},
+        "oracle_mismatches": {"type": "integer", "minimum": 0}
+      }
+    },
+    "gates": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "exactly_500_calls",
+        "minimum_99pct_completed",
+        "all_completed_outputs_schema_valid",
+        "all_completed_outputs_semantically_valid",
+        "all_completed_outputs_match_oracle",
+        "all_completed_citation_objects_schema_valid",
+        "no_evidence_outside_supplied_set",
+        "no_unsupported_additions",
+        "no_rejected_or_uncited_refusals",
+        "real_provider_execution",
+        "frozen_task_set_verified"
+      ],
+      "properties": {
+        "exactly_500_calls": {"type": "boolean"},
+        "minimum_99pct_completed": {"type": "boolean"},
+        "all_completed_outputs_schema_valid": {"type": "boolean"},
+        "all_completed_outputs_semantically_valid": {"type": "boolean"},
+        "all_completed_outputs_match_oracle": {"type": "boolean"},
+        "all_completed_citation_objects_schema_valid": {"type": "boolean"},
+        "no_evidence_outside_supplied_set": {"type": "boolean"},
+        "no_unsupported_additions": {"type": "boolean"},
+        "no_rejected_or_uncited_refusals": {"type": "boolean"},
+        "real_provider_execution": {"type": "boolean"},
+        "frozen_task_set_verified": {"type": "boolean"}
+      }
+    },
+    "records": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sequence",
+          "task_id",
+          "task_sha256",
+          "oracle_sha256",
+          "provider_completed",
+          "selection_schema_valid",
+          "semantic_valid",
+          "rendered_schema_valid",
+          "oracle_match",
+          "selection_sha256",
+          "rendered_sha256",
+          "error_code"
+        ],
+        "properties": {
+          "sequence": {"type": "integer", "minimum": 1},
+          "task_id": {"type": "string", "minLength": 1},
+          "task_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "oracle_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+          "provider_completed": {"type": "boolean"},
+          "selection_schema_valid": {"type": "boolean"},
+          "semantic_valid": {"type": "boolean"},
+          "rendered_schema_valid": {"type": "boolean"},
+          "oracle_match": {"type": "boolean"},
+          "selection_sha256": {
+            "anyOf": [
+              {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              {"type": "null"}
+            ]
+          },
+          "rendered_sha256": {
+            "anyOf": [
+              {"type": "string", "pattern": "^[0-9a-f]{64}$"},
+              {"type": "null"}
+            ]
+          },
+          "error_code": {
+            "anyOf": [
+              {
+                "enum": [
+                  "EVIDENCE_OUTSIDE_SET",
+                  "REFUSAL_REJECTED",
+                  "UNSUPPORTED_ADDITION",
+                  "SCHEMA_INVALID",
+                  "VALIDATION_REJECTED",
+                  "ORACLE_MISMATCH"
+                ]
+              },
+              {"type": "null"}
+            ]
+          }
+        }
+      }
+    },
+    "receipt_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

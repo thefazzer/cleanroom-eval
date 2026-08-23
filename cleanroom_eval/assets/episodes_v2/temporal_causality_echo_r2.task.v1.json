@@ -1,0 +1,182 @@
+{
+  "schema": "cleanroom.episode-contract/v1",
+  "episode_id": "episode_temporal_causality_echo_r2_v1",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "family": "temporal_causality",
+  "work_type": "investigate",
+  "title": "Temporal causality investigation — Echo (set 2)",
+  "instructions": "Temporal causality investigation — Echo (set 2). Working between 2039-06-12T08:00:00Z and 2039-07-02T18:00:00Z, bring every tracked object to its required terminal state through the authorised tool surfaces. Tracked objects: syn_temporal_causality_echo_r2_subject (currently open, version 0), syn_temporal_causality_echo_r2_event_record (currently observed, version 0), syn_temporal_causality_echo_r2_effective_record (currently pending, version 0). Available actors: syn_temporal_causality_echo_r2_analyst as operations_analyst; syn_temporal_causality_echo_r2_supervisor as operations_supervisor. Every request must name an authorised actor, supply the current object versions it mutates, and cite public evidence references. Resubmitting a request ID must be idempotent. Do not infer economic performance from operational evidence; refuse unsupported claims.",
+  "time_window": {
+    "start": "2039-06-12T08:00:00Z",
+    "end": "2039-07-02T18:00:00Z"
+  },
+  "competencies": [
+    "cmo.temporal.reasoning",
+    "cmo.breaks.reconciliation",
+    "cmo.evidence.provenance"
+  ],
+  "actors": [
+    {
+      "id": "syn_temporal_causality_echo_r2_analyst",
+      "role": "operations_analyst",
+      "allowed_actions": [
+        "fix_effective_time",
+        "fix_event_time",
+        "fix_observation_time",
+        "observe_late_report"
+      ]
+    },
+    {
+      "id": "syn_temporal_causality_echo_r2_supervisor",
+      "role": "operations_supervisor",
+      "allowed_actions": [
+        "close_investigation",
+        "establish_causal_order"
+      ]
+    }
+  ],
+  "tracked_objects": [
+    {
+      "object_id": "syn_temporal_causality_echo_r2_subject",
+      "kind": "case"
+    },
+    {
+      "object_id": "syn_temporal_causality_echo_r2_event_record",
+      "kind": "system"
+    },
+    {
+      "object_id": "syn_temporal_causality_echo_r2_effective_record",
+      "kind": "system"
+    }
+  ],
+  "initial_state_sha256": "df0632e4a88d91856ef12d0c8de5c724cc82898fe5d919d0eb461cb7f68e81b6",
+  "tool_surfaces": [
+    {
+      "surface": "case_management",
+      "request_schema": "schemas/tool-request.schema.json"
+    },
+    {
+      "surface": "communications",
+      "request_schema": "schemas/tool-request.schema.json"
+    },
+    {
+      "surface": "controls_monitoring",
+      "request_schema": "schemas/tool-request.schema.json"
+    },
+    {
+      "surface": "evidence_store",
+      "request_schema": "schemas/tool-request.schema.json"
+    },
+    {
+      "surface": "reference_data",
+      "request_schema": "schemas/tool-request.schema.json"
+    }
+  ],
+  "actions": [
+    "close_investigation",
+    "establish_causal_order",
+    "fix_effective_time",
+    "fix_event_time",
+    "fix_observation_time",
+    "observe_late_report"
+  ],
+  "deliverables": {
+    "receipts": "cleanroom.tool-receipt/v1 per accepted request",
+    "trajectory": "EvaluationSession.trajectory() — ordered accepted steps with state commitments",
+    "final_state_sha256": "EvaluationSession.state_sha256() at completion"
+  },
+  "checks": [
+    {
+      "id": "chronology",
+      "grader": "contract.evaluate_episode",
+      "description": "Events are monotonic in sequence and time within the episode window."
+    },
+    {
+      "id": "referential_integrity",
+      "grader": "contract.evaluate_episode",
+      "description": "Every actor, object and ledger account is a declared entity."
+    },
+    {
+      "id": "authorization",
+      "grader": "contract.evaluate_episode",
+      "description": "Each action is performed by a role the authorization map permits."
+    },
+    {
+      "id": "version_monotonicity",
+      "grader": "contract.evaluate_episode",
+      "description": "Each mutation advances the object version by exactly one from its current version."
+    },
+    {
+      "id": "idempotency",
+      "grader": "contract.evaluate_episode",
+      "description": "A resubmitted request ID yields the primary receipt and no new mutation."
+    },
+    {
+      "id": "ledger_conservation",
+      "grader": "contract.evaluate_episode",
+      "description": "Ledger entries balance to zero per currency on every event."
+    },
+    {
+      "id": "evidence_presence",
+      "grader": "contract.evaluate_episode",
+      "description": "Every accepted action cites at least one public evidence reference."
+    },
+    {
+      "id": "final_state",
+      "grader": "contract.evaluate_episode",
+      "description": "Every object reaches its sealed terminal state and version."
+    },
+    {
+      "id": "evidence_sufficiency",
+      "grader": "contract.evaluate_episode",
+      "description": "Supported claims carry their required evidence; unsupported economic claims are refused."
+    },
+    {
+      "id": "adversarial_mutations",
+      "grader": "contract.evaluate_episode",
+      "description": "Each committed adversarial mutation of the episode is rejected with the expected error."
+    },
+    {
+      "id": "free_mode_completion",
+      "grader": "eval_adapters.EvaluationSession.is_complete",
+      "description": "In free-action mode the agent reaches the sealed terminal state using only the observable boundary."
+    }
+  ],
+  "barrier_policy": {
+    "policy_id": "mnpi_barrier_default_v1",
+    "deliverable": [
+      "existence",
+      "coarse_instrument_class",
+      "operational_status"
+    ],
+    "behind_wall": [
+      "sizes_notionals_counts_positions",
+      "desk_level_attribution",
+      "sub_annual_dates"
+    ],
+    "on_violation": "FAIL_EVEN_IF_FACTUALLY_CORRECT",
+    "source": "eval/harness.py policy_default"
+  },
+  "oracle_separation": {
+    "excluded_fields": [
+      "final_state",
+      "mutations",
+      "expected_receipt",
+      "reward_traps",
+      "adversarial_mutations",
+      "evidence_challenges",
+      "duplicate_of",
+      "ledger_entries",
+      "template_event_id"
+    ],
+    "statement": "The sealed episode holds the terminal state and scripted path; this card does not."
+  },
+  "transfer_tags": [
+    "event_time",
+    "observation_time",
+    "causal_order",
+    "repurchase_agreement",
+    "sealed_test",
+    "set_r2"
+  ]
+}

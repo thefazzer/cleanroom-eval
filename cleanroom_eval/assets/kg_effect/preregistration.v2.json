@@ -1,0 +1,990 @@
+{
+  "schema": "cleanroom.kg-effect-preregistration/v2",
+  "preregistration_id": "ficta_cleanroom_kg_effect_v2",
+  "supersedes_for_future_runs": "ficta_cleanroom_kg_effect_v1",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "status": "PROTOCOL_FROZEN_BEFORE_EXECUTION",
+  "frozen_at": "2026-07-31",
+  "purpose": "Estimate the causal and operational value of synthetic banking-operations knowledge-graph evidence after repairing temporal projection, semantic scoring, negative evidence and control-arm construction.",
+  "scope": {
+    "institution_profile": "synthetic-ficta-4181",
+    "source_reach": "Only content-addressed clean-room synthetic institution artefacts and separately identified public external-timeline facts bound in the preexecution manifest.",
+    "restricted_corpus_access": "PROHIBITED",
+    "model_training": "No model is trained or fine-tuned during this evaluation. Held-out means unseen by method development, query-rule development and provider calls.",
+    "claim_limit": "Results estimate performance on the sealed scenario population and registered transfer panels; they do not establish performance on every banking operation or institution."
+  },
+  "primary_estimand": {
+    "id": "delta_kg_semantic_strict",
+    "treatment_arm": "E4",
+    "control_arm": "E1",
+    "contrast": "E4-E1",
+    "metric": "semantic_strict_success",
+    "unit": "sealed scenario family",
+    "paired": true,
+    "interpretation": "Incremental Semantic Strict success attributable to the integrated synthetic graph over exact-budget-matched flat retrieval from the same clean-room evidence universe."
+  },
+  "arms": [
+    {
+      "id": "E0",
+      "name": "BASE_MODEL_ONLY",
+      "class": "core",
+      "material": "No scenario evidence; only the frozen question, options and response contract.",
+      "role": "unassisted base-model baseline",
+      "graph_enabled": false,
+      "runtime_selection": "none"
+    },
+    {
+      "id": "E1",
+      "name": "FLAT_TEXT_RETRIEVAL",
+      "class": "core",
+      "material": "Deterministic flat retrieval over the complete committed clean-room source-evidence universe without graph topology or ontology traversal.",
+      "role": "primary matched control",
+      "graph_enabled": false,
+      "runtime_selection": "question-aware retrieval over the committed flat universe"
+    },
+    {
+      "id": "E2",
+      "name": "CANONICAL_ATOMS_ONLY",
+      "class": "core",
+      "material": "Canonical instance atoms and relations without ontology inheritance, graph traversal or computed aggregates.",
+      "role": "canonical-atom contribution control",
+      "graph_enabled": false,
+      "runtime_selection": "deterministic selection over the committed atom universe"
+    },
+    {
+      "id": "E3",
+      "name": "ARCHETYPES_ONLY",
+      "class": "core",
+      "material": "The committed banking archetypes, predicates and inheritance rules with all institution instances removed and instance leakage audited.",
+      "role": "ontology and archetype contribution control",
+      "graph_enabled": false,
+      "runtime_selection": "deterministic selection over the committed instance-free archetype universe"
+    },
+    {
+      "id": "E4",
+      "name": "SYNTHETIC_KG",
+      "class": "core",
+      "material": "Canonical atoms, archetypes, provenance, effective-time state and production graph traversal over the committed clean-room institution.",
+      "role": "graph treatment",
+      "graph_enabled": true,
+      "runtime_selection": "question-aware graph planning and traversal"
+    },
+    {
+      "id": "E5",
+      "name": "SEMANTICS_DESTROYED_SHAM_KG",
+      "class": "core",
+      "material": "A topology-preserving sham produced by a committed bijective semantic permutation of the full graph candidate universe before any query sees or selects it.",
+      "role": "structure-only sham control",
+      "graph_enabled": true,
+      "runtime_selection": "question-aware selection only after full-universe semantic destruction"
+    },
+    {
+      "id": "E6",
+      "name": "ORACLE_EVIDENCE_UPPER_BOUND",
+      "class": "core",
+      "material": "The precommitted minimum sufficient evidence set resolved by opaque scenario ID without exposing answers, scoring keys, support labels or question text at runtime.",
+      "role": "evidence-selection upper bound",
+      "graph_enabled": false,
+      "runtime_selection": "question-free lookup in a preexecution-committed scenario-to-evidence manifest"
+    },
+    {
+      "id": "E7",
+      "name": "IRRELEVANT_MATCHED_GRAPH_CONTROL",
+      "class": "core",
+      "material": "Exact-budget- and structure-matched clean-room graph evidence selected from a precommitted irrelevant universe by opaque scenario and run commitments.",
+      "role": "relevance and specificity control",
+      "graph_enabled": true,
+      "runtime_selection": "question-free deterministic selection from a preexecution-committed irrelevant universe"
+    },
+    {
+      "id": "H1",
+      "name": "GRAPH_PLUS_SOURCE_HYBRID",
+      "class": "diagnostic",
+      "material": "Graph-planned canonical claims joined to original clean-room source passages, with one shared supplied-evidence allowlist and deterministic claim-level citation rendering.",
+      "role": "hybrid graph-plus-source diagnostic",
+      "graph_enabled": true,
+      "runtime_selection": "question-aware graph planning followed by source passage resolution"
+    }
+  ],
+  "scenario_population": {
+    "sealed_original_scenarios": 500,
+    "supported_scenarios": 400,
+    "unsupported_scenarios": 100,
+    "scenario_generation": "Questions, expected decisions, explicit action requests, support scopes, evidence allowlists, minimum evidence sets, family clusters and scoring keys are committed before any provider call.",
+    "missing_result_policy": "Every missing, malformed, timed-out, refused-by-provider or unscorable response remains in its registered denominator with all binary success metrics scored 0.",
+    "strata": [
+      {
+        "id": "people_employment_seniority_reporting",
+        "support_class": "supported",
+        "target": 46
+      },
+      {
+        "id": "client_account_product_counterparty_resolution",
+        "support_class": "supported",
+        "target": 46
+      },
+      {
+        "id": "trade_booking_allocation_fix_lifecycle",
+        "support_class": "supported",
+        "target": 46
+      },
+      {
+        "id": "reconciliation_breaks_ownership_escalation",
+        "support_class": "supported",
+        "target": 45
+      },
+      {
+        "id": "settlement_reference_confirmation",
+        "support_class": "supported",
+        "target": 45
+      },
+      {
+        "id": "collateral_margin_valuation",
+        "support_class": "supported",
+        "target": 45
+      },
+      {
+        "id": "permissions_segregation_release",
+        "support_class": "supported",
+        "target": 38
+      },
+      {
+        "id": "temporal_causality_effective_dating",
+        "support_class": "supported",
+        "target": 45
+      },
+      {
+        "id": "provenance_contradiction_duplicates_uncertainty_refusal",
+        "support_class": "unsupported",
+        "target": 100
+      },
+      {
+        "id": "cross_case_concentration_motifs_dependencies_risk",
+        "support_class": "supported",
+        "target": 44
+      }
+    ],
+    "transfer_partitions": [
+      {
+        "id": "sealed_iid",
+        "target": 350,
+        "holdout_basis": "all entities and families may be represented in method-development fixtures, but no sealed instance or source record is exposed"
+      },
+      {
+        "id": "unseen_clients",
+        "target": 40,
+        "holdout_basis": "client identity cluster"
+      },
+      {
+        "id": "unseen_products",
+        "target": 30,
+        "holdout_basis": "product identity cluster"
+      },
+      {
+        "id": "unseen_staff_hierarchies",
+        "target": 30,
+        "holdout_basis": "connected employment and reporting component"
+      },
+      {
+        "id": "unseen_scenario_families",
+        "target": 50,
+        "holdout_basis": "latent episode and scenario-template family"
+      }
+    ],
+    "partition_invariants": [
+      "No entity alias, source record, event chain, message thread, near-duplicate cluster or temporal derivative may cross a declared holdout boundary.",
+      "All method-development fixtures are committed and proved disjoint from the 500 sealed scenarios before execution.",
+      "The family-cluster identifier, not a generated question string, is the statistical and leakage-control unit."
+    ]
+  },
+  "variant_panels": {
+    "held_out_paraphrases": {
+      "base_scenarios": 500,
+      "variants_per_base": 1,
+      "target_variants": 500,
+      "arms": [
+        "E1",
+        "E4",
+        "H1"
+      ],
+      "provider_repeats": 1,
+      "construction": "A deterministic committed paraphrase generator changes wording and option order while preserving entities, requested action, truth, evidence scope and family cluster.",
+      "held_out_rule": "Paraphrase templates and lexical substitutions are disjoint from method-development query phrases and are frozen before any provider call.",
+      "primary_transfer_measure": "Within-arm Semantic Strict difference between paraphrase and original at the matching seed, plus the paired E4-E1 paraphrase contrast."
+    },
+    "adversarial_mutations": {
+      "base_scenarios": 500,
+      "mutations_per_base": 1,
+      "target_mutations": 500,
+      "arms": [
+        "E1",
+        "E4",
+        "H1"
+      ],
+      "provider_repeats": 1,
+      "families": [
+        {
+          "id": "entity_swap",
+          "target": 100
+        },
+        {
+          "id": "date_shift",
+          "target": 100
+        },
+        {
+          "id": "polarity_reversal",
+          "target": 100
+        },
+        {
+          "id": "contradiction_injection",
+          "target": 100
+        },
+        {
+          "id": "unsupported_addition",
+          "target": 100
+        }
+      ],
+      "construction": "One deterministic mutation is assigned per base scenario by committed balanced permutation. The mutation oracle commits whether truth, required action, support class, evidence allowlist or effective-time state changes.",
+      "acceptance": "Semantic Strict must reject polarity, relation, qualifier, effective-time and unsupported-claim errors rather than preserving an answer solely because its citation ID exists."
+    }
+  },
+  "metric_contract": {
+    "primary_metric": {
+      "id": "semantic_strict_success",
+      "display_name": "Semantic Strict",
+      "type": "binary_per_scenario_per_repeat",
+      "direction": "higher_is_better",
+      "denominator": "all registered calls in the applicable panel, including missing and malformed calls",
+      "supported_success_requires_all": [
+        "the expected factual option set is exact",
+        "the expected action is exact when and only when the question explicitly requests an action",
+        "the refusal decision is exact",
+        "the response and citation-selection objects satisfy their frozen schemas",
+        "every material claim is linked to evidence selected from the supplied evidence-ID allowlist",
+        "the linked proposition entails the claim with the correct subject, predicate, object, polarity and qualifiers",
+        "effective-time, observed-time and recorded-time semantics are not conflated",
+        "all required material insights are present",
+        "no unsupported addition is present"
+      ],
+      "unsupported_success_requires_all": [
+        "the unsupported conclusion is not asserted",
+        "the declared query scope and completeness or known-gap evidence justify the refusal",
+        "the response does not generalise beyond the declared evidence scope",
+        "the refusal has a schema-valid citation selected from the supplied evidence-ID allowlist",
+        "no entity, amount, state, cause or action is invented"
+      ],
+      "missing_result_score": 0
+    },
+    "reported_metrics": [
+      {
+        "id": "decision_tuple_success",
+        "display_name": "Decision tuple",
+        "definition": "Exact factual option set, explicitly requested action and refusal decision."
+      },
+      {
+        "id": "harness_strict_success",
+        "display_name": "Harness Strict",
+        "definition": "Decision tuple plus response-schema validity, required citation presence and evidence-ID allowlist membership; it does not assert semantic entailment."
+      },
+      {
+        "id": "factual_option_accuracy",
+        "definition": "Exact factual option-set accuracy independent of action and citation."
+      },
+      {
+        "id": "explicit_action_accuracy",
+        "definition": "Exact action accuracy only over questions that explicitly request an action; null-action cases are a separately reported denominator."
+      },
+      {
+        "id": "refusal_accuracy",
+        "definition": "Exact supported-versus-refuse decision."
+      },
+      {
+        "id": "grounded_claim_precision",
+        "definition": "Semantically entailed material claims divided by all material claims."
+      },
+      {
+        "id": "material_supported_insight_recall",
+        "definition": "Required supported insights present divided by committed required insights."
+      },
+      {
+        "id": "citation_semantic_validity_rate",
+        "definition": "Citations whose proposition matches relation, polarity, qualifiers and effective time divided by citations checked."
+      },
+      {
+        "id": "temporal_causal_accuracy",
+        "definition": "Exact state and causal conclusion at the requested effective-time cutoff."
+      },
+      {
+        "id": "unsupported_claim_rate",
+        "definition": "Unsupported material claims divided by all material claims."
+      },
+      {
+        "id": "latency_and_cost",
+        "definition": "Retrieval, graph, provider, validation and rendering latency; input/output tokens and provider cost, reported without optimizing the primary metric."
+      }
+    ],
+    "semantic_validator_contract": {
+      "model_output": "The model selects schema-constrained claim objects and evidence IDs; it never writes rendered citation links.",
+      "renderer": "A deterministic renderer attaches citations after validation.",
+      "checks": [
+        "evidence allowlist membership",
+        "subject-predicate-object entailment",
+        "polarity",
+        "qualifiers",
+        "effective time",
+        "required-insight completeness",
+        "grounded refusal scope",
+        "unsupported additions"
+      ],
+      "known_bad_fixture_rejection_rate": 1.0,
+      "unsupported_addition_disposition": "Semantic Strict failure",
+      "uncited_refusal_disposition": "Semantic Strict failure",
+      "prompt_only_or_id_membership_scoring_prohibited": true
+    }
+  },
+  "material_construction": {
+    "committed_source_universes": [
+      "flat source evidence",
+      "canonical atom projection",
+      "instance-free archetype catalogue",
+      "full synthetic graph",
+      "full-universe semantics-destroyed sham",
+      "precommitted oracle evidence map",
+      "precommitted irrelevant graph pool",
+      "graph-to-original-source resolution index"
+    ],
+    "e5_full_universe_rule": {
+      "order": [
+        "commit the complete E4 candidate graph universe",
+        "apply one deterministic bijective semantic permutation across the complete universe",
+        "prove item count and topology invariants",
+        "commit the sham-universe digest",
+        "only then allow a selector to receive the question and sham universe"
+      ],
+      "prohibited": "Selecting relevant E4 evidence before destroying its semantics."
+    },
+    "e6_question_free_rule": {
+      "selection_inputs": [
+        "opaque scenario commitment",
+        "precommitted scenario-to-evidence manifest",
+        "run commitment",
+        "budget specification"
+      ],
+      "selection_excludes": [
+        "question text",
+        "answer options",
+        "gold answer",
+        "expected action",
+        "support label",
+        "answer vocabulary"
+      ],
+      "commitment_deadline": "The scenario-to-evidence manifest is signed before any question variant or provider request is materialised."
+    },
+    "e7_question_free_rule": {
+      "selection_inputs": [
+        "opaque scenario commitment",
+        "precommitted irrelevant-universe commitment",
+        "run commitment",
+        "budget specification"
+      ],
+      "selection_excludes": [
+        "question text",
+        "answer options",
+        "gold answer",
+        "expected action",
+        "support label",
+        "answer vocabulary"
+      ],
+      "relevance_audit": "No entity, event-chain, evidence, alias or near-duplicate cluster from the scenario may occur in the selected irrelevant material."
+    },
+    "h1_hybrid_rule": {
+      "channels": [
+        "graph-derived canonical claims and paths",
+        "original clean-room source passages resolved from graph provenance"
+      ],
+      "channel_requirement": "Every supported H1 call contains at least one graph-derived item and one provenance-resolved original source passage. Unsupported calls contain graph scope/completeness evidence and the source passage establishing the observed gap or contradiction.",
+      "channel_audit": "Per-call item, byte and provider-token contributions are reported separately for graph and source channels before the merged exact-budget audit.",
+      "merge": "Stable deterministic merge into one opaque evidence-ID allowlist before the model request.",
+      "citation": "Model-selected evidence IDs are semantically validated and rendered after inference."
+    }
+  },
+  "budget_contract": {
+    "measurement_unit": "The exact canonical JSON evidence array placed in the provider request.",
+    "required_measurements_per_call": [
+      "item_count",
+      "utf8_byte_count",
+      "provider_token_count",
+      "payload_sha256"
+    ],
+    "tokenizer": "The exact provider tokenizer identifier and revision are bound before execution; heuristic token estimates cannot satisfy a match.",
+    "exact_match_set": [
+      "E1",
+      "E2",
+      "E3",
+      "E4",
+      "E5",
+      "E6",
+      "E7",
+      "H1"
+    ],
+    "exact_equal_fields_within_scenario_model_and_variant": [
+      "item_count",
+      "utf8_byte_count",
+      "provider_token_count"
+    ],
+    "e0_budget": {
+      "item_count": 0,
+      "utf8_byte_count": 2,
+      "explanation": "The canonical empty evidence array is []."
+    },
+    "material_fit": "A deterministic pre-provider material fitter may select and explicitly truncate provider-visible record text. It must preserve evidence IDs and semantic assertions and must commit both source and fitted payload digests.",
+    "semantic_padding_or_filler": "PROHIBITED",
+    "failure_policy": "If every evidence-bearing arm cannot be fit exactly on items, UTF-8 bytes and provider tokens without semantic padding, the scenario block fails preexecution and the target run may not begin.",
+    "cross_model_rule": "Economical and stronger models receive byte-identical material and questions. Provider-token counts are measured under each bound tokenizer and matched across arms within that model; tokenizer differences across models are reported, not disguised."
+  },
+  "blinding_and_leakage": {
+    "provider_receives_only": [
+      "question and answer options",
+      "opaque unlabeled evidence envelope",
+      "response schema",
+      "inference configuration",
+      "seed"
+    ],
+    "provider_request_excludes": [
+      "arm identity or role",
+      "factor names",
+      "enabled or ablated labels",
+      "gold answer",
+      "expected evidence IDs",
+      "scoring rubric",
+      "support class",
+      "scenario partition name",
+      "model comparison role"
+    ],
+    "opaque_identifiers": "Provider-visible evidence, entity, relation and scenario identifiers are deterministic opaque IDs with no arm, source-kind, truth or answer vocabulary.",
+    "scorer_blinding": "Responses receive randomized opaque IDs; arm, model and repeat identities are unsealed only after deterministic and semantic verdicts are committed.",
+    "leakage_audits": [
+      "exact and near-duplicate source clusters",
+      "entity aliases",
+      "event chains and message threads",
+      "question and answer vocabulary",
+      "arm and factor labels",
+      "scenario-family partition boundaries"
+    ]
+  },
+  "model_and_execution_plan": {
+    "economical_model": {
+      "role": "primary frozen base model",
+      "identity": "bound by model identifier, provider, revision and digest before execution",
+      "temperature": "bound and identical across arms",
+      "core_provider_repeats": 3,
+      "repeat_seeds": 3
+    },
+    "stronger_model": {
+      "role": "predeclared capacity upper-bound model",
+      "designation_rule": "Selected and bound before execution using provider tier and independent published capability evidence, never observed evaluation outcomes.",
+      "identity": "bound by model identifier, provider, revision and digest before execution",
+      "comparison_provider_repeats": 1
+    },
+    "panels": [
+      {
+        "id": "economical_core",
+        "model": "economical_model",
+        "scenario_count": 500,
+        "arms": [
+          "E0",
+          "E1",
+          "E2",
+          "E3",
+          "E4",
+          "E5",
+          "E6",
+          "E7"
+        ],
+        "repeats": 3,
+        "planned_calls": 12000
+      },
+      {
+        "id": "economical_hybrid",
+        "model": "economical_model",
+        "scenario_count": 500,
+        "arms": [
+          "H1"
+        ],
+        "repeats": 3,
+        "planned_calls": 1500
+      },
+      {
+        "id": "paraphrase_transfer",
+        "model": "economical_model",
+        "scenario_count": 500,
+        "arms": [
+          "E1",
+          "E4",
+          "H1"
+        ],
+        "repeats": 1,
+        "planned_calls": 1500
+      },
+      {
+        "id": "adversarial_mutation",
+        "model": "economical_model",
+        "scenario_count": 500,
+        "arms": [
+          "E1",
+          "E4",
+          "H1"
+        ],
+        "repeats": 1,
+        "planned_calls": 1500
+      },
+      {
+        "id": "stronger_model_matched",
+        "model": "stronger_model",
+        "scenario_count": 500,
+        "arms": [
+          "E1",
+          "E4",
+          "H1"
+        ],
+        "repeats": 1,
+        "planned_calls": 1500
+      },
+      {
+        "id": "live_copilot_six",
+        "model": "economical_model",
+        "scenario_count": 6,
+        "arms": [
+          "H1"
+        ],
+        "repeats": 3,
+        "planned_calls": 18
+      }
+    ],
+    "total_planned_calls": 18018,
+    "smoke_prefix": {
+      "scenario_count": 20,
+      "arms": [
+        "E0",
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "H1"
+      ],
+      "repeats": 1,
+      "planned_calls": 180,
+      "included_in_target_denominator": true,
+      "rule": "The smoke is the frozen first-repeat prefix, not an adaptive pilot. No prompt, arm, score or scenario may change after seeing it; otherwise the run is abandoned and a new preregistration is required."
+    },
+    "execution_order": "A precommitted balanced Latin-square order over arm, model and repeat within scenario-family cluster.",
+    "retry_policy": "Only transport-level retries with the identical request digest are allowed. A retry is not an independent repeat; exhausted retries score 0 under the missing-result policy.",
+    "seed_policy": "All seeds and balanced orders are committed before the first call and forwarded to providers that support deterministic seeds; unsupported provider seeding is recorded."
+  },
+  "hard_gates": {
+    "minimum_completed_call_rate": 0.99,
+    "minimum_completed_scenario_block_rate": 0.99,
+    "schema_valid_citation_selection_rate_on_completed_calls": 1.0,
+    "citations_outside_supplied_evidence_set": 0,
+    "known_bad_semantic_fixtures_accepted": 0,
+    "gold_or_arm_identity_leaks": 0,
+    "post_execution_exclusions": 0,
+    "budget_match_violations": 0,
+    "question_text_reads_by_E6_or_E7": 0,
+    "E5_pre_scramble_question_aware_selections": 0,
+    "hybrid_single_channel_collapses": 0,
+    "scenario_partition_leaks": 0,
+    "material_or_model_changes_after_smoke": 0,
+    "semantic_grounding_noninferiority": {
+      "metric": "grounded_claim_precision",
+      "contrast": "E4-E1",
+      "minimum_delta": -0.01,
+      "confidence_bound": "lower simultaneous 95% bound"
+    },
+    "failure_disposition": "A failed hard gate makes the entire affected panel INADMISSIBLE. It cannot be described as positive, null or negative evidence about KG effect. Model errors such as unsupported additions or uncited refusals receive Semantic Strict 0; only validator failure to reject known-bad fixtures is a hard-gate failure."
+  },
+  "statistical_analysis": {
+    "analysis_population": "intention-to-evaluate over every registered scenario, variant, arm, model and repeat",
+    "primary_contrast": "E4-E1 on Semantic Strict in economical_core",
+    "point_estimate": "For each scenario, average binary Semantic Strict over its three registered repeats, then take the paired arm difference and average across all 500 scenarios.",
+    "confidence_level": 0.95,
+    "confidence_interval": {
+      "method": "hierarchical paired cluster bootstrap",
+      "bootstrap_samples": 20000,
+      "outer_resampling_unit": "scenario_family_cluster",
+      "outer_stratification": "scenario stratum and transfer partition",
+      "inner_resampling_unit": "provider repeat seed within sampled scenario",
+      "interval": "two-sided bias-corrected and accelerated interval",
+      "committed_seed": "bound before execution"
+    },
+    "confirmatory_secondary_family": [
+      "E4-E5",
+      "E4-E7",
+      "H1-E4",
+      "H1-E1",
+      "E6-E4",
+      "stronger_minus_economical interaction on E4-E1"
+    ],
+    "multiple_comparison_policy": {
+      "primary": "E4-E1 is the sole primary comparison and uses two-sided alpha 0.05 without adjustment.",
+      "confirmatory_secondary": "Control family-wise error at 0.05 with Holm-Bonferroni adjusted p-values and simultaneous Holm-adjusted 95% confidence intervals across the six registered contrasts.",
+      "question_subgroups": "Within each evaluation question, apply Holm-Bonferroni across its registered subgroup contrasts; across exploratory subgroup families also report Benjamini-Hochberg q-values at false-discovery rate 0.05.",
+      "unregistered": "Any unregistered contrast is exploratory, receives no causal label and is clearly separated from confirmatory results."
+    },
+    "repeatability": {
+      "metrics": [
+        "per-arm between-repeat Semantic Strict range",
+        "scenario-level unanimous-outcome rate",
+        "Fleiss kappa across three repeats",
+        "intraclass correlation for continuous secondary scores",
+        "provider completion and latency variation"
+      ],
+      "independence_guard": "Repeated calls are not treated as independent scenarios; all uncertainty preserves scenario-family clustering."
+    },
+    "model_capacity_analysis": {
+      "matched_seed": "The stronger_model_matched panel uses the same committed seed-zero questions, materials, order and response contract as the economical model's seed-zero E1, E4 and H1 calls.",
+      "primary_interaction": "(E4-E1)_stronger minus (E4-E1)_economical",
+      "hybrid_interaction": "(H1-E1)_stronger minus (H1-E1)_economical",
+      "interpretation": "A positive interaction indicates model capacity changes the value extracted from structured evidence; a near-zero interaction with similar errors indicates evidence construction or scoring is the tighter bottleneck."
+    },
+    "decision_rules": {
+      "POSITIVE": "All hard gates pass; the lower 95% primary E4-E1 bound exceeds zero; the Holm-adjusted lower bounds for E4-E5 and E4-E7 exceed zero; and the semantic-grounding noninferiority gate passes.",
+      "NEGATIVE": "All hard gates pass and the upper 95% primary E4-E1 bound is below zero.",
+      "NULL": "All hard gates pass and the primary E4-E1 interval includes zero, or its lower bound exceeds zero but either required sham contrast does not clear its Holm-adjusted zero bound.",
+      "INADMISSIBLE": "A hard gate fails, a preexecution commitment is missing, or the registered denominator is altered.",
+      "practical_relevance_threshold": "Report whether the absolute E4-E1 effect reaches 0.05 Semantic Strict points; this label does not replace the statistical classification."
+    }
+  },
+  "failure_taxonomy": {
+    "classification_order": [
+      "evaluation_contract",
+      "provider_or_runtime",
+      "preprocessing_or_modelling",
+      "retrieval_or_query_planning",
+      "negative_evidence_or_grounding",
+      "model_reasoning",
+      "semantic_postprocessing",
+      "rendering_or_product_integration",
+      "genuine_source_coverage_gap",
+      "no_failure"
+    ],
+    "required_stage_evidence": [
+      "contract and schema verdicts",
+      "provider request, response, completion and retry telemetry",
+      "source-to-atom and atom-to-graph provenance",
+      "retrieval candidates, selected evidence and graph plan",
+      "declared query scope and completeness evidence",
+      "model claim and decision objects",
+      "semantic verdicts by relation, polarity, qualifier and time",
+      "deterministic rendered output",
+      "source-universe search proving a required fact is absent"
+    ],
+    "more_data_gate": "Additional synthetic source content is allowed only for genuine_source_coverage_gap after all earlier stages pass and the required fact is proved absent from the committed complete source universe.",
+    "single_label_rule": "Assign the earliest demonstrated causal failure as primary and retain all later consequences as secondary labels."
+  },
+  "evaluation_questions": [
+    {
+      "id": "Q01",
+      "question": "Does the KG advantage survive unseen paraphrases once phrase-specific query triggers are removed?",
+      "panels": [
+        "economical_core",
+        "paraphrase_transfer"
+      ],
+      "arms": [
+        "E1",
+        "E4"
+      ],
+      "metrics": [
+        "semantic_strict_success",
+        "decision_tuple_success"
+      ],
+      "analysis": "Paired E4-E1 contrast on paraphrases and difference-in-differences between paraphrase and original; report lexical-template and scenario-family subgroups."
+    },
+    {
+      "id": "Q02",
+      "question": "How much of the gain comes separately from canonical atoms, ontology/archetypes, topology, retrieval relevance and computed aggregates?",
+      "panels": [
+        "economical_core"
+      ],
+      "arms": [
+        "E0",
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7"
+      ],
+      "metrics": [
+        "semantic_strict_success",
+        "material_supported_insight_recall"
+      ],
+      "analysis": "Report E2-E0 for atoms, E3-E0 for archetypes, E4-E2 and E4-E5 for integrated topology/semantics, E6-E1 and E4-E7 for retrieval relevance, and E4-E1 within the aggregate stratum. Components are non-additive; report interaction residual rather than claiming a Shapley decomposition."
+    },
+    {
+      "id": "Q03",
+      "question": "Does a hybrid graph-plus-source arm outperform graph-only and flat-only evidence on semantic grounding?",
+      "panels": [
+        "economical_core",
+        "economical_hybrid"
+      ],
+      "arms": [
+        "E1",
+        "E4",
+        "H1"
+      ],
+      "metrics": [
+        "semantic_strict_success",
+        "grounded_claim_precision",
+        "citation_semantic_validity_rate"
+      ],
+      "analysis": "Paired H1-E4 and H1-E1 contrasts under the same evidence budget, with simultaneous corrected intervals."
+    },
+    {
+      "id": "Q04",
+      "question": "Can the system prove absence within a declared evidence scope rather than infer absence from a short neighbourhood?",
+      "panels": [
+        "economical_core",
+        "economical_hybrid",
+        "adversarial_mutation"
+      ],
+      "arms": [
+        "E1",
+        "E4",
+        "H1"
+      ],
+      "metrics": [
+        "semantic_strict_success",
+        "refusal_accuracy",
+        "grounded_claim_precision"
+      ],
+      "analysis": "Evaluate unsupported and contradiction strata plus unsupported-addition mutations; separate bounded zero-result, complete-scope, known-gap and unjustified-global-absence verdicts."
+    },
+    {
+      "id": "Q05",
+      "question": "Do effective-time queries remain correct under late-arriving observations, corrections and contradictory timestamps?",
+      "panels": [
+        "economical_core",
+        "adversarial_mutation"
+      ],
+      "arms": [
+        "E1",
+        "E4",
+        "H1"
+      ],
+      "metrics": [
+        "semantic_strict_success",
+        "temporal_causal_accuracy"
+      ],
+      "analysis": "Paired contrasts within the temporal stratum and date-shift/contradiction mutations, keyed to committed state_at(cutoff) oracles that keep effective, observed and recorded times distinct."
+    },
+    {
+      "id": "Q06",
+      "question": "Does performance transfer to unseen clients, products, staff hierarchies and scenario families?",
+      "panels": [
+        "economical_core",
+        "paraphrase_transfer"
+      ],
+      "arms": [
+        "E1",
+        "E4",
+        "H1"
+      ],
+      "metrics": [
+        "semantic_strict_success",
+        "material_supported_insight_recall"
+      ],
+      "analysis": "Report paired contrasts and noninferiority gaps for unseen_clients, unseen_products, unseen_staff_hierarchies and unseen_scenario_families against sealed_iid, using family-cluster intervals."
+    },
+    {
+      "id": "Q07",
+      "question": "Is the economical model the bottleneck after evidence and scoring are fixed, or does a stronger model add little?",
+      "panels": [
+        "economical_core",
+        "economical_hybrid",
+        "stronger_model_matched"
+      ],
+      "arms": [
+        "E1",
+        "E4",
+        "H1"
+      ],
+      "metrics": [
+        "semantic_strict_success",
+        "grounded_claim_precision",
+        "latency_and_cost"
+      ],
+      "analysis": "Matched seed-zero model main effects and model-by-evidence interactions on byte-identical questions and materials."
+    },
+    {
+      "id": "Q08",
+      "question": "How stable are results across repeated provider calls?",
+      "panels": [
+        "economical_core",
+        "economical_hybrid"
+      ],
+      "arms": [
+        "E0",
+        "E1",
+        "E2",
+        "E3",
+        "E4",
+        "E5",
+        "E6",
+        "E7",
+        "H1"
+      ],
+      "metrics": [
+        "semantic_strict_success",
+        "decision_tuple_success",
+        "latency_and_cost"
+      ],
+      "analysis": "Three-repeat unanimous rate, Fleiss kappa, intraclass correlation, arm-level range and provider completion/latency variation without treating repeats as independent scenarios."
+    },
+    {
+      "id": "Q09",
+      "question": "Can the live Copilot answer all six audit questions completely, concisely and with claim-level citations?",
+      "panels": [
+        "live_copilot_six"
+      ],
+      "arms": [
+        "H1"
+      ],
+      "metrics": [
+        "semantic_strict_success",
+        "material_supported_insight_recall",
+        "citation_semantic_validity_rate",
+        "latency_and_cost"
+      ],
+      "analysis": "Each of six precommitted editable audit questions must pass Semantic Strict in all three repeats; report answer words, material-insight recall, claim-level citation validity and stage latency."
+    },
+    {
+      "id": "Q10",
+      "question": "Which residual failures are true missing-data gaps rather than modelling, retrieval, reasoning or rendering failures?",
+      "panels": [
+        "economical_core",
+        "economical_hybrid",
+        "paraphrase_transfer",
+        "adversarial_mutation",
+        "stronger_model_matched",
+        "live_copilot_six"
+      ],
+      "arms": [
+        "E1",
+        "E4",
+        "H1"
+      ],
+      "metrics": [
+        "semantic_strict_success"
+      ],
+      "analysis": "Classify every Semantic Strict failure with the registered stage-evidence taxonomy; permit the missing-data label only after a complete source-universe search proves the required fact absent."
+    }
+  ],
+  "question_answer_contract": {
+    "required_question_ids": [
+      "Q01",
+      "Q02",
+      "Q03",
+      "Q04",
+      "Q05",
+      "Q06",
+      "Q07",
+      "Q08",
+      "Q09",
+      "Q10"
+    ],
+    "answer_statuses": [
+      "SUPPORTED",
+      "NOT_SUPPORTED",
+      "INCONCLUSIVE",
+      "INADMISSIBLE"
+    ],
+    "required_answer_fields": [
+      "question_id",
+      "status",
+      "plain_english_answer",
+      "effect_estimates",
+      "confidence_intervals",
+      "assumptions",
+      "limitations",
+      "evidence_artifact_paths",
+      "evidence_artifact_sha256s"
+    ],
+    "rule": "All ten questions are answered after frozen scoring. No answer may rely on an unregistered metric, omit a failed call from its denominator or substitute narrative opinion for a content-addressed result."
+  },
+  "commitment_protocol": {
+    "status": "SPECIFICATION_ONLY_UNBOUND",
+    "run_values_present_in_this_document": false,
+    "binding_deadline": "Before the first smoke-prefix or target provider call, whichever occurs first.",
+    "binding_artifact": "A separate immutable Ed25519-signed and timestamped preexecution manifest resolved and reverified by the runner.",
+    "required_sha256_commitments": [
+      "original_scenario_set_sha256",
+      "scenario_family_partition_sha256",
+      "method_development_fixture_set_sha256",
+      "paraphrase_manifest_sha256",
+      "mutation_manifest_sha256",
+      "live_question_set_sha256",
+      "synthetic_kg_sha256",
+      "synthetic_kg_lineage_sha256",
+      "ontology_frame_sha256",
+      "flat_source_universe_sha256",
+      "canonical_atom_universe_sha256",
+      "archetype_universe_sha256",
+      "sham_full_universe_sha256",
+      "oracle_material_manifest_sha256",
+      "irrelevant_universe_sha256",
+      "graph_source_resolution_index_sha256",
+      "material_builder_sha256",
+      "control_builder_sha256",
+      "retriever_implementations_sha256",
+      "provider_tokenizers_sha256",
+      "response_schema_sha256",
+      "citation_selection_schema_sha256",
+      "deterministic_renderer_sha256",
+      "semantic_validator_sha256",
+      "failure_classifier_sha256",
+      "scoring_rubric_sha256",
+      "economical_model_sha256",
+      "stronger_model_sha256",
+      "inference_configurations_sha256",
+      "prompt_template_sha256",
+      "seed_and_order_schedule_sha256",
+      "evaluator_code_commit_sha256"
+    ],
+    "required_bindings": [
+      "exact provider and model identifiers and revisions",
+      "exact tokenizer identifiers and revisions",
+      "all 500 scenario IDs, strata, family clusters and transfer partitions",
+      "all 500 paraphrase and 500 mutation IDs and base-scenario bindings",
+      "all E0-E7 and H1 material source and fitted payload digests and exact budgets",
+      "question-free E6 and E7 selector entrypoints",
+      "full-universe-before-selection E5 audit",
+      "balanced call order and three repeat seeds",
+      "planned call count and evaluation start timestamp",
+      "Ed25519 signer identity, public key and signature"
+    ],
+    "prohibited": [
+      "invented or caller-authored placeholder hashes",
+      "self-reported provider counts without request and response receipts",
+      "post-smoke prompt, metric, arm, material, model or scenario changes",
+      "question, gold, support or answer-vocabulary access by E6 or E7 selectors",
+      "E4 relevance selection reused before E5 semantic destruction",
+      "provider-token estimation by a tokenizer other than the bound provider tokenizer",
+      "unsigned replacement of a committed artefact"
+    ]
+  },
+  "analysis_lock": {
+    "post_execution_exclusions": 0,
+    "metric_redefinition_after_execution": false,
+    "arm_or_model_relabeling_after_execution": false,
+    "adaptive_repeat_or_retry_count": false,
+    "unregistered_primary_contrast": false,
+    "protocol_change_rule": "Any material change requires a new preregistration ID and canonical self digest before execution."
+  },
+  "self_digest_algorithm": "sha256(canonical-json(document-without-self_sha256); UTF-8; keys sorted; separators comma+colon; ensure_ascii=false)",
+  "self_sha256": "1f376963604aaaa3523541edad7df441264332cb8ec0d260af9a9c97f6d8ad01"
+}

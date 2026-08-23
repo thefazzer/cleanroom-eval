@@ -1,0 +1,13 @@
+cryptography==46.0.5
+iniconfig==2.3.0
+jsonschema==4.26.0
+numpy==2.4.2
+packaging==25.0
+pluggy==1.6.0
+pyarrow==23.0.1
+python-dotenv==1.2.1
+PyYAML==6.0.1
+Pygments==2.17.2
+pytest==9.0.2
+tokenizers==0.22.2
+websockets==16.0

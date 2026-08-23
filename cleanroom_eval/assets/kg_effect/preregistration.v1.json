@@ -1,0 +1,385 @@
+{
+  "schema": "cleanroom.kg-effect-preregistration/v1",
+  "preregistration_id": "ficta_cleanroom_kg_effect_v1",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "status": "PROTOCOL_FROZEN_BEFORE_EXECUTION",
+  "purpose": "Estimate the causal effect of synthetic knowledge-graph structure on a fixed base language model's banking-operations intelligence.",
+  "estimand": {
+    "id": "delta_kg",
+    "treatment_arm": "E4",
+    "control_arm": "E1",
+    "contrast": "E4-E1",
+    "interpretation": "The incremental effect of graph topology, canonical archetypes and graph traversal over budget-matched flat retrieval from the same clean-room evidence universe.",
+    "unit": "scenario",
+    "paired": true
+  },
+  "arms": [
+    {
+      "id": "E0",
+      "name": "BASE_MODEL_ONLY",
+      "material": "No scenario evidence; only the frozen question and response contract.",
+      "role": "unassisted base-model baseline",
+      "graph_enabled": false
+    },
+    {
+      "id": "E1",
+      "name": "FLAT_TEXT_RETRIEVAL",
+      "material": "Deterministic flat retrieval over the clean-room evidence records, without graph topology or ontology traversal.",
+      "role": "primary matched control",
+      "graph_enabled": false
+    },
+    {
+      "id": "E2",
+      "name": "CANONICAL_ATOMS_ONLY",
+      "material": "Canonical clean-room entities, properties, values and relations rendered without traversal or archetype inheritance.",
+      "role": "atom contribution control",
+      "graph_enabled": false
+    },
+    {
+      "id": "E3",
+      "name": "ARCHETYPES_ONLY",
+      "material": "The frozen banking ontology, canonical predicates and inheritance rules with all institution instances removed.",
+      "role": "archetype contribution control",
+      "graph_enabled": false
+    },
+    {
+      "id": "E4",
+      "name": "SYNTHETIC_KG",
+      "material": "Canonical atoms, archetypes, provenance, temporal observations and production graph traversal over the clean-room institution.",
+      "role": "treatment",
+      "graph_enabled": true
+    },
+    {
+      "id": "E5",
+      "name": "SEMANTICS_DESTROYED_SHAM_KG",
+      "material": "A byte-, item-, degree- and topology-matched graph whose semantic labels and values are deterministically permuted before execution.",
+      "role": "structure-only sham control",
+      "graph_enabled": true
+    },
+    {
+      "id": "E6",
+      "name": "ORACLE_EVIDENCE_UPPER_BOUND",
+      "material": "The precommitted minimum sufficient clean-room evidence selected by the scenario author, without answers, scoring labels or hidden state.",
+      "role": "evidence upper bound",
+      "graph_enabled": false
+    },
+    {
+      "id": "E7",
+      "name": "IRRELEVANT_MATCHED_GRAPH_CONTROL",
+      "material": "A byte-, item- and structure-matched clean-room graph drawn from banking evidence irrelevant to the scenario.",
+      "role": "specificity control",
+      "graph_enabled": true
+    }
+  ],
+  "scenario_population": {
+    "target_scenarios": 500,
+    "smoke_scenarios": 20,
+    "target_arm_calls": 4000,
+    "harness_smoke_arm_calls": 80,
+    "confirmatory_smoke_arm_calls": 160,
+    "supported_scenarios": 400,
+    "unsupported_scenarios": 100,
+    "scenario_generation": "Scenario definitions, expected decisions, minimum evidence sets, mutation families and scoring keys are sealed before any model call.",
+    "missing_result_policy": "A missing, malformed, timed-out or unscorable response receives strict success 0; scenarios may not be excluded after execution.",
+    "strata": [
+      {
+        "id": "people_employment_seniority_reporting",
+        "support_class": "supported",
+        "target": 46,
+        "smoke": 2
+      },
+      {
+        "id": "client_account_product_counterparty_resolution",
+        "support_class": "supported",
+        "target": 46,
+        "smoke": 2
+      },
+      {
+        "id": "trade_booking_allocation_fix_lifecycle",
+        "support_class": "supported",
+        "target": 46,
+        "smoke": 2
+      },
+      {
+        "id": "reconciliation_breaks_ownership_escalation",
+        "support_class": "supported",
+        "target": 45,
+        "smoke": 2
+      },
+      {
+        "id": "settlement_reference_confirmation",
+        "support_class": "supported",
+        "target": 45,
+        "smoke": 2
+      },
+      {
+        "id": "collateral_margin_valuation",
+        "support_class": "supported",
+        "target": 45,
+        "smoke": 2
+      },
+      {
+        "id": "permissions_segregation_release",
+        "support_class": "supported",
+        "target": 38,
+        "smoke": 1
+      },
+      {
+        "id": "temporal_causality_effective_dating",
+        "support_class": "supported",
+        "target": 45,
+        "smoke": 1
+      },
+      {
+        "id": "provenance_contradiction_duplicates_uncertainty_refusal",
+        "support_class": "unsupported",
+        "target": 100,
+        "smoke": 4
+      },
+      {
+        "id": "cross_case_concentration_motifs_dependencies_risk",
+        "support_class": "supported",
+        "target": 44,
+        "smoke": 2
+      }
+    ]
+  },
+  "primary_metric": {
+    "id": "strict_banking_scenario_success_rate",
+    "type": "binary_per_scenario",
+    "direction": "higher_is_better",
+    "denominator": "all 500 precommitted scenarios",
+    "aggregation": "arithmetic mean within arm, followed by the paired E4-E1 scenario-level contrast",
+    "supported_success_requires_all": [
+      "required operational conclusion or action is correct",
+      "required material insights are present",
+      "every factual claim is semantically entailed by supplied evidence",
+      "temporal, polarity, relation and qualifier semantics are correct",
+      "every evidence-bearing claim has a schema-valid citation selected from the supplied evidence IDs",
+      "no unsupported addition is present"
+    ],
+    "unsupported_success_requires_all": [
+      "the requested unsupported conclusion is not asserted",
+      "the material evidence gap or contradiction is identified",
+      "no entity, amount, state, cause or action is invented",
+      "the refusal is grounded by a schema-valid citation to the supplied insufficiency or contradiction evidence"
+    ],
+    "missing_result_score": 0
+  },
+  "secondary_metrics": [
+    {
+      "id": "operational_decision_accuracy",
+      "direction": "higher_is_better"
+    },
+    {
+      "id": "material_supported_insight_recall",
+      "direction": "higher_is_better"
+    },
+    {
+      "id": "grounded_claim_precision",
+      "direction": "higher_is_better"
+    },
+    {
+      "id": "temporal_causal_accuracy",
+      "direction": "higher_is_better"
+    },
+    {
+      "id": "unsupported_claim_rate",
+      "direction": "lower_is_better"
+    },
+    {
+      "id": "unsupported_scenario_refusal_accuracy",
+      "direction": "higher_is_better"
+    },
+    {
+      "id": "citation_semantic_validity_rate",
+      "direction": "higher_is_better"
+    },
+    {
+      "id": "latency_ms_and_input_output_tokens",
+      "direction": "reported_not_optimized"
+    }
+  ],
+  "matched_execution": {
+    "base_model_identity_equal_across_arms": true,
+    "inference_configuration_equal_across_arms": true,
+    "question_bytes_equal_across_arms": true,
+    "seed_schedule_equal_across_arms": true,
+    "response_schema_equal_across_arms": true,
+    "arm_order": "deterministic balanced randomization within scenario and seed",
+    "primary_pair": {
+      "arms": [
+        "E1",
+        "E4"
+      ],
+      "retrieved_evidence_token_budget": 2048,
+      "retrieved_evidence_item_budget": 12,
+      "token_budget_ceiling_equal": true,
+      "item_budget_ceiling_equal": true,
+      "tokenizer_identity_must_match_model": true,
+      "same_cleanroom_evidence_universe": true,
+      "deterministic_truncation": true,
+      "padding_prohibited": true,
+      "actual_token_and_item_usage_reported": true
+    },
+    "sham_pairs": [
+      {
+        "arms": [
+          "E4",
+          "E5"
+        ],
+        "equal_fields": [
+          "byte_count",
+          "token_count",
+          "item_count",
+          "degree_sequence",
+          "topology_hash"
+        ],
+        "must_differ_fields": [
+          "semantic_hash"
+        ]
+      },
+      {
+        "arms": [
+          "E4",
+          "E7"
+        ],
+        "equal_fields": [
+          "byte_count",
+          "token_count",
+          "item_count",
+          "structure_hash"
+        ],
+        "must_differ_fields": [
+          "semantic_hash",
+          "scenario_relevance_hash"
+        ]
+      }
+    ]
+  },
+  "blinding": {
+    "model_request_excludes": [
+      "arm identity",
+      "arm role",
+      "gold answer",
+      "expected evidence IDs",
+      "scoring rubric",
+      "support class",
+      "factor names",
+      "enabled or ablated labels"
+    ],
+    "material_envelope": "All arms use the same unlabeled evidence-envelope schema.",
+    "provider_receives_only": [
+      "question",
+      "unlabeled arm material",
+      "response schema",
+      "inference configuration",
+      "seed"
+    ],
+    "scorer_blinding": "Responses are assigned randomized opaque IDs; arm and provider identities are unsealed only after deterministic and semantic scores are frozen.",
+    "scenario_author_blinding": "Scenario gold and minimum evidence sets are committed before retrieval outputs or model responses exist."
+  },
+  "hard_gates": {
+    "minimum_completed_call_rate": 0.99,
+    "minimum_completed_scenario_block_rate": 0.99,
+    "schema_valid_citation_object_rate": 1.0,
+    "citations_outside_supplied_evidence_set": 0,
+    "unsupported_additions": 0,
+    "uncited_refusals": 0,
+    "gold_or_arm_identity_leaks": 0,
+    "post_execution_scenario_exclusions": 0,
+    "budget_match_violations_for_E1_E4": 0,
+    "scenario_partition_leaks": 0,
+    "semantic_grounding_noninferiority": {
+      "metric": "grounded_claim_precision",
+      "contrast": "E4-E1",
+      "minimum_delta": -0.01
+    },
+    "failure_disposition": "Any failed hard gate makes the run INADMISSIBLE; it may not be described as positive, null or negative evidence about KG effect."
+  },
+  "inference": {
+    "primary_contrast": "E4-E1",
+    "confidence_level": 0.95,
+    "method": "paired cluster bootstrap",
+    "bootstrap_samples": 10000,
+    "resampling_unit": "scenario_family_cluster",
+    "stratified_by": "scenario stratum",
+    "seed_schedule": "committed before execution",
+    "interval": "two-sided percentile interval",
+    "additional_contrasts": [
+      "E4-E0",
+      "E4-E5",
+      "E4-E7",
+      "E2-E0",
+      "E3-E0",
+      "E6-E4"
+    ],
+    "multiple_comparison_policy": "The E4-E1 contrast alone is primary; all other contrasts and secondary metrics are diagnostic and labelled exploratory."
+  },
+  "decision_rules": {
+    "evaluation_order": [
+      "hard gates",
+      "primary E4-E1 interval",
+      "semantic sham controls",
+      "guardrail diagnostics"
+    ],
+    "POSITIVE": "All hard gates pass; the lower 95% paired-cluster-bootstrap bound for E4-E1 is above zero; the lower bounds for E4-E5 and E4-E7 are above zero; and no registered guardrail regresses.",
+    "NEGATIVE": "All hard gates pass and the upper 95% paired-cluster-bootstrap bound for E4-E1 is below zero.",
+    "NULL": "All hard gates pass and the 95% paired-cluster-bootstrap interval for E4-E1 includes zero, or the primary interval is positive but a required semantic sham contrast does not clear zero.",
+    "INADMISSIBLE": "One or more hard gates fail, execution commitments were not bound before the first model call, or fewer than the registered scenarios were scored under the missing-result policy.",
+    "practical_relevance_threshold": {
+      "metric": "absolute E4-E1 strict success-rate points",
+      "threshold": 0.05,
+      "role": "reported alongside statistical classification; it does not replace the registered POSITIVE, NULL or NEGATIVE rule"
+    }
+  },
+  "commitment_protocol": {
+    "status": "SPECIFICATION_ONLY_UNBOUND",
+    "run_values_present_in_this_document": false,
+    "binding_deadline": "Before the first smoke or target model call, whichever occurs first.",
+    "binding_artifact": "A separate immutable preexecution binding manifest, signed and timestamped by the evaluation runner.",
+    "required_sha256_commitments": [
+      "scenario_set_sha256",
+      "scenario_partition_manifest_sha256",
+      "synthetic_kg_sha256",
+      "synthetic_kg_lineage_sha256",
+      "ontology_frame_sha256",
+      "flat_evidence_corpus_sha256",
+      "arm_material_deriver_sha256",
+      "retriever_implementations_sha256",
+      "evidence_renderer_sha256",
+      "response_schema_sha256",
+      "semantic_validator_sha256",
+      "scoring_rubric_sha256",
+      "base_model_sha256",
+      "inference_configuration_sha256",
+      "prompt_template_sha256",
+      "seed_schedule_sha256",
+      "evaluator_code_commit_sha256"
+    ],
+    "required_bindings": [
+      "provider and exact model identifier",
+      "tokenizer identifier and revision",
+      "scenario count and per-stratum IDs",
+      "all E0-E7 material byte counts and digests",
+      "balanced arm execution order",
+      "evaluation start timestamp",
+      "Ed25519 signer identity and signature"
+    ],
+    "prohibited": [
+      "invented 64-character placeholder hashes",
+      "self-asserted provider call counts",
+      "post-run commitment replacement",
+      "caller-authored evidence or graph telemetry accepted without byte derivation"
+    ]
+  },
+  "analysis_lock": {
+    "episode_exclusions_after_run": 0,
+    "metric_redefinition_after_run": false,
+    "arm_relabeling_after_run": false,
+    "unregistered_primary_contrasts": false,
+    "frozen_protocol_changes_require": "a new preregistration ID and a new self digest before execution"
+  },
+  "self_digest_algorithm": "sha256(canonical-json(document-without-self_sha256); UTF-8; keys sorted; no insignificant whitespace)",
+  "self_sha256": "ae32646e83bfd5fdb5b6a8c4d5cd4544b58d20ee8835b8880d3db7f3c216e696"
+}

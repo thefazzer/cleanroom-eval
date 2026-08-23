@@ -1,0 +1,2 @@
+Synthetic operations training example: inspect observable evidence, respect action authority, use versioned state transitions, preserve prior values, cite support, and close an exception only after independent reconciliation.
+

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-semantic-evidence-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "evidence_id", "propositions", "coverage"],
+  "properties": {
+    "schema": {"const": "cleanroom.semantic-evidence/v1"},
+    "evidence_id": {"type": "string", "minLength": 1, "maxLength": 256},
+    "propositions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/proposition"}
+    },
+    "coverage": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/coverage"}
+    }
+  },
+  "$defs": {
+    "qualifiers": {
+      "type": "object",
+      "maxProperties": 32,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1024
+      }
+    },
+    "proposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "relation",
+        "object",
+        "polarity",
+        "qualifiers"
+      ],
+      "properties": {
+        "subject": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "relation": {"type": "string", "minLength": 1, "maxLength": 512},
+        "object": {"type": "string", "minLength": 1, "maxLength": 4096},
+        "polarity": {"enum": ["affirmed", "negated", "unknown"]},
+        "qualifiers": {"$ref": "#/$defs/qualifiers"}
+      }
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["subject", "relation", "qualifiers"],
+      "properties": {
+        "subject": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "relation": {"type": "string", "minLength": 1, "maxLength": 512},
+        "qualifiers": {"$ref": "#/$defs/qualifiers"}
+      }
+    }
+  }
+}

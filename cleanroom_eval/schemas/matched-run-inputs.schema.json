@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "classification", "experiment_id", "provider_identity", "evaluator", "tool_policy", "inference_config", "evaluation_seeds", "arms"],
+  "properties": {
+    "schema": {"const": "cleanroom.matched-run-inputs/v1"},
+    "classification": {"const": "CLEANROOM_SYNTHETIC"},
+    "experiment_id": {"type": "string"},
+    "provider_identity": {"$ref": "#/$defs/providerIdentity"},
+    "evaluator": {"$ref": "#/$defs/artifact"},
+    "tool_policy": {"$ref": "#/$defs/artifact"},
+    "inference_config": {"$ref": "#/$defs/artifact"},
+    "evaluation_seeds": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "integer"}},
+    "arms": {
+      "type": "array", "minItems": 5, "maxItems": 5,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["arm_id", "checkpoint_kind", "model_identifier", "checkpoint", "training_material", "training_receipt", "optimizer_config", "reward_config", "training_tokens", "optimizer_steps", "compute_budget"],
+        "properties": {
+          "arm_id": {"enum": ["BASE", "SFT", "SFT_MATCHED_CONTROL", "RL", "RL_MATCHED_CONTROL"]},
+          "checkpoint_kind": {"enum": ["FROZEN_BASE", "SFT_DOMAIN", "SFT_CONTROL", "RL_DOMAIN", "RL_CONTROL"]},
+          "model_identifier": {"type": "string", "minLength": 1},
+          "checkpoint": {"$ref": "#/$defs/artifact"},
+          "training_material": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/artifact"}]},
+          "training_receipt": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/artifact"}]},
+          "optimizer_config": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/artifact"}]},
+          "reward_config": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/artifact"}]},
+          "training_tokens": {"type": "integer", "minimum": 0},
+          "optimizer_steps": {"type": "integer", "minimum": 0},
+          "compute_budget": {"type": "integer", "minimum": 1}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "providerIdentity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "endpoint_sha256"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "endpoint_sha256": {"pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "artifact": {
+      "type": "object", "additionalProperties": false, "required": ["path", "sha256"],
+      "properties": {"path": {"type": "string", "minLength": 1}, "sha256": {"pattern": "^[0-9a-f]{64}$"}}
+    }
+  }
+}

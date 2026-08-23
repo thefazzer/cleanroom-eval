@@ -1,0 +1,37 @@
+{
+  "schema": "cleanroom.scenario-partitions/v1",
+  "partition_id": "cmo_cleanroom_scenario_partitions_v1",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "disjoint_fields": [
+    "scenario_family",
+    "world_id",
+    "template_family",
+    "entity_namespace",
+    "render_seed_family"
+  ],
+  "training_lineage": [
+    {
+      "scenario_family": "training_lifecycle_basics",
+      "world_id": "world_train_orchid",
+      "template_family": "train_lifecycle_basics",
+      "entity_namespace": "syn_train_orchid",
+      "render_seed_family": "train_seed_orchid"
+    },
+    {
+      "scenario_family": "training_control_basics",
+      "world_id": "world_train_saffron",
+      "template_family": "train_control_basics",
+      "entity_namespace": "syn_train_saffron",
+      "render_seed_family": "train_seed_saffron"
+    },
+    {
+      "scenario_family": "training_evidence_basics",
+      "world_id": "world_train_topaz",
+      "template_family": "train_evidence_basics",
+      "entity_namespace": "syn_train_topaz",
+      "render_seed_family": "train_seed_topaz"
+    }
+  ],
+  "sealed_partition": "SEALED_TEST",
+  "policy": "No scenario-level lineage value used for training may occur in a sealed test episode."
+}

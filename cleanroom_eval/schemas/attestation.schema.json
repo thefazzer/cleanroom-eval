@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-attestation-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "status",
+    "release_id",
+    "manifest_payload_sha256",
+    "reviewed_asset_count",
+    "reviewed_at",
+    "reviewer_independence",
+    "signing_key_id",
+    "signature"
+  ],
+  "properties": {
+    "schema": {"const": "cleanroom.independent-attestation/v1"},
+    "status": {"const": "PASS"},
+    "release_id": {"type": "string"},
+    "manifest_payload_sha256": {"pattern": "^[0-9a-f]{64}$"},
+    "reviewed_asset_count": {"type": "integer", "minimum": 1},
+    "reviewed_at": {"type": "string", "format": "date-time"},
+    "reviewer_independence": {"const": "INDEPENDENT_OF_GENERATOR_AND_TRAINING_RUN"},
+    "signing_key_id": {"type": "string", "minLength": 4},
+    "signature": {"type": "string", "minLength": 40}
+  }
+}

@@ -1,0 +1,223 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-episode-contract-v1",
+  "title": "Clean-room agent-facing episode contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "episode_id",
+    "classification",
+    "family",
+    "work_type",
+    "title",
+    "instructions",
+    "time_window",
+    "competencies",
+    "actors",
+    "tracked_objects",
+    "initial_state_sha256",
+    "tool_surfaces",
+    "actions",
+    "deliverables",
+    "checks",
+    "barrier_policy",
+    "oracle_separation",
+    "transfer_tags"
+  ],
+  "properties": {
+    "schema": {
+      "const": "cleanroom.episode-contract/v1"
+    },
+    "episode_id": {
+      "pattern": "^episode_[a-z0-9_]+_v1$"
+    },
+    "classification": {
+      "const": "CLEANROOM_SYNTHETIC"
+    },
+    "family": {
+      "pattern": "^[a-z][a-z0-9_]+$"
+    },
+    "work_type": {
+      "enum": [
+        "resolve",
+        "repair",
+        "reconcile",
+        "approve",
+        "investigate",
+        "adjudicate"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 8
+    },
+    "instructions": {
+      "type": "string",
+      "minLength": 80
+    },
+    "time_window": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "start",
+        "end"
+      ],
+      "properties": {
+        "start": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time"
+        }
+      }
+    },
+    "competencies": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "pattern": "^cmo\\.[a-z0-9_.]+$"
+      }
+    },
+    "actors": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "role",
+          "allowed_actions"
+        ],
+        "properties": {
+          "id": {
+            "pattern": "^syn_[a-z0-9_]+$"
+          },
+          "role": {
+            "type": "string",
+            "minLength": 2
+          },
+          "allowed_actions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "tracked_objects": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "object_id",
+          "kind"
+        ],
+        "properties": {
+          "object_id": {
+            "pattern": "^syn_[a-z0-9_]+$"
+          },
+          "kind": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "initial_state_sha256": {
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "tool_surfaces": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "surface",
+          "request_schema"
+        ],
+        "properties": {
+          "surface": {
+            "pattern": "^[a-z][a-z0-9_]+$"
+          },
+          "request_schema": {
+            "const": "schemas/tool-request.schema.json"
+          }
+        }
+      }
+    },
+    "actions": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string"
+      }
+    },
+    "deliverables": {
+      "type": "object",
+      "required": [
+        "receipts",
+        "trajectory",
+        "final_state_sha256"
+      ],
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "checks": {
+      "type": "array",
+      "minItems": 11,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "grader",
+          "description"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "grader": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "barrier_policy": {
+      "type": "object",
+      "required": [
+        "policy_id",
+        "deliverable",
+        "behind_wall",
+        "on_violation",
+        "source"
+      ]
+    },
+    "oracle_separation": {
+      "type": "object",
+      "required": [
+        "excluded_fields",
+        "statement"
+      ]
+    },
+    "transfer_tags": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

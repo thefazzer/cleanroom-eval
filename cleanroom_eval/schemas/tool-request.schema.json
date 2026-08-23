@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-tool-request-v1",
+  "title": "Clean-room free-action tool request",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "request_id",
+    "actor_id",
+    "action",
+    "object_versions",
+    "evidence_refs"
+  ],
+  "properties": {
+    "request_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actor_id": {
+      "pattern": "^syn_[a-z0-9_]+$"
+    },
+    "action": {
+      "pattern": "^[a-z][a-z0-9_]+$"
+    },
+    "object_versions": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 0
+      }
+    },
+    "evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

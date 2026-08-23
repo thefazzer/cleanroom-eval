@@ -1,0 +1,113 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-claim-selection-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "answer_kind", "claims"],
+  "properties": {
+    "schema": {"const": "cleanroom.claim-selection/v1"},
+    "answer_kind": {"enum": ["answer", "refusal"]},
+    "claims": {
+      "type": "array",
+      "maxItems": 64,
+      "items": {"$ref": "#/$defs/claim"}
+    },
+    "refusal": {"$ref": "#/$defs/refusal"}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"answer_kind": {"const": "answer"}}},
+      "then": {
+        "properties": {"claims": {"minItems": 1}},
+        "not": {"required": ["refusal"]}
+      },
+      "else": {
+        "properties": {"claims": {"maxItems": 0}},
+        "required": ["refusal"]
+      }
+    }
+  ],
+  "$defs": {
+    "qualifiers": {
+      "type": "object",
+      "maxProperties": 32,
+      "additionalProperties": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 1024
+      }
+    },
+    "proposition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "subject",
+        "relation",
+        "object",
+        "polarity",
+        "qualifiers"
+      ],
+      "properties": {
+        "subject": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "relation": {"type": "string", "minLength": 1, "maxLength": 512},
+        "object": {"type": "string", "minLength": 1, "maxLength": 4096},
+        "polarity": {"enum": ["affirmed", "negated", "unknown"]},
+        "qualifiers": {"$ref": "#/$defs/qualifiers"}
+      }
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "claim_id",
+        "subject",
+        "relation",
+        "object",
+        "polarity",
+        "qualifiers",
+        "evidence_ids"
+      ],
+      "properties": {
+        "claim_id": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 128
+        },
+        "subject": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "relation": {"type": "string", "minLength": 1, "maxLength": 512},
+        "object": {"type": "string", "minLength": 1, "maxLength": 4096},
+        "polarity": {"enum": ["affirmed", "negated", "unknown"]},
+        "qualifiers": {"$ref": "#/$defs/qualifiers"},
+        "evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 256}
+        }
+      }
+    },
+    "refusal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reason_code", "requested_proposition", "evidence_ids"],
+      "properties": {
+        "reason_code": {
+          "enum": [
+            "insufficient_evidence",
+            "conflicting_evidence",
+            "outside_evidence_scope"
+          ]
+        },
+        "requested_proposition": {"$ref": "#/$defs/proposition"},
+        "evidence_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 32,
+          "uniqueItems": true,
+          "items": {"type": "string", "minLength": 1, "maxLength": 256}
+        }
+      }
+    }
+  }
+}

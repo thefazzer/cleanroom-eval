@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "classification", "status", "plan_sha256", "checks", "jobs", "missing_external_artifacts", "errors", "result_claim_allowed", "report_sha256"],
+  "properties": {
+    "schema": {"const": "cleanroom.matched-run-readiness/v1"},
+    "classification": {"const": "CLEANROOM_SYNTHETIC"},
+    "status": {"enum": ["BLOCKED_MISSING_OR_INVALID_INPUTS", "READY_TO_EXECUTE", "READY_FOR_INDEPENDENT_ATTESTATION"]},
+    "plan_sha256": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^[0-9a-f]{64}$"}]},
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["concrete_artifacts_rehashed", "distinct_arm_checkpoints", "matched_compute_equal", "seed_schedule_frozen", "complete_episode_allocation", "no_indeterminate_started_jobs", "all_job_receipts_verified"],
+      "properties": {
+        "concrete_artifacts_rehashed": {"type": "boolean"},
+        "distinct_arm_checkpoints": {"type": "boolean"},
+        "matched_compute_equal": {"type": "boolean"},
+        "seed_schedule_frozen": {"type": "boolean"},
+        "complete_episode_allocation": {"type": "boolean"},
+        "no_indeterminate_started_jobs": {"type": "boolean"},
+        "all_job_receipts_verified": {"type": "boolean"}
+      }
+    },
+    "jobs": {
+      "type": "object", "additionalProperties": false, "required": ["total", "verified", "pending", "invalid", "indeterminate"],
+      "properties": {
+        "total": {"type": "integer", "minimum": 0},
+        "verified": {"type": "integer", "minimum": 0},
+        "pending": {"type": "integer", "minimum": 0},
+        "invalid": {"type": "integer", "minimum": 0},
+        "indeterminate": {"type": "integer", "minimum": 0}
+      }
+    },
+    "missing_external_artifacts": {"type": "array", "items": {"type": "string"}},
+    "errors": {"type": "array", "items": {"type": "string"}},
+    "result_claim_allowed": {"const": false},
+    "report_sha256": {"pattern": "^[0-9a-f]{64}$"}
+  }
+}

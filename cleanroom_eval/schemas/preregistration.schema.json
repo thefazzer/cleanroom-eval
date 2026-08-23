@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-preregistration-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "preregistration_id",
+    "classification",
+    "status",
+    "episode_set_id",
+    "primary_metric",
+    "secondary_metrics",
+    "analysis_lock"
+  ],
+  "properties": {
+    "schema": {"const": "cleanroom.evaluation-preregistration/v1"},
+    "preregistration_id": {"const": "cmo_cleanroom_preregistration_v1"},
+    "classification": {"const": "CLEANROOM_SYNTHETIC"},
+    "status": {"const": "FROZEN_BEFORE_RUN"},
+    "episode_set_id": {"const": "cmo_cleanroom_sealed_v1"},
+    "primary_metric": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "unit",
+        "denominator",
+        "success_rule",
+        "aggregation",
+        "missing_result_policy",
+        "direction"
+      ],
+      "properties": {
+        "id": {"const": "sealed_episode_deterministic_success_rate"},
+        "unit": {"const": "episode"},
+        "denominator": {"const": "all 40 sealed test episodes"},
+        "success_rule": {"type": "string", "minLength": 80},
+        "aggregation": {"type": "string", "minLength": 20},
+        "missing_result_policy": {"const": "score zero"},
+        "direction": {"const": "higher_is_better"}
+      }
+    },
+    "secondary_metrics": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 12}
+    },
+    "analysis_lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "episode_exclusions_after_run",
+        "metric_redefinition_after_run",
+        "required_causal_contrasts"
+      ],
+      "properties": {
+        "episode_exclusions_after_run": {"const": 0},
+        "metric_redefinition_after_run": {"const": false},
+        "required_causal_contrasts": {
+          "type": "array",
+          "minItems": 4,
+          "uniqueItems": true,
+          "items": {"type": "string"}
+        }
+      }
+    }
+  }
+}

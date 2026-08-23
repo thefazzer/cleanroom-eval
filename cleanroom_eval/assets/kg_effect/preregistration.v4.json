@@ -1,0 +1,155 @@
+{
+  "schema": "cleanroom.kg-effect-preregistration/v4",
+  "preregistration_id": "ficta_cleanroom_kg_effect_v4",
+  "supersedes_for_future_runs": "ficta_cleanroom_kg_effect_v3",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "status": "TRANSFER_GATE_CLOSED_BEFORE_EXECUTION_OTHER_GATES_UNCHANGED",
+  "frozen_at": "2026-08-01",
+  "purpose": "Bind the newly generated v8 clean-room source, its source-assigned communication lineage, the regenerated 500-scenario population and the now-admissible exact focal transfer split before any provider call; replace the proved-infeasible exact item/byte/token equality rule with a common exact-token ceiling and whole-record materialization.",
+  "base_protocol": {
+    "path": "cleanroom_eval/assets/kg_effect/preregistration.v3.json",
+    "file_sha256": "466e03d935501da242ba690d83f93259a7dfba4ccd82941fa93c0ae99794c28d",
+    "canonical_self_sha256": "b1603f58dc95bbdca0d26f74afbe0429caf4df3c6cebbd20898b3a9cb6e0175f",
+    "inheritance": "All v3 provisions remain binding except its unmet explicit-thread assessment, its source/scenario/transfer content commitments, and the v2 exact item/byte/token equality and truncating material-fit rules inherited through v3. This document replaces those provisions. Arms, questions, metrics, model plan, statistical estimands and all remaining hard gates are unchanged."
+  },
+  "v8_source_bundle": {
+    "release_id": "ficta-4181-institution-v8",
+    "seed": 4181,
+    "source_manifest_file_sha256": "6364f0ff41ce720803bb74438acd384d05f6a78a278077aed581759135ac81d5",
+    "corpus_sha256": "9204786b8e61702dd42f8cd10fa20a62f3a7ad97bb8f361cf428a2cdd4000761",
+    "raw_workbench_bundle_sha256": "fc15521d1a3478b32ea1640b0c3e5182f924dbc2dd8908d6493899f747753c06",
+    "raw_workbench_bundle_bytes": 14089553,
+    "source_verification_status": "PASS",
+    "institution_scale_status": "PASS",
+    "sealed_v7_mutated": false
+  },
+  "communication_thread_contract": {
+    "schema": "cleanroom.communication-thread-contract/v1",
+    "assignment_phase": "hidden-world-render-before-artifact-bytes",
+    "assignment_basis": "Deterministic UUIDv5 of seed plus the explicit focal business root. No subject, participant, question-text or similarity inference is permitted.",
+    "communication_artifacts": 2901,
+    "distinct_messages": 2701,
+    "explicit_threads": 920,
+    "duplicate_lineages": 400,
+    "missing_explicit_thread_ids": 0,
+    "thread_root_crossings": 0,
+    "verification_status": "PASS",
+    "duplicate_rules": {
+      "exact": "same message ID, root, thread, reply parent and bytes as its source",
+      "near": "new deterministic message ID, same root/thread, explicit reply to its source, changed bytes"
+    }
+  },
+  "sealed_population_commitments": {
+    "scenario_manifest": {
+      "file_sha256": "c484ae6b0930d014661c3988b0072a4a77e6d20a8a2cccf13f2f9eb9f4238dc9",
+      "content_sha256": "9aca873336068e3649cec5594843df6758d5c4f9f0a01173882245e2943e6b4c",
+      "scenario_count": 500
+    },
+    "provider_projection": {
+      "file_sha256": "dceabd8868b16fbf039da8be362b4c129b1175c1bc31e2e323a3787cd4b64aea",
+      "content_sha256": "7cda30d7e661ad45c1f2e753d0a6c8a95767e72b0443bdb96d16a31f88a18e16",
+      "scenario_count": 500
+    },
+    "held_out_paraphrases": {
+      "file_sha256": "5da9d5c08a1b1eda82e3ae2ef671fd6b0c540d6cd4ff5df0e7f531984e49b2fb",
+      "content_sha256": "7b33bfddcc0fbd3255a6eddf6fc594fad663e646044b102ed46ae82b26cf7ab4",
+      "scenario_count": 500,
+      "truth_preserving": true,
+      "source_cluster_retained": true
+    },
+    "sealed_scenario_partition": {
+      "file_sha256": "3338c890715c3c5a6ed16585dc2bcd8a2fd319ca477f2c8821f6a54a2a0abf84",
+      "content_sha256": "9edcbdc4c34ce01cc927d36a727ffb0e121a35be2c17b903d11cf6644efc67b3"
+    },
+    "adversarial_mutations": {
+      "file_sha256": "d74b67fdc4d70bd02e08f7b861b59e5e48e5f233d1fac222b033ba1f28b6f914",
+      "content_sha256": "f0db02862c52771e8869f07072ab8f192c39a3a2932eb327f237e356f3144164",
+      "mutation_count": 500,
+      "family_counts": {
+        "entity_swap": 100,
+        "date_shift": 100,
+        "polarity_reversal": 100,
+        "contradiction_injection": 100,
+        "unsupported_addition": 100
+      }
+    }
+  },
+  "focal_transfer_commitments": {
+    "catalogue": {
+      "file_sha256": "8c7c7e789281e9cf9d7fc4b6330c14198c133f78ad56e172b052e771ad280da9",
+      "content_sha256": "4bb39ca90eaaffebd76d7675d4516efa8e4aef4ef0d51bcdd3a1f1872ad490ee"
+    },
+    "partition_manifest": {
+      "file_sha256": "a26705399bcb799b8ce821871571cb611638cd0e737005d913ad6dc291a9a034",
+      "content_sha256": "a2cfee6aa4a80ed4db8c79cfb3e57947278ebf41d2fc19b513af0bfd18306301"
+    },
+    "counts": {
+      "sealed_iid": 350,
+      "unseen_clients": 40,
+      "unseen_products": 30,
+      "unseen_staff_hierarchies": 30,
+      "unseen_scenario_families": 50
+    },
+    "component_count": 414,
+    "largest_component": 25,
+    "closure_crossings": 0,
+    "typed_identity_assignment_failures": 0,
+    "admissible": true,
+    "status": "PROVEN_ADMISSIBLE"
+  },
+  "budget_contract_amendment": {
+    "feasibility_finding": "Exact equality of item_count, utf8_byte_count and provider_token_count across semantically different evidence arms is not generally attainable using whole records. Attaining it would require prohibited filler or semantic truncation, so the inherited exact-equality rule is infeasible and superseded before execution.",
+    "superseded_v2_fields": [
+      "budget_contract.exact_match_set",
+      "budget_contract.exact_equal_fields_within_scenario_model_and_variant",
+      "budget_contract.material_fit",
+      "budget_contract.failure_policy"
+    ],
+    "retained_measurement_scope": "The exact canonical JSON evidence array placed in the provider request.",
+    "retained_required_measurements_per_call": [
+      "item_count",
+      "utf8_byte_count",
+      "provider_token_count",
+      "payload_sha256"
+    ],
+    "shared_provider_token_ceiling": {
+      "rule": "One numeric ceiling measured by the bound exact provider tokenizer is frozen before the first call and applied identically to every evidence-bearing arm, scenario, variant and repeat. E0 remains the canonical empty array.",
+      "selection": "Treatment-blind deterministic ordering followed by whole-record inclusion only while the next complete semantic record fits beneath the ceiling.",
+      "numeric_ceiling_status": "REQUIRED_NOT_YET_BOUND",
+      "binding_location": "immutable signed preexecution manifest",
+      "post_execution_change_allowed": false
+    },
+    "record_integrity": {
+      "whole_semantic_records_only": true,
+      "semantic_or_byte_truncation": "PROHIBITED",
+      "padding_or_filler": "PROHIBITED",
+      "partial_record_inclusion": "PROHIBITED"
+    },
+    "reporting": {
+      "actual_counts_reported_for_every_call": [
+        "provider_token_count",
+        "item_count",
+        "utf8_byte_count"
+      ],
+      "primary_analysis": "Registered paired Semantic Strict contrasts under the common ceiling, with no length-based exclusions.",
+      "length_sensitivity": "Report paired effects with actual provider tokens, items and UTF-8 bytes as preregistered covariates and in fixed length bins; treat this as sensitivity analysis rather than manufactured equality.",
+      "arm_length_differences_hidden": false
+    },
+    "feasibility_gate": {
+      "exact_tokenizer_binding_verified": true,
+      "numeric_ceiling_bound": false,
+      "whole_record_material_matrix_built": false,
+      "filler_or_truncation_records": 0,
+      "provider_execution_allowed": false
+    }
+  },
+  "execution_lock": {
+    "provider_calls_made_under_v4": 0,
+    "transfer_gate_passed": true,
+    "provider_execution_authorized_by_this_amendment": false,
+    "reason": "This amendment closes the source/thread/transfer gate and corrects the infeasible budget rule. Provider calls remain prohibited until a numeric common ceiling and whole-record material matrix, plus every inherited negative-evidence, signing, model, prompt and smoke-prefix gate, pass in one immutable signed preexecution manifest.",
+    "change_rule": "Any material change to the bound v8 source, scenario population, focal split or inherited protocol requires preregistration v5 before execution."
+  },
+  "self_digest_algorithm": "sha256(canonical-json(document-without-self_sha256); UTF-8; keys sorted; separators comma+colon; ensure_ascii=false)",
+  "self_sha256": "12d9d3cd5f8ec59e0bf5ed31ad5555eecc354e3da29aeb9a2596891480afebf7"
+}

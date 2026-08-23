@@ -1,0 +1,22 @@
+[
+  {
+    "as_run": "gpt-5.2 via api.openai.com",
+    "id": "substituted-frontier-arm",
+    "preregistered": "claude-sonnet-5 via the Anthropic OpenAI-compatible endpoint",
+    "reason": "originally named arm unavailable at run time; substitution disclosed in the report"
+  },
+  {
+    "as_run": "deepseek-v4-flash via api.deepseek.com",
+    "id": "substituted-open-weight-arm",
+    "preregistered": "gpt-oss-120b via the Cerebras endpoint (pipeline/pass3b_model.yaml fallback)",
+    "reason": "originally named arm unavailable at run time; substitution disclosed in the report"
+  },
+  {
+    "description": "The first frontier run executed under harness v1, which treated provider 429 responses as fatal and rejected correct-but-more-specific version assertions. Both defects were fixed (retry/backoff and grading), the harness re-frozen as v2, and all reported model arms re-run. The v1 frontier artifact is retained in the archive store as superseded context and is not part of this evidence pack.",
+    "id": "harness-v1-to-v2-revision"
+  },
+  {
+    "description": "The archive store retains aborted attempts (a smoke run and two aborted open-weight attempts) by opaque id; none contribute to reported results.",
+    "id": "archived-aborted-runs"
+  }
+]

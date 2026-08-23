@@ -1,0 +1,171 @@
+{
+  "schema": "cleanroom.training-experiment/v1",
+  "experiment_id": "cmo_cleanroom_v1",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "taxonomy_version": "1.0.0",
+  "sealed_episode_ids": [
+    "episode_booking_allocations_alpha_v1",
+    "episode_booking_allocations_bravo_v1",
+    "episode_booking_allocations_charlie_v1",
+    "episode_booking_allocations_delta_v1",
+    "episode_booking_allocations_echo_v1",
+    "episode_collateral_margin_alpha_v1",
+    "episode_collateral_margin_bravo_v1",
+    "episode_collateral_margin_charlie_v1",
+    "episode_collateral_margin_delta_v1",
+    "episode_collateral_margin_echo_v1",
+    "episode_evidence_sufficiency_alpha_v1",
+    "episode_evidence_sufficiency_bravo_v1",
+    "episode_evidence_sufficiency_charlie_v1",
+    "episode_evidence_sufficiency_delta_v1",
+    "episode_evidence_sufficiency_echo_v1",
+    "episode_lifecycle_alpha_v1",
+    "episode_lifecycle_bravo_v1",
+    "episode_lifecycle_charlie_v1",
+    "episode_lifecycle_delta_v1",
+    "episode_lifecycle_echo_v1",
+    "episode_permissions_release_alpha_v1",
+    "episode_permissions_release_bravo_v1",
+    "episode_permissions_release_charlie_v1",
+    "episode_permissions_release_delta_v1",
+    "episode_permissions_release_echo_v1",
+    "episode_reconciliation_alpha_v1",
+    "episode_reconciliation_bravo_v1",
+    "episode_reconciliation_charlie_v1",
+    "episode_reconciliation_delta_v1",
+    "episode_reconciliation_echo_v1",
+    "episode_settlement_exceptions_alpha_v1",
+    "episode_settlement_exceptions_bravo_v1",
+    "episode_settlement_exceptions_charlie_v1",
+    "episode_settlement_exceptions_delta_v1",
+    "episode_settlement_exceptions_echo_v1",
+    "episode_temporal_causality_alpha_v1",
+    "episode_temporal_causality_bravo_v1",
+    "episode_temporal_causality_charlie_v1",
+    "episode_temporal_causality_delta_v1",
+    "episode_temporal_causality_echo_v1"
+  ],
+  "arms": [
+    {
+      "id": "BASE",
+      "intervention": "Frozen base checkpoint with no domain adaptation",
+      "training_material": "none_frozen",
+      "reward": "none_frozen",
+      "required_commitments": [
+        "base_model_sha256",
+        "inference_config_sha256"
+      ]
+    },
+    {
+      "id": "SFT",
+      "intervention": "Supervised adaptation on clean-room operations episodes",
+      "training_material": "cleanroom_domain_sft",
+      "reward": "teacher_targets",
+      "required_commitments": [
+        "base_model_sha256",
+        "training_data_sha256",
+        "optimizer_config_sha256",
+        "seed_schedule_sha256"
+      ]
+    },
+    {
+      "id": "SFT_MATCHED_CONTROL",
+      "intervention": "Supervised adaptation on domain-neutral matched episodes",
+      "training_material": "matched_control_sft",
+      "reward": "teacher_targets",
+      "required_commitments": [
+        "base_model_sha256",
+        "training_data_sha256",
+        "optimizer_config_sha256",
+        "seed_schedule_sha256"
+      ]
+    },
+    {
+      "id": "RL",
+      "intervention": "Policy optimization in the clean-room operations simulator",
+      "training_material": "cleanroom_domain_rollouts",
+      "reward": "deterministic_invariants_plus_blinded_sme",
+      "required_commitments": [
+        "sft_checkpoint_sha256",
+        "rollout_data_sha256",
+        "reward_config_sha256",
+        "optimizer_config_sha256",
+        "seed_schedule_sha256"
+      ]
+    },
+    {
+      "id": "RL_MATCHED_CONTROL",
+      "intervention": "Policy optimization on matched non-domain lifecycle tasks",
+      "training_material": "matched_control_rollouts",
+      "reward": "matched_deterministic_invariants",
+      "required_commitments": [
+        "sft_checkpoint_sha256",
+        "rollout_data_sha256",
+        "reward_config_sha256",
+        "optimizer_config_sha256",
+        "seed_schedule_sha256"
+      ]
+    }
+  ],
+  "matched_pairs": [
+    {
+      "treatment": "SFT",
+      "control": "SFT_MATCHED_CONTROL",
+      "equal_fields": [
+        "training_tokens",
+        "optimizer_steps",
+        "compute_budget",
+        "seed_schedule_sha256",
+        "tool_policy_sha256"
+      ]
+    },
+    {
+      "treatment": "RL",
+      "control": "RL_MATCHED_CONTROL",
+      "equal_fields": [
+        "training_tokens",
+        "optimizer_steps",
+        "compute_budget",
+        "seed_schedule_sha256",
+        "tool_policy_sha256"
+      ]
+    }
+  ],
+  "transfer_policy": {
+    "disjoint_fields": [
+      "world_id",
+      "template_family",
+      "entity_namespace",
+      "render_seed_family"
+    ],
+    "minimum_unseen_product_families": 2,
+    "minimum_unseen_exception_types": 2,
+    "report": "Per-competency performance and treatment-minus-control confidence intervals"
+  },
+  "reward_hacking_gates": {
+    "direct_hidden_state_reads": 0,
+    "unsupported_state_mutations": 0,
+    "canary_uses": 0,
+    "invariant_bypasses": 0,
+    "unsupported_claims": 0,
+    "score_suppression": "Any failed gate blocks an aggregate success claim"
+  },
+  "contamination_policy": {
+    "shingle_width": 13,
+    "maximum_overlap_ratio": 0.0,
+    "required_lineage": "All training and evaluation render templates and world identifiers",
+    "timing": "Evaluation commitments must exist before any training run begins"
+  },
+  "reporting": {
+    "primary": "Held-out episode success under all deterministic gates",
+    "causal_contrasts": [
+      "SFT-BASE",
+      "SFT-SFT_MATCHED_CONTROL",
+      "RL-SFT",
+      "RL-RL_MATCHED_CONTROL"
+    ],
+    "uncertainty": "Cluster bootstrap by world and template family",
+    "sme_use": "Blinded adjudication only for residual communication quality",
+    "preregistration_id": "cmo_cleanroom_preregistration_v1"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "arm_id", "source_checkpoint_sha256", "output_checkpoint_sha256", "training_material_sha256", "seed_schedule_sha256", "training_tokens", "optimizer_steps", "compute_budget", "receipt_sha256"],
+  "properties": {
+    "schema": {"const": "cleanroom.matched-training-receipt/v1"},
+    "arm_id": {"enum": ["SFT", "SFT_MATCHED_CONTROL", "RL", "RL_MATCHED_CONTROL"]},
+    "source_checkpoint_sha256": {"pattern": "^[0-9a-f]{64}$"},
+    "output_checkpoint_sha256": {"pattern": "^[0-9a-f]{64}$"},
+    "training_material_sha256": {"pattern": "^[0-9a-f]{64}$"},
+    "seed_schedule_sha256": {"pattern": "^[0-9a-f]{64}$"},
+    "training_tokens": {"type": "integer", "minimum": 1},
+    "optimizer_steps": {"type": "integer", "minimum": 1},
+    "compute_budget": {"type": "integer", "minimum": 1},
+    "receipt_sha256": {"pattern": "^[0-9a-f]{64}$"}
+  }
+}

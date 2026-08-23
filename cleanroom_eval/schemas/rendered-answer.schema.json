@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-rendered-answer-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "answer_kind",
+    "answer",
+    "citations",
+    "selection_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "cleanroom.rendered-answer/v1"},
+    "answer_kind": {"enum": ["answer", "refusal"]},
+    "answer": {"type": "string", "minLength": 1},
+    "citations": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["citation_id", "marker", "evidence_id", "claim_ids"],
+        "properties": {
+          "citation_id": {
+            "type": "string",
+            "pattern": "^citation-[0-9]{3}$"
+          },
+          "marker": {"type": "string", "pattern": "^\\[[1-9][0-9]*\\]$"},
+          "evidence_id": {"type": "string", "minLength": 1, "maxLength": 256},
+          "claim_ids": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string", "minLength": 1, "maxLength": 128}
+          }
+        }
+      }
+    },
+    "selection_sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+  }
+}

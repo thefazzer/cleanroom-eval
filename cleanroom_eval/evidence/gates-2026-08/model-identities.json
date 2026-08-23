@@ -1,0 +1,46 @@
+{
+  "baseline-v1": {
+    "endpoint_class": null,
+    "episode_count": 40,
+    "episode_ids_sha256": "06b0e33acee2aefdd6a586138f0aec262e885342cffe3edcd2383db681f98f3d",
+    "identity_source": "baseline-v1/config.json@3763ce32257ee17534cab7496dc62af181b6b205c4614aefe3f5fd77701dc044",
+    "model": null,
+    "model_identifier_sha256": null,
+    "policy": "scripted_boundary_search",
+    "temperature_commitment": null,
+    "turn_limit": 64
+  },
+  "baseline-v2": {
+    "endpoint_class": null,
+    "episode_count": 40,
+    "episode_ids_sha256": "9869c004b4c5ea057ab2babfc9eaf1d8efed4b89fece0a58153b63b7d27ae49a",
+    "identity_source": "baseline-v2/config.json@9505820c9088b9cc6ed9d86b557fa7516f42a8907f0a6bfbd6b08d9d7f2ebb40",
+    "model": null,
+    "model_identifier_sha256": null,
+    "policy": "scripted_boundary_search",
+    "temperature_commitment": null,
+    "turn_limit": 64
+  },
+  "frontier": {
+    "endpoint_class": "api.openai.com",
+    "episode_count": 40,
+    "episode_ids_sha256": "9869c004b4c5ea057ab2babfc9eaf1d8efed4b89fece0a58153b63b7d27ae49a",
+    "identity_source": "frontier/config.json@ce5ab6f87e0087d7c9085efd6e7a8a5472c5206353676a79e29a07b7e5b04451",
+    "model": "gpt-5.2",
+    "model_identifier_sha256": "131e2083b68bde4fe879efc38ed9651b1623f8735eeb42157fa3b63ef943fdc6",
+    "policy": "chat_completions",
+    "temperature_commitment": 0.0,
+    "turn_limit": 24
+  },
+  "open_weight": {
+    "endpoint_class": "api.deepseek.com",
+    "episode_count": 40,
+    "episode_ids_sha256": "9869c004b4c5ea057ab2babfc9eaf1d8efed4b89fece0a58153b63b7d27ae49a",
+    "identity_source": "open_weight/config.json@70b15325f6ff9432cc58df020b1c79f9e945a8cd25986db9d0a8afccdb4a6a7b",
+    "model": "deepseek-v4-flash",
+    "model_identifier_sha256": "f61ff5cf8e1cc88da6944d6bcd3e2e7da5ff27dd3288a8781908018cb8240cd6",
+    "policy": "chat_completions",
+    "temperature_commitment": 0.0,
+    "turn_limit": 24
+  }
+}

@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "classification", "experiment_id", "experiment_sha256", "provider_identity", "evaluator", "tool_policy", "inference_config", "inference_policy", "evaluation_seeds", "seed_schedule_sha256", "arms", "contamination", "job_context_sha256", "episode_ids", "jobs", "plan_sha256"],
+  "properties": {
+    "schema": {"const": "cleanroom.matched-run-plan/v1"},
+    "classification": {"const": "CLEANROOM_SYNTHETIC"},
+    "experiment_id": {"type": "string"},
+    "experiment_sha256": {"pattern": "^[0-9a-f]{64}$"},
+    "provider_identity": {"$ref": "#/$defs/providerIdentity"},
+    "evaluator": {"$ref": "#/$defs/committed"},
+    "tool_policy": {"$ref": "#/$defs/committed"},
+    "inference_config": {"$ref": "#/$defs/committed"},
+    "inference_policy": {
+      "type": "object", "additionalProperties": false,
+      "required": ["temperature", "timeout_seconds", "max_retries", "max_output_tokens"],
+      "properties": {
+        "temperature": {"const": 0},
+        "timeout_seconds": {"type": "number", "exclusiveMinimum": 0, "maximum": 120},
+        "max_retries": {"type": "integer", "minimum": 0, "maximum": 2},
+        "max_output_tokens": {"type": "integer", "minimum": 32, "maximum": 4096}
+      }
+    },
+    "evaluation_seeds": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "integer"}},
+    "seed_schedule_sha256": {"pattern": "^[0-9a-f]{64}$"},
+    "arms": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/arm"}},
+    "contamination": {"$ref": "#/$defs/contamination"},
+    "job_context_sha256": {"pattern": "^[0-9a-f]{64}$"},
+    "episode_ids": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "jobs": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/job"}},
+    "plan_sha256": {"pattern": "^[0-9a-f]{64}$"}
+  },
+  "$defs": {
+    "providerIdentity": {
+      "type": "object", "additionalProperties": false,
+      "required": ["name", "endpoint_sha256"],
+      "properties": {
+        "name": {"type": "string", "minLength": 1},
+        "endpoint_sha256": {"pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "committed": {"type": "object", "additionalProperties": false, "required": ["sha256", "bytes"], "properties": {"sha256": {"pattern": "^[0-9a-f]{64}$"}, "bytes": {"type": "integer", "minimum": 1}}},
+    "nullableCommitted": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/committed"}]},
+    "trainingReceipt": {
+      "type": "object", "additionalProperties": false,
+      "required": ["sha256", "bytes", "claims", "claims_sha256"],
+      "properties": {
+        "sha256": {"pattern": "^[0-9a-f]{64}$"},
+        "bytes": {"type": "integer", "minimum": 1},
+        "claims": {"type": "object"},
+        "claims_sha256": {"pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "nullableTrainingReceipt": {"oneOf": [{"type": "null"}, {"$ref": "#/$defs/trainingReceipt"}]},
+    "contamination": {
+      "type": "object",
+      "required": ["schema", "status", "candidate_files", "sealed_commitment_sha256"],
+      "properties": {
+        "schema": {"const": "cleanroom.contamination-report/v1"},
+        "status": {"const": "PASS"},
+        "candidate_files": {
+          "type": "array",
+          "minItems": 4,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": ["path", "sha256"],
+            "properties": {
+              "path": {"type": "string"},
+              "sha256": {"pattern": "^[0-9a-f]{64}$"}
+            }
+          }
+        },
+        "sealed_commitment_sha256": {"pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "arm": {
+      "type": "object", "additionalProperties": false,
+      "required": ["arm_id", "checkpoint_kind", "model_identifier", "checkpoint", "training_material", "training_receipt", "optimizer_config", "reward_config", "training_tokens", "optimizer_steps", "compute_budget", "seed_schedule_sha256", "tool_policy_sha256"],
+      "properties": {
+        "arm_id": {"enum": ["BASE", "SFT", "SFT_MATCHED_CONTROL", "RL", "RL_MATCHED_CONTROL"]},
+        "checkpoint_kind": {"enum": ["FROZEN_BASE", "SFT_DOMAIN", "SFT_CONTROL", "RL_DOMAIN", "RL_CONTROL"]},
+        "model_identifier": {"type": "string", "minLength": 1},
+        "checkpoint": {"$ref": "#/$defs/committed"},
+        "training_material": {"$ref": "#/$defs/nullableCommitted"},
+        "training_receipt": {"$ref": "#/$defs/nullableTrainingReceipt"},
+        "optimizer_config": {"$ref": "#/$defs/nullableCommitted"},
+        "reward_config": {"$ref": "#/$defs/nullableCommitted"},
+        "training_tokens": {"type": "integer", "minimum": 0},
+        "optimizer_steps": {"type": "integer", "minimum": 0},
+        "compute_budget": {"type": "integer", "minimum": 1},
+        "seed_schedule_sha256": {"pattern": "^[0-9a-f]{64}$"},
+        "tool_policy_sha256": {"pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "job": {
+      "type": "object", "additionalProperties": false,
+      "required": ["job_id", "arm_id", "checkpoint_sha256", "job_context_sha256", "episode_id", "evaluation_seed", "seed_index"],
+      "properties": {
+        "job_id": {"pattern": "^[0-9a-f]{64}$"},
+        "arm_id": {"enum": ["BASE", "SFT", "SFT_MATCHED_CONTROL", "RL", "RL_MATCHED_CONTROL"]},
+        "checkpoint_sha256": {"pattern": "^[0-9a-f]{64}$"},
+        "job_context_sha256": {"pattern": "^[0-9a-f]{64}$"},
+        "episode_id": {"type": "string"},
+        "evaluation_seed": {"type": "integer"},
+        "seed_index": {"type": "integer", "minimum": 0}
+      }
+    }
+  }
+}

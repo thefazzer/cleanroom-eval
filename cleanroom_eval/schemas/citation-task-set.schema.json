@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-citation-task-set-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "set_id",
+    "classification",
+    "status",
+    "source_sealed_set",
+    "task_count",
+    "episode_count",
+    "assets",
+    "coverage",
+    "task_ledger",
+    "task_list_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "cleanroom.citation-task-set/v1"},
+    "set_id": {"type": "string", "minLength": 1, "maxLength": 256},
+    "classification": {"const": "CLEANROOM_SYNTHETIC"},
+    "status": {"const": "FROZEN"},
+    "source_sealed_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["set_id", "manifest_path", "manifest_sha256"],
+      "properties": {
+        "set_id": {"type": "string", "minLength": 1},
+        "manifest_path": {"type": "string", "minLength": 1},
+        "manifest_sha256": {"$ref": "#/$defs/sha256"}
+      }
+    },
+    "task_count": {"const": 500},
+    "episode_count": {"const": 40},
+    "assets": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 2,
+      "items": {"$ref": "#/$defs/asset"}
+    },
+    "coverage": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["categories", "scenario_families", "expected_answer_kinds"],
+      "properties": {
+        "categories": {"$ref": "#/$defs/counts"},
+        "scenario_families": {"$ref": "#/$defs/counts"},
+        "expected_answer_kinds": {"$ref": "#/$defs/counts"}
+      }
+    },
+    "task_ledger": {
+      "type": "array",
+      "minItems": 500,
+      "maxItems": 500,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "sequence",
+          "task_id",
+          "task_sha256",
+          "oracle_sha256",
+          "episode_id",
+          "scenario_family",
+          "category",
+          "expected_answer_kind"
+        ],
+        "properties": {
+          "sequence": {"type": "integer", "minimum": 1, "maximum": 500},
+          "task_id": {"type": "string", "minLength": 1, "maxLength": 256},
+          "task_sha256": {"$ref": "#/$defs/sha256"},
+          "oracle_sha256": {"$ref": "#/$defs/sha256"},
+          "episode_id": {"type": "string", "minLength": 1},
+          "scenario_family": {"type": "string", "minLength": 1},
+          "category": {
+            "enum": [
+              "supported_claim",
+              "unsupported_addition_guard",
+              "unsupported_refusal",
+              "polarity_adversary",
+              "relation_adversary",
+              "qualifier_adversary"
+            ]
+          },
+          "expected_answer_kind": {"enum": ["answer", "refusal"]}
+        }
+      }
+    },
+    "task_list_sha256": {"$ref": "#/$defs/sha256"}
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "asset": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes", "sha256", "records"],
+      "properties": {
+        "path": {"type": "string", "minLength": 1},
+        "bytes": {"type": "integer", "minimum": 1},
+        "sha256": {"$ref": "#/$defs/sha256"},
+        "records": {"const": 500}
+      }
+    },
+    "counts": {
+      "type": "object",
+      "minProperties": 1,
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 500
+      }
+    }
+  }
+}

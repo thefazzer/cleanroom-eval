@@ -1,0 +1,198 @@
+{
+  "schema": "cleanroom.competency-taxonomy/v1",
+  "version": "1.0.0",
+  "status": "FROZEN",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "scope": "Abstract, institution-neutral capabilities required to perform and supervise capital-markets operations across products, counterparties, accounts and lifecycle events.",
+  "tool_surfaces": [
+    {
+      "id": "communications",
+      "name": "Communications",
+      "contract": "Read and send synthetic email, chat and meeting records with immutable message receipts."
+    },
+    {
+      "id": "case_management",
+      "name": "Case management",
+      "contract": "Open, assign, escalate, annotate and close operational cases through versioned state transitions."
+    },
+    {
+      "id": "trade_ledger",
+      "name": "Trade ledger",
+      "contract": "Read and mutate synthetic bookings through authorized, balanced and idempotent instructions."
+    },
+    {
+      "id": "reference_data",
+      "name": "Reference and master data",
+      "contract": "Inspect and propose effective-dated changes to accounts, parties, instruments and settlement instructions."
+    },
+    {
+      "id": "controls_monitoring",
+      "name": "Controls and monitoring",
+      "contract": "Query breaks, reconciliations, deadlines and control results without direct access to simulator state."
+    },
+    {
+      "id": "evidence_store",
+      "name": "Evidence and provenance",
+      "contract": "Resolve immutable evidence identifiers and attach supported citations to claims, decisions and actions."
+    }
+  ],
+  "competencies": [
+    {
+      "id": "cmo.identity.party_resolution",
+      "name": "Party and role resolution",
+      "definition": "Resolve organisations, people, accounts and operational roles without collapsing distinct parties or inventing identity links.",
+      "observable_outcomes": [
+        "Distinguishes client, executing broker, custodian and internal owner",
+        "Preserves aliases while grounding actions to canonical synthetic identifiers"
+      ],
+      "failure_modes": [
+        "Treating an operational venue as a client",
+        "Merging similarly named synthetic parties"
+      ]
+    },
+    {
+      "id": "cmo.lifecycle.trade_state",
+      "name": "Trade lifecycle state",
+      "definition": "Interpret and advance versioned trade states from capture through confirmation, settlement, amendment, cancellation and closure.",
+      "observable_outcomes": [
+        "Uses current state and version before proposing a mutation",
+        "Separates economic amendment from operational status change"
+      ],
+      "failure_modes": [
+        "Mutating stale trade versions",
+        "Marking an unconfirmed trade settled"
+      ]
+    },
+    {
+      "id": "cmo.lifecycle.cash_and_positions",
+      "name": "Cash and position conservation",
+      "definition": "Reason over cash, securities and position movements while maintaining balanced postings and explicit units and currencies.",
+      "observable_outcomes": [
+        "Produces balanced synthetic ledger entries per currency",
+        "Reconciles position changes to authorized lifecycle events"
+      ],
+      "failure_modes": [
+        "Creating value through one-sided posting",
+        "Mixing currencies or nominal and cash units"
+      ]
+    },
+    {
+      "id": "cmo.reference.effective_dating",
+      "name": "Effective-dated reference data",
+      "definition": "Apply party, account, instrument and settlement-data changes only within their valid temporal and approval bounds.",
+      "observable_outcomes": [
+        "Selects the instruction valid on the settlement date",
+        "Preserves superseded values and their effective windows"
+      ],
+      "failure_modes": [
+        "Backdating an unapproved instruction",
+        "Deleting the prior value instead of versioning it"
+      ]
+    },
+    {
+      "id": "cmo.breaks.reconciliation",
+      "name": "Break detection and reconciliation",
+      "definition": "Detect, classify and explain differences between independent books, records, messages and control observations.",
+      "observable_outcomes": [
+        "Locates the first divergent state or value",
+        "Keeps unresolved breaks open until evidence supports closure"
+      ],
+      "failure_modes": [
+        "Closing on matching labels rather than values",
+        "Silently tolerating a material difference"
+      ]
+    },
+    {
+      "id": "cmo.collateral.margin",
+      "name": "Collateral and margin operations",
+      "definition": "Evaluate synthetic calls, disputes, eligibility and settlement while distinguishing exposure, requirement and delivered collateral.",
+      "observable_outcomes": [
+        "Traces a call to exposure and agreement terms",
+        "Records dispute amount separately from undisputed payment"
+      ],
+      "failure_modes": [
+        "Treating disputed collateral as delivered",
+        "Using stale market data without qualification"
+      ]
+    },
+    {
+      "id": "cmo.exceptions.ownership",
+      "name": "Exception ownership and escalation",
+      "definition": "Assign a material operational exception to an accountable role and escalate it according to age, impact and deadline.",
+      "observable_outcomes": [
+        "Names the current owner and next deadline",
+        "Escalates without fabricating resolution or authority"
+      ],
+      "failure_modes": [
+        "Leaving a material break unowned",
+        "Escalating to an unauthorized role"
+      ]
+    },
+    {
+      "id": "cmo.controls.authorization",
+      "name": "Authorization and segregation of duties",
+      "definition": "Respect action-level authority, dual control and segregation constraints across all mutable operational surfaces.",
+      "observable_outcomes": [
+        "Refuses or routes unauthorized state changes",
+        "Obtains an independent approval where dual control applies"
+      ],
+      "failure_modes": [
+        "Self-approving a restricted change",
+        "Using read access as mutation authority"
+      ]
+    },
+    {
+      "id": "cmo.temporal.reasoning",
+      "name": "Temporal and deadline reasoning",
+      "definition": "Reason across event time, observation time, effective time, deadlines and uncertain or conflicting temporal evidence.",
+      "observable_outcomes": [
+        "Orders evidence by the relevant temporal field",
+        "Expresses uncertainty instead of assigning an unsupported exact date"
+      ],
+      "failure_modes": [
+        "Using ingestion time as event time",
+        "Ignoring a cut-off or settlement calendar"
+      ]
+    },
+    {
+      "id": "cmo.evidence.provenance",
+      "name": "Evidence-grounded decisions",
+      "definition": "Ground material claims and actions in immutable synthetic evidence references and preserve the distinction between fact and inference.",
+      "observable_outcomes": [
+        "Cites the artefacts that support each material conclusion",
+        "Labels an inference and identifies missing evidence"
+      ],
+      "failure_modes": [
+        "Citing an artefact that does not support the claim",
+        "Presenting an inference as observed fact"
+      ]
+    },
+    {
+      "id": "cmo.communication.precision",
+      "name": "Operational communication",
+      "definition": "Communicate concise, role-appropriate instructions, status, impact, uncertainty and next action without leaking hidden state.",
+      "observable_outcomes": [
+        "States owner, action, deadline and evidence compactly",
+        "Separates confirmed facts from unresolved questions"
+      ],
+      "failure_modes": [
+        "Sending ambiguous action requests",
+        "Disclosing simulator-only or answer-key information"
+      ]
+    },
+    {
+      "id": "cmo.control.closure",
+      "name": "Controlled closure",
+      "definition": "Close cases only after required mutations, reconciliations, approvals and evidence are complete and independently observable.",
+      "observable_outcomes": [
+        "Checks closure prerequisites deterministically",
+        "Leaves a case open when any material condition is unresolved"
+      ],
+      "failure_modes": [
+        "Closing from a narrative assurance alone",
+        "Suppressing an exception to improve the score"
+      ]
+    }
+  ]
+}
+

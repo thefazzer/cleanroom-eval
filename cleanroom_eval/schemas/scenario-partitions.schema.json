@@ -1,0 +1,54 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-scenario-partitions-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "partition_id",
+    "classification",
+    "disjoint_fields",
+    "training_lineage",
+    "sealed_partition",
+    "policy"
+  ],
+  "properties": {
+    "schema": {"const": "cleanroom.scenario-partitions/v1"},
+    "partition_id": {"const": "cmo_cleanroom_scenario_partitions_v1"},
+    "classification": {"const": "CLEANROOM_SYNTHETIC"},
+    "disjoint_fields": {
+      "type": "array",
+      "const": [
+        "scenario_family",
+        "world_id",
+        "template_family",
+        "entity_namespace",
+        "render_seed_family"
+      ]
+    },
+    "training_lineage": {
+      "type": "array",
+      "minItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "scenario_family",
+          "world_id",
+          "template_family",
+          "entity_namespace",
+          "render_seed_family"
+        ],
+        "properties": {
+          "scenario_family": {"pattern": "^training_[a-z0-9_]+$"},
+          "world_id": {"pattern": "^world_train_[a-z0-9_]+$"},
+          "template_family": {"pattern": "^train_[a-z0-9_]+$"},
+          "entity_namespace": {"pattern": "^syn_train_[a-z0-9_]+$"},
+          "render_seed_family": {"pattern": "^train_seed_[a-z0-9_]+$"}
+        }
+      }
+    },
+    "sealed_partition": {"const": "SEALED_TEST"},
+    "policy": {"type": "string", "minLength": 40}
+  }
+}

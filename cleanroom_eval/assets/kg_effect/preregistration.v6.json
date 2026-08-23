@@ -1,0 +1,153 @@
+{
+  "schema": "cleanroom.kg-effect-preregistration/v6",
+  "preregistration_id": "ficta_cleanroom_kg_effect_v6_repeated_budget_ladder_smoke",
+  "supersedes_for_future_runs": "ficta_cleanroom_kg_effect_v5",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "status": "POLICY_FROZEN_REQUIRES_NEW_RELEASE_SPECIFIC_ED25519_BINDING",
+  "frozen_at": "2026-08-01",
+  "purpose": "Register the replacement scorer-complete repeated smoke without modifying the historical v5 run or claiming equality between naturally different evidence representations.",
+  "parent_preregistration": {
+    "path": "cleanroom_eval/assets/kg_effect/preregistration.v5.json",
+    "file_sha256": "dbb2c8b47b3b0deaadbb3259a2597d94c0f0dae2d34facecb20284323e0b9da2",
+    "bytes": 7920,
+    "self_sha256": "f72530135f0e892deb4479c406348644e3f32fc47cbe5a926aa883f337f02625",
+    "inheritance": "All v5 provenance, blinding, whole-record, provider and reporting provisions remain binding unless this document expressly strengthens them. Historical v5 artifacts remain immutable evidence and are never reused as v6 outputs."
+  },
+  "historical_artifacts_mutated": false,
+  "release_binding": {
+    "policy_level_release_id": null,
+    "policy": "The preregistration is release/profile agnostic. Before inference, a separate signed readiness manifest must bind exactly one immutable synthetic bundle, deployed profile, graph, source manifest and source-role inventory by absolute path, byte count and SHA-256.",
+    "prior_run_directory_reuse": "PROHIBITED",
+    "output_names": [
+      "preexecution-readiness.smoke.v6.json",
+      "preexecution-binding.smoke.v6.json"
+    ]
+  },
+  "smoke_contract": {
+    "selection_policy": "literal-first-20-prefix-of-newly-sealed-release-specific-population",
+    "scenario_count": 20,
+    "arm_ids": ["E0", "E1", "E2", "E3", "E4", "E5", "E6", "E7", "H1"],
+    "repeat_count": 3,
+    "registered_call_denominator": 540,
+    "independent_provider_request_required_per_cell_repeat": true,
+    "cache_reuse_or_inflight_coalescing": "PROHIBITED",
+    "provider_seed_limitation": "The derived seed is recorded in the schedule; if the provider does not accept a seed, repeated calls are reported as unseeded provider repeats and are not represented as deterministic samples."
+  },
+  "primary_estimand": {
+    "treatment_arm": "E4",
+    "control_arm": "E1",
+    "metric": "semantic_strict_success",
+    "pairing_unit": "scenario_id_x_repeat",
+    "expected_pair_count": 60,
+    "required_scorer_evaluable_pair_count": 60,
+    "missing_or_unevaluable_pair_policy": "INVALIDATE_PRIMARY",
+    "failure_outcome_policy": "Registered provider, transport, parse and schema failures remain in the intention-to-evaluate denominator as zero; scorer material itself must nevertheless be semantically evaluable before any call.",
+    "decision_rule": "A positive KG claim requires an evaluated paired interval for all 60 registered E4/E1 pairs and a strictly positive preregistered lower confidence bound. Otherwise report null, negative, or not evaluable exactly as observed."
+  },
+  "semantic_preflight": {
+    "timing": "BEFORE_PROVIDER_CONSTRUCTION_OR_CALL",
+    "scope": "Every sealed expectation and every scenario-by-arm scorer evidence cell",
+    "required_primary_arms": ["E1", "E4"],
+    "null_or_unstructured_primary_rows": "BLOCK",
+    "primary_pair_completeness": "100_PERCENT",
+    "preflight_artifact_must_be_separate_and_content_bound": true,
+    "provider_calls_during_preflight": 0
+  },
+  "budget_ladder": {
+    "design": "preregistered-balanced-randomized-cluster-budget-ladder",
+    "assignment_unit": "scenario_cluster",
+    "provider_token_ceilings": [8192, 16384, 32768, 65536],
+    "assignment_before_material_inspection": true,
+    "same_ceiling_for_all_arms_within_unit": true,
+    "whole_records_only": true,
+    "selection_policy": "deterministic-order-complete-record-prefix-stop-before-first-overflow",
+    "filler_padding_partial_or_truncated_records": 0,
+    "exact_length_equality_required_or_claimed": false,
+    "achieved_payload_lengths_may_differ": true,
+    "post_assignment_exclusions": 0,
+    "balance_rule": "The maximum minus minimum number of assigned scenario clusters across registered ceiling levels is at most one.",
+    "primary_interpretation": "E4 versus E1 estimates representation performance under a randomized capacity regime with a ceiling matched within each scenario cluster. It does not isolate semantics at exactly equal achieved token, byte, character or item lengths.",
+    "secondary_reporting": [
+      "paired E4-E1 effect at each ceiling",
+      "pooled paired E4-E1 effect across the registered ceiling distribution",
+      "actual tokens, items, UTF-8 bytes and text characters for every call",
+      "arm-by-budget interaction with scenario-cluster uncertainty"
+    ]
+  },
+  "randomisation": {
+    "root_seed": 260801,
+    "budget_assignment": "seeded balanced shuffle of sorted scenario-cluster IDs, performed without reading material values",
+    "call_order": "seeded-base-permutation-cyclic-latin-square-v4-three-repeats",
+    "question_and_arm_blinding": "Provider requests contain neither arm identity nor gold/scorer fields"
+  },
+  "reporting_contract": {
+    "minimum_provider_completion_rate": 0.99,
+    "primary_requires_complete_scorer_evaluability": true,
+    "length_based_exclusions": 0,
+    "required_per_call_covariates": [
+      "assigned_provider_token_ceiling",
+      "provider_token_count",
+      "evidence_item_count",
+      "evidence_utf8_byte_count",
+      "evidence_text_character_count"
+    ],
+    "required_outputs": [
+      "all 540 registered observations including failures",
+      "provider request identifiers proving three non-cached repeats",
+      "60-pair E4-E1 Semantic Strict primary interval",
+      "paired budget-stratum intervals",
+      "repeatability by arm and scenario cluster",
+      "budget and achieved-length sensitivity",
+      "semantic preflight and signed inventory commitments"
+    ],
+    "forbidden_claims": [
+      "exact achieved-length matching",
+      "independent observations when repeats share a scenario cluster",
+      "causal KG benefit when the primary is incomplete or not evaluable"
+    ]
+  },
+  "required_source_roles": [
+    "binding_verifier_source",
+    "control_commitment_builder_source",
+    "control_material_source",
+    "execution_runner_source",
+    "execution_cli_source",
+    "evaluation_helper_source",
+    "material_provider_base_source",
+    "material_provider_source",
+    "material_retrieval_source",
+    "provider_adapter_source",
+    "provider_transport_source",
+    "preexecution_builder_source",
+    "request_prompt_builder_source",
+    "run_readiness_source",
+    "semantic_evidence_resolver_source",
+    "semantic_validator_source",
+    "tokenizer_binding_source",
+    "tokenizer_contract"
+  ],
+  "adjacent_cleanroom_work": {
+    "remote_additions_reviewed": [
+      "schema-constrained citation-task pipeline",
+      "matched-run readiness and job receipts",
+      "sealed commercial-proof episodes"
+    ],
+    "incorporated_principles": [
+      "closed input and source inventories",
+      "independent non-cached provider request receipts",
+      "schema-constrained outputs",
+      "fail-closed readiness before paid execution"
+    ],
+    "not_part_of_this_estimand": "Commercial-proof citation acceptance and model-training arms are adjacent clean-room programmes, not evidence for the KG E4-versus-E1 causal contrast."
+  },
+  "execution_authorisation": {
+    "authorized_panel": "economical-repeated-base-first-20-budget-ladder-only",
+    "variant_transfer_adversarial_or_stronger_model_calls_authorized": false,
+    "provider_calls_at_freeze": 0,
+    "authorized_by_this_document_alone": false,
+    "required_external_gate": "A release-specific Ed25519 v6 binding must rehash this preregistration, the new scenario/material/preflight artifacts, deployed release/profile, tokenizer and every required source role before inference is reachable.",
+    "post_execution_change_allowed": false
+  },
+  "self_digest_algorithm": "sha256(canonical-json(document-without-self_sha256); UTF-8; keys sorted; separators comma+colon; ensure_ascii=false)",
+  "self_sha256": "59cabca88c39b1ed9117df8e76e893efb38cc008d2600ddf30cdaf5e7c513ae4"
+}

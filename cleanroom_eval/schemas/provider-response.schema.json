@@ -1,0 +1,34 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-provider-response-v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["action", "execute", "evidence_refs", "claims"],
+  "properties": {
+    "action": {"type": "string", "minLength": 2},
+    "execute": {"type": "boolean"},
+    "evidence_refs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["text", "evidence_refs"],
+        "properties": {
+          "text": {"type": "string", "minLength": 1},
+          "evidence_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {"type": "string"}
+          }
+        }
+      }
+    },
+    "mutations": {"type": "array"},
+    "bypass_invariants": {"type": "boolean"}
+  }
+}

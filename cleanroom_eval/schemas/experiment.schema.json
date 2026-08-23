@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-experiment-v1",
+  "title": "Clean-room causal training experiment",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "experiment_id",
+    "classification",
+    "taxonomy_version",
+    "sealed_episode_ids",
+    "arms",
+    "matched_pairs",
+    "transfer_policy",
+    "reward_hacking_gates",
+    "contamination_policy",
+    "reporting"
+  ],
+  "properties": {
+    "schema": {"const": "cleanroom.training-experiment/v1"},
+    "experiment_id": {"pattern": "^cmo_cleanroom_v[0-9]+$"},
+    "classification": {"const": "CLEANROOM_SYNTHETIC"},
+    "taxonomy_version": {"pattern": "^1\\.[0-9]+\\.[0-9]+$"},
+    "sealed_episode_ids": {
+      "type": "array",
+      "minItems": 3,
+      "uniqueItems": true,
+      "items": {"pattern": "^episode_[a-z0-9_]+_v1$"}
+    },
+    "arms": {
+      "type": "array",
+      "minItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "intervention",
+          "training_material",
+          "reward",
+          "required_commitments"
+        ],
+        "properties": {
+          "id": {
+            "enum": [
+              "BASE",
+              "SFT",
+              "SFT_MATCHED_CONTROL",
+              "RL",
+              "RL_MATCHED_CONTROL"
+            ]
+          },
+          "intervention": {"type": "string", "minLength": 10},
+          "training_material": {"type": "string", "minLength": 8},
+          "reward": {"type": "string", "minLength": 5},
+          "required_commitments": {
+            "type": "array",
+            "minItems": 2,
+            "uniqueItems": true,
+            "items": {"type": "string"}
+          }
+        }
+      }
+    },
+    "matched_pairs": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["treatment", "control", "equal_fields"],
+        "properties": {
+          "treatment": {"type": "string"},
+          "control": {"type": "string"},
+          "equal_fields": {
+            "type": "array",
+            "minItems": 3,
+            "uniqueItems": true,
+            "items": {"type": "string"}
+          }
+        }
+      }
+    },
+    "transfer_policy": {"type": "object", "minProperties": 3},
+    "reward_hacking_gates": {"type": "object", "minProperties": 5},
+    "contamination_policy": {"type": "object", "minProperties": 3},
+    "reporting": {"type": "object", "minProperties": 3}
+  }
+}
+

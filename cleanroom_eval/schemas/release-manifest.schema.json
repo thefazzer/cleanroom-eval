@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-release-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "release_id",
+    "classification",
+    "repository_commit",
+    "assets",
+    "asset_count",
+    "assets_sha256",
+    "manifest_payload_sha256"
+  ],
+  "properties": {
+    "schema": {"const": "cleanroom.release-manifest/v1"},
+    "release_id": {"pattern": "^cleanroom-[a-z0-9_.-]+$"},
+    "classification": {"const": "CLEANROOM_SYNTHETIC"},
+    "repository_commit": {"pattern": "^[0-9a-f]{40}$"},
+    "assets": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "bytes", "sha256"],
+        "properties": {
+          "path": {"type": "string", "not": {"pattern": "(^/|\\.\\.)"}},
+          "bytes": {"type": "integer", "minimum": 1},
+          "sha256": {"pattern": "^[0-9a-f]{64}$"}
+        }
+      }
+    },
+    "asset_count": {"type": "integer", "minimum": 1},
+    "assets_sha256": {"pattern": "^[0-9a-f]{64}$"},
+    "manifest_payload_sha256": {"pattern": "^[0-9a-f]{64}$"}
+  }
+}
+

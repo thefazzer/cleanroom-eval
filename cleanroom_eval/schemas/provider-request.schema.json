@@ -1,0 +1,72 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://finexhaust.example/schemas/cleanroom-provider-request-v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "episode_id",
+    "event_id",
+    "sequence",
+    "observation_time",
+    "observation",
+    "actor",
+    "available_tool_surfaces",
+    "allowed_actions",
+    "visible_state",
+    "available_evidence_refs",
+    "prior_receipts"
+  ],
+  "properties": {
+    "schema": {"const": "cleanroom.provider-request/v1"},
+    "episode_id": {"type": "string"},
+    "event_id": {"type": "string"},
+    "sequence": {"type": "integer", "minimum": 1},
+    "observation_time": {"type": "string", "format": "date-time"},
+    "observation": {"type": "string", "minLength": 20},
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "role"],
+      "properties": {
+        "id": {"type": "string"},
+        "role": {"type": "string"}
+      }
+    },
+    "available_tool_surfaces": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "allowed_actions": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "visible_state": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["object_id", "state", "version", "facts"],
+        "properties": {
+          "object_id": {"type": "string"},
+          "state": {"type": "string"},
+          "version": {"type": "integer", "minimum": 0},
+          "facts": {"type": "object"}
+        }
+      }
+    },
+    "available_evidence_refs": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": {"type": "string"}
+    },
+    "prior_receipts": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}
+

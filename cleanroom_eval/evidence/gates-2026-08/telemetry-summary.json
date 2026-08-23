@@ -1,0 +1,129 @@
+{
+  "baseline-v1": {
+    "cached_tokens": "UNKNOWN",
+    "completed": 40,
+    "completion_rate": 1.0,
+    "cost_note": "harness v2 telemetry records status/latency/request+response hashes per call but not provider usage; token and inference-cost fields are UNKNOWN by policy, never zero. operational_expected_loss_usd lives in cost_cards.json and is never combined with inference cost.",
+    "episodes": 40,
+    "gates": {
+      "canary_echoes": 0,
+      "forbidden_output_keys": 0,
+      "rejected_requests": 120,
+      "rejections_by_category": {
+        "stale_version": 120
+      }
+    },
+    "http_status_counts": {},
+    "input_tokens": "UNKNOWN",
+    "mean_call_latency_seconds": "UNKNOWN",
+    "mean_turns": 7.0,
+    "output_tokens": "UNKNOWN",
+    "provider_calls": 0,
+    "provider_inference_cost_usd": "UNKNOWN",
+    "retry_count": 0,
+    "termination_reasons": {
+      "complete": 40
+    },
+    "total_tokens": "UNKNOWN",
+    "transport_5xx": 0,
+    "wall_clock_provider_seconds": "UNKNOWN"
+  },
+  "baseline-v2": {
+    "cached_tokens": "UNKNOWN",
+    "completed": 40,
+    "completion_rate": 1.0,
+    "cost_note": "harness v2 telemetry records status/latency/request+response hashes per call but not provider usage; token and inference-cost fields are UNKNOWN by policy, never zero. operational_expected_loss_usd lives in cost_cards.json and is never combined with inference cost.",
+    "episodes": 40,
+    "gates": {
+      "canary_echoes": 0,
+      "forbidden_output_keys": 0,
+      "rejected_requests": 233,
+      "rejections_by_category": {
+        "precondition": 43,
+        "stale_version": 190
+      }
+    },
+    "http_status_counts": {},
+    "input_tokens": "UNKNOWN",
+    "mean_call_latency_seconds": "UNKNOWN",
+    "mean_turns": 11.57,
+    "output_tokens": "UNKNOWN",
+    "provider_calls": 0,
+    "provider_inference_cost_usd": "UNKNOWN",
+    "retry_count": 0,
+    "termination_reasons": {
+      "complete": 40
+    },
+    "total_tokens": "UNKNOWN",
+    "transport_5xx": 0,
+    "wall_clock_provider_seconds": "UNKNOWN"
+  },
+  "frontier": {
+    "cached_tokens": "UNKNOWN",
+    "completed": 27,
+    "completion_rate": 0.675,
+    "cost_note": "harness v2 telemetry records status/latency/request+response hashes per call but not provider usage; token and inference-cost fields are UNKNOWN by policy, never zero. operational_expected_loss_usd lives in cost_cards.json and is never combined with inference cost.",
+    "episodes": 40,
+    "gates": {
+      "canary_echoes": 0,
+      "forbidden_output_keys": 0,
+      "rejected_requests": 279,
+      "rejections_by_category": {
+        "already_applied": 1,
+        "precondition": 271,
+        "stale_version": 7
+      }
+    },
+    "http_status_counts": {
+      "200": 473
+    },
+    "input_tokens": "UNKNOWN",
+    "mean_call_latency_seconds": 1.713,
+    "mean_turns": 11.82,
+    "output_tokens": "UNKNOWN",
+    "provider_calls": 473,
+    "provider_inference_cost_usd": "UNKNOWN",
+    "retry_count": 0,
+    "termination_reasons": {
+      "complete": 27,
+      "turn_limit": 13
+    },
+    "total_tokens": "UNKNOWN",
+    "transport_5xx": 0,
+    "wall_clock_provider_seconds": 810.325
+  },
+  "open_weight": {
+    "cached_tokens": "UNKNOWN",
+    "completed": 39,
+    "completion_rate": 0.975,
+    "cost_note": "harness v2 telemetry records status/latency/request+response hashes per call but not provider usage; token and inference-cost fields are UNKNOWN by policy, never zero. operational_expected_loss_usd lives in cost_cards.json and is never combined with inference cost.",
+    "episodes": 40,
+    "gates": {
+      "canary_echoes": 0,
+      "forbidden_output_keys": 0,
+      "rejected_requests": 110,
+      "rejections_by_category": {
+        "already_applied": 1,
+        "precondition": 76,
+        "stale_version": 33
+      }
+    },
+    "http_status_counts": {
+      "200": 336
+    },
+    "input_tokens": "UNKNOWN",
+    "mean_call_latency_seconds": 38.88,
+    "mean_turns": 8.4,
+    "output_tokens": "UNKNOWN",
+    "provider_calls": 336,
+    "provider_inference_cost_usd": "UNKNOWN",
+    "retry_count": 0,
+    "termination_reasons": {
+      "complete": 39,
+      "turn_limit": 1
+    },
+    "total_tokens": "UNKNOWN",
+    "transport_5xx": 0,
+    "wall_clock_provider_seconds": 13063.69
+  }
+}
