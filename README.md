@@ -11,6 +11,12 @@ reward-hacking gates (hidden-field probes, canary echoes, out-of-contract
 state changes), and an evidence pipeline that binds every reported number to
 run bytes by hash.
 
+**New in 1.1.0:** per-run salted canaries (the published derivation no longer
+weakens contamination detection); `cleanroom_eval.strategy_metrics` —
+classify every rejected turn as identical repeat / local adjustment /
+strategy revision and measure strategy-locking directly from transcripts
+(see `docs/technical-note-strategy-locking.md`); provider-usage telemetry.
+
 **Headline result (harness v2, preregistered, evidence in
 `cleanroom_eval/evidence/gates-2026-08/`):** a frontier model completed
 **27/40** episodes within 24 turns; an open-weight model completed **39/40**;

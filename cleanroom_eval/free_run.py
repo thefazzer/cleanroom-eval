@@ -39,6 +39,8 @@ from __future__ import annotations
 
 import argparse
 import hashlib
+import hmac as _hmac
+import secrets
 import json
 import os
 import sys
@@ -348,6 +350,17 @@ def _evidence_stub_root(out_dir: Path) -> Path:
     return root
 
 
+def episode_canary(run_salt: str, episode_id: str) -> str:
+    """Per-run salted canary (#146): the public repo made the old derivation
+    (sha256 of the episode id) computable by anyone, so an echo stopped being
+    evidence of a boundary read for post-publication models. HMAC over a
+    fresh per-run salt restores that meaning; the salt is recorded in
+    config.json AFTER generation, which is harmless (echo counting happens
+    during the run)."""
+
+    return "CANARY-" + _hmac.new(run_salt.encode(), episode_id.encode(), hashlib.sha256).hexdigest()[:16]
+
+
 def run_episode(
     episode: Mapping[str, Any],
     card: Mapping[str, Any],
@@ -356,9 +369,10 @@ def run_episode(
     corpus_root: Path,
     turn_limit: int,
     transcript: list[dict[str, Any]],
+    run_salt: str,
 ) -> EpisodeOutcome:
     session = EvaluationSession(corpus_root, dict(episode), mode="free")
-    canary = f"CANARY-{digest(episode['episode_id'])[:16]}"
+    canary = episode_canary(run_salt, episode["episode_id"])
     rejections: dict[str, int] = {}
     applied = rejected = forbidden = canary_echoes = 0
     stop_reason = "turn_limit"
@@ -457,12 +471,14 @@ def run(
     turn_limit: int,
     limit: int | None = None,
     policy_commitment: Mapping[str, Any] | None = None,
+    run_salt: str | None = None,
 ) -> dict[str, Any]:
     pairs = load_episodes(episode_dir, limit)
     if not pairs:
         raise ContractError(f"no episodes under {episode_dir}")
     run_dir = out_dir / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
+    run_salt = run_salt if run_salt is not None else secrets.token_hex(16)
     corpus_root = _evidence_stub_root(out_dir)
     config = {
         "schema": "cleanroom.free-run-config/v1",
@@ -474,12 +490,15 @@ def run(
         "episode_ids_sha256": digest([e["episode_id"] for e, _ in pairs]),
         "turn_limit": turn_limit,
         "mode": "free",
+        "canary_generation": "post-release-salted/v1",
+        "run_salt": run_salt,
     }
     (run_dir / "config.json").write_text(json.dumps(config, indent=2) + "\n", encoding="utf-8")
     transcript: list[dict[str, Any]] = []
     outcomes = []
     for index, (episode, card) in enumerate(pairs, start=1):
-        outcome = run_episode(episode, card, policy, corpus_root=corpus_root, turn_limit=turn_limit, transcript=transcript)
+        outcome = run_episode(episode, card, policy, corpus_root=corpus_root, turn_limit=turn_limit,
+                              transcript=transcript, run_salt=run_salt)
         outcomes.append(outcome)
         print(
             f"[{run_id}] {index}/{len(pairs)} {outcome.episode_id} "
@@ -491,6 +510,7 @@ def run(
         for row in transcript:
             handle.write(json.dumps(row, sort_keys=True) + "\n")
     gates = {
+        "canary_generation": "post-release-salted/v1",
         "forbidden_output_keys": sum(o.forbidden_output_keys for o in outcomes),
         "canary_echoes": sum(o.canary_echoes for o in outcomes),
         "rejected_requests": sum(o.rejected for o in outcomes),

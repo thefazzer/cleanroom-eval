@@ -345,9 +345,10 @@ def _pick(items: list[Any], *, seed: str, count: int) -> list[Any]:
 # Episode assembly
 # ---------------------------------------------------------------------------
 
-def _episode_v2(family: dict[str, Any], variant: dict[str, str], ordinal: int) -> dict[str, Any]:
+def _episode_v2(family: dict[str, Any], variant: dict[str, str], ordinal: int, set_tag: str = "r2") -> dict[str, Any]:
     family_id = family["id"]
-    slug = f"{family_id}_{variant['id']}_r2"
+    slug = f"{family_id}_{variant['id']}_{set_tag}"
+    set_label = "set 2" if set_tag == "r2" else f"set {set_tag}"
     graph = _graph(family_id, variant, ordinal)
     roles = ["operations_analyst", "operations_supervisor"]
     if THIRD_ROLE[family_id]:
@@ -503,15 +504,15 @@ def _episode_v2(family: dict[str, Any], variant: dict[str, str], ordinal: int) -
     return {
         "schema": "cleanroom.capital-markets-episode/v1",
         "episode_id": f"episode_{slug}_v1",
-        "title": f"{family['title']} — {variant['id'].title()} (set 2)",
+        "title": f"{family['title']} — {variant['id'].title()} ({set_label})",
         "classification": CLASSIFICATION,
         "partition": "SEALED_TEST",
         "world_id": f"world_eval_{slug}",
-        "template_family": f"eval_{family_id}_r2",
+        "template_family": f"eval_{family_id}_{set_tag}",
         "scenario_lineage": {
-            "scenario_family": f"sealed_{family_id}_r2",
+            "scenario_family": f"sealed_{family_id}_{set_tag}",
             "entity_namespace": f"syn_eval_{slug}",
-            "render_seed_family": f"sealed_seed_r2_{ordinal:02d}",
+            "render_seed_family": f"sealed_seed_{set_tag}_{ordinal:02d}",
             "source_basis": "GENERAL_DOMAIN_EXPERTISE",
             "restricted_source_inputs": 0,
         },
@@ -547,48 +548,71 @@ def _episode_v2(family: dict[str, Any], variant: dict[str, str], ordinal: int) -
         ],
         "adversarial_mutations": adversarial,
         "reward_traps": reward_traps,
-        "transfer_tags": family["tags"] + [variant["product"], "sealed_test", "set_r2"],
+        "transfer_tags": family["tags"] + [variant["product"], "sealed_test", f"set_{set_tag}"],
     }
 
 
-def _asset(path: Path) -> dict[str, Any]:
+def _asset(path: Path, base: Path = ROOT) -> dict[str, Any]:
     payload = path.read_bytes()
     return {
-        "path": path.relative_to(ROOT).as_posix(),
+        "path": path.relative_to(base).as_posix(),
         "bytes": len(payload),
         "sha256": hashlib.sha256(payload).hexdigest(),
     }
 
 
-def build() -> list[dict[str, Any]]:
-    EPISODE_ROOT_V2.mkdir(parents=True, exist_ok=True)
-    for path in EPISODE_ROOT_V2.glob("*.json"):
+def build(
+    set_tag: str = "r2",
+    *,
+    episode_root: Path | None = None,
+    manifest_path: Path | None = None,
+    set_id: str | None = None,
+    asset_base: Path | None = None,
+    manifest_prefix: str = "cleanroom_eval/assets",
+) -> list[dict[str, Any]]:
+    """Build a sealed set. Defaults regenerate the committed v2 set byte-for-byte.
+
+    A non-default ``set_tag`` shifts every episode id, world, namespace,
+    scenario lineage and seed-ordered selection (mutations, traps) — and the
+    run-time canaries, which derive from episode ids — producing a disjoint
+    private set into ``episode_root``.
+    """
+    episode_root = episode_root or EPISODE_ROOT_V2
+    manifest_path = manifest_path or MANIFEST_V2
+    set_id = set_id or SET_ID_V2
+    asset_base = asset_base or ROOT
+    episode_root.mkdir(parents=True, exist_ok=True)
+    for path in episode_root.glob("*.json"):
         path.unlink()
     episodes = []
     for ordinal, (family, variant) in enumerate(
         ((family, variant) for family in FAMILIES for variant in VARIANTS)
     ):
-        episode = _episode_v2(family, variant, ordinal)
+        episode = _episode_v2(family, variant, ordinal, set_tag)
         episodes.append(episode)
         filename = episode["episode_id"].removeprefix("episode_").removesuffix("_v1")
-        _write_json(EPISODE_ROOT_V2 / f"{filename}.v1.json", episode)
-    write_contracts(EPISODE_ROOT_V2)
+        _write_json(episode_root / f"{filename}.v1.json", episode)
+    write_contracts(episode_root)
 
-    sealed_paths = [
-        ROOT / "competency-taxonomy.v1.json",
-        ROOT / "scenario-partitions.v1.json",
-        *sorted(EPISODE_ROOT_V2.glob("*.json")),
-    ]
-    assets = [_asset(path) for path in sealed_paths]
+    shared = [ROOT / "competency-taxonomy.v1.json", ROOT / "scenario-partitions.v1.json"]
+    if asset_base != ROOT:
+        copied = []
+        for source in shared:
+            target = asset_base / source.name
+            target.write_bytes(source.read_bytes())
+            copied.append(target)
+        shared = copied
+    sealed_paths = [*shared, *sorted(episode_root.glob("*.json"))]
+    assets = [_asset(path, base=asset_base) for path in sealed_paths]
     lines = [
-        f"{item['sha256']}  cleanroom_eval/assets/{item['path']}\n"
+        f"{item['sha256']}  {manifest_prefix}/{item['path']}\n"
         for item in sorted(assets, key=lambda item: item["path"])
     ]
     _write_json(
-        MANIFEST_V2,
+        manifest_path,
         {
             "schema": "cleanroom.sealed-set/v1",
-            "set_id": SET_ID_V2,
+            "set_id": set_id,
             "classification": CLASSIFICATION,
             "status": "FROZEN",
             "assets": assets,

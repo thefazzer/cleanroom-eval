@@ -46,6 +46,7 @@ ALLOW_DIRS = (
 )
 ALLOW_FILES = (
     "cleanroom_eval/README.md",
+    "docs/technical-note-strategy-locking.md",
     "cleanroom_eval/evidence/__init__.py",
     "cleanroom_eval/release/__init__.py",
     "cleanroom_corpus/eval_adapters.py",
@@ -56,6 +57,9 @@ ALLOW_FILES = (
 # Evaluator-only material must never ship, allowlist notwithstanding.
 DENY_NAME_PATTERNS = (
     re.compile(r"oracle", re.IGNORECASE),
+    # S1 private-set minting recipe: the SKU differentiator, never shipped.
+    re.compile(r"private_sets\.py$"),
+    re.compile(r"mint_private_set\.py$"),
     re.compile(r"\.pyc$"),
     re.compile(r"__pycache__"),
 )
@@ -95,7 +99,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cleanroom-eval"
-version = "1.0.0"
+version = "1.1.0"
 description = "Clean-room capital-markets agent evaluation: sealed synthetic episodes, task contracts, reward-hacking gates, hash-bound evidence"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -120,6 +124,12 @@ causality and evidence sufficiency. Six tool-surface contracts, armed
 reward-hacking gates (hidden-field probes, canary echoes, out-of-contract
 state changes), and an evidence pipeline that binds every reported number to
 run bytes by hash.
+
+**New in 1.1.0:** per-run salted canaries (the published derivation no longer
+weakens contamination detection); `cleanroom_eval.strategy_metrics` —
+classify every rejected turn as identical repeat / local adjustment /
+strategy revision and measure strategy-locking directly from transcripts
+(see `docs/technical-note-strategy-locking.md`); provider-usage telemetry.
 
 **Headline result (harness v2, preregistered, evidence in
 `cleanroom_eval/evidence/gates-2026-08/`):** a frontier model completed

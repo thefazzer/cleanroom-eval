@@ -1,49 +1,65 @@
 {
-  "schema": "cleanroom.runtime-deployment-receipt/v1",
   "captured_at": "2026-08-23T22:05:00Z",
-  "service": {
-    "bind": "loopback-only",
-    "port": 8787,
-    "unit": "systemd-user knowledge-graph-copilot.service",
-    "runtime_release": "v25.48.0",
-    "release_badge": "KG v25.47.0 · corpus-1",
-    "cleanroom_runs_root": "absolute path, set via unit drop-in (opaque store: cleanroom-runs-store-v1)"
-  },
-  "ui_acceptance": {
-    "modes_present": ["Explore", "Ask", "Audit", "Evaluate", "Ledger"],
-    "workbench_markers": {"KG_CLEANROOM_EVALUATE_V1": 2, "KG_WORK_LEDGER_V1": 2},
-    "evaluate_opens_without_record_corpus_access": true,
-    "both_model_runs_appear": true,
-    "summary_metrics_equal_committed_report": {
-      "frontier_completion_rate": 0.675,
-      "open_weight_completion_rate": 0.975,
-      "matches_gates_report_json": true
-    },
-    "run_detail_serves_model_commitment": true,
-    "transcript_drill_down_works": true,
-    "aiuc_wording": "AIUC-1 evidence (never compliance/certification)",
-    "missing_or_corrupt_run_fails_visibly": "clean-room run not found",
-    "ledger_reflects_current_tracker": {
-      "refreshed_at_served_path": true,
-      "issue_113_children_consistent": true,
-      "note": "work_ledger refresh must target the RUNTIME's work_ledger.json (server reads ROOT/work_ledger.json); the repo-default path is not the served copy"
-    }
-  },
   "deployed_changes": [
     "runtime v25.48.0 html carries the Evaluate/Ledger workbench modes (verified markers x2)",
     "CLEANROOM_RUNS_ROOT absolute in the unit drop-in",
     "work ledger snapshot refreshed at the served path after the 2026-08-23 tracker corrections",
     "KG_WORKBENCH_OPEN posture landed on main (16322cc) so main's server can serve the interactive workbench once release identities are reconciled"
   ],
+  "limitation": null,
+  "limitation_resolved": {
+    "resolution": ":8787 now served by main's copilot_server.py from a detached committed worktree (serving/main-serving @ 167397d), open-workbench posture, dev-tree drop-in retired; v25 runtime accepted via the digest-bound serving-identity override (fail-closed, tested)",
+    "resolved_at": "2026-08-23T22:34:11.796132Z",
+    "root_page_regression_found_and_fixed": "runtime root page had been regenerated without the Evaluate/Ledger blocks (22:46 2026-08-23); v25 const D= blob re-spliced byte-identically into the committed product template; markers verified live",
+    "was": "serving-code-not-main"
+  },
   "limitations": [
     {
-      "id": "serving-code-not-main",
-      "description": "The live service still executes the institution-scale dev checkout (2 unmerged commits past a merged base, plus uncommitted local edits), not current main. Blocker: main's release identity (canonical/release.py v22, matching main's committed root artifacts) rejects the served v25 runtime artifact lineage built by the census lane; deploying main's server against the v25 runtime fails its release guard, and re-cutting the runtime from main's v22 artifacts would regress served content. Resolution requires reconciling the v25 release lineage into main - tracked as the remaining step for the runtime-deployment receipt; #120 therefore stays status:code-merged."
+      "description": "The live service still executes the institution-scale dev checkout (2 unmerged commits past a merged base, plus uncommitted local edits), not current main. Blocker: main's release identity (canonical/release.py v22, matching main's committed root artifacts) rejects the served v25 runtime artifact lineage built by the census lane; deploying main's server against the v25 runtime fails its release guard, and re-cutting the runtime from main's v22 artifacts would regress served content. Resolution requires reconciling the v25 release lineage into main - tracked as the remaining step for the runtime-deployment receipt; #120 therefore stays status:code-merged.",
+      "id": "serving-code-not-main"
     }
   ],
+  "schema": "cleanroom.runtime-deployment-receipt/v1",
+  "service": {
+    "bind": "loopback-only",
+    "cleanroom_runs_root": "absolute path, set via unit drop-in (opaque store: cleanroom-runs-store-v1)",
+    "port": 8787,
+    "release_badge": "KG v25.47.0 \u00b7 corpus-1",
+    "runtime_release": "v25.48.0",
+    "unit": "systemd-user knowledge-graph-copilot.service"
+  },
+  "ui_acceptance": {
+    "aiuc_wording": "AIUC-1 evidence (never compliance/certification)",
+    "both_model_runs_appear": true,
+    "evaluate_opens_without_record_corpus_access": true,
+    "ledger_reflects_current_tracker": {
+      "issue_113_children_consistent": true,
+      "note": "work_ledger refresh must target the RUNTIME's work_ledger.json (server reads ROOT/work_ledger.json); the repo-default path is not the served copy",
+      "refreshed_at_served_path": true
+    },
+    "missing_or_corrupt_run_fails_visibly": "clean-room run not found",
+    "modes_present": [
+      "Explore",
+      "Ask",
+      "Audit",
+      "Evaluate",
+      "Ledger"
+    ],
+    "run_detail_serves_model_commitment": true,
+    "summary_metrics_equal_committed_report": {
+      "frontier_completion_rate": 0.675,
+      "matches_gates_report_json": true,
+      "open_weight_completion_rate": 0.975
+    },
+    "transcript_drill_down_works": true,
+    "workbench_markers": {
+      "KG_CLEANROOM_EVALUATE_V1": 2,
+      "KG_WORK_LEDGER_V1": 2
+    }
+  },
   "verification_sources": {
+    "committed_report": "cleanroom_eval/evidence/gates-2026-08/gates-report.json",
     "health": "GET /health 200, mode=pinned, version=evidence-grounded-copilot-v25",
-    "runs_listing": "GET /cleanroom/runs serves baseline-v1, baseline-v2, frontier, open_weight",
-    "committed_report": "cleanroom_eval/evidence/gates-2026-08/gates-report.json"
+    "runs_listing": "GET /cleanroom/runs serves baseline-v1, baseline-v2, frontier, open_weight"
   }
 }
