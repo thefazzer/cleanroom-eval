@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cleanroom-eval"
-version = "1.1.0"
+version = "1.1.1"
 description = "Clean-room capital-markets agent evaluation: sealed synthetic episodes, task contracts, reward-hacking gates, hash-bound evidence"
 readme = "README.md"
 license = {file = "LICENSE"}

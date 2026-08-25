@@ -46,6 +46,7 @@ class EvaluationSession:
         self._requests: dict[str, dict[str, Any]] = {}
         self._applied_transitions: set[str] = set()
         self._trajectory: list[dict[str, Any]] = []
+        self._last_rejection: dict[str, Any] | None = None
         self._states = {
             row["object_id"]: {
                 "state": row["state"],
@@ -123,6 +124,45 @@ class EvaluationSession:
             )
         ).hexdigest()
 
+    def state_changes_outside_contract(self) -> int:
+        """Diff the live state against an independent recomputation from the
+        sealed contract: initial_state plus the mutations of every applied
+        transition. Nonzero means state moved outside the contract."""
+
+        expected: dict[str, dict[str, Any]] = {
+            row["object_id"]: {
+                "state": row["state"],
+                "version": row["version"],
+                "facts": row.get("facts", {}),
+            }
+            for row in self._episode["initial_state"]
+        }
+        for transition in self._transitions:
+            if transition["template_event_id"] not in self._applied_transitions:
+                continue
+            for mutation in transition["mutations"]:
+                row = expected.setdefault(
+                    mutation["object_id"], {"state": None, "version": -1, "facts": {}}
+                )
+                # Versions form a strict chain per object, so the contracted
+                # end state is the applied mutation with the highest to_version.
+                if mutation["to_version"] > row["version"]:
+                    row["state"] = mutation["to_state"]
+                    row["version"] = mutation["to_version"]
+        live = {
+            object_id: {
+                "state": state["state"],
+                "version": state["version"],
+                "facts": state["facts"],
+            }
+            for object_id, state in self._states.items()
+        }
+        return sum(
+            1
+            for object_id in set(expected) | set(live)
+            if expected.get(object_id) != live.get(object_id)
+        )
+
     def _active_transitions(self) -> list[dict[str, Any]]:
         return [
             transition
@@ -190,6 +230,9 @@ class EvaluationSession:
                 {ref for t in self._transitions for ref in t["evidence_refs"]}
             ),
             "prior_receipts": list(self._receipts.values()),
+            # Feedback: the contract's last rejection, so a stateless policy
+            # can correct itself. Names the error text only.
+            "last_rejection": dict(self._last_rejection) if self._last_rejection else None,
             "complete": self.is_complete(),
         }
 
@@ -230,7 +273,17 @@ class EvaluationSession:
             mutation["object_id"]: mutation["from_version"]
             for mutation in transition["mutations"]
         }
-        if request["object_versions"] != expected_versions:
+        asserted = request["object_versions"]
+        # Optimistic concurrency: every version the caller asserts must be the
+        # object's current version, and every object the transition mutates
+        # must be asserted. Asserting extra, current objects is not an error.
+        stale = {
+            object_id: version
+            for object_id, version in asserted.items()
+            if object_id not in self._states or self._states[object_id]["version"] != version
+        }
+        missing = {k: v for k, v in expected_versions.items() if k not in asserted}
+        if stale or missing:
             raise AdapterError(
                 f"stale or excessive object versions: expected {expected_versions}"
             )
@@ -342,7 +395,17 @@ class EvaluationSession:
 
     def _invoke(self, surface: str, request: dict[str, Any]) -> dict[str, Any]:
         if self.mode == "free":
-            return self._invoke_free(surface, request)
+            try:
+                receipt = self._invoke_free(surface, request)
+            except AdapterError as exc:
+                self._last_rejection = {
+                    "surface": surface,
+                    "action": request.get("action") if isinstance(request, dict) else None,
+                    "error": str(exc),
+                }
+                raise
+            self._last_rejection = None
+            return receipt
         if self._event_index >= len(self._episode["events"]):
             raise AdapterError("episode is complete")
         event = self._episode["events"][self._event_index]

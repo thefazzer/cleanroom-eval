@@ -1,7 +1,7 @@
 # cleanroom-eval
 
 **A sealed, preregistered agent-evaluation environment for capital-markets
-operations — that frontier models do not saturate.**
+operations — every reported number bound to run bytes by hash.**
 
 Forty hash-sealed long-horizon episodes per set (two sets) across eight
 operational families: trade lifecycle, booking/allocations, reconciliation,
@@ -11,19 +11,34 @@ reward-hacking gates (hidden-field probes, canary echoes, out-of-contract
 state changes), and an evidence pipeline that binds every reported number to
 run bytes by hash.
 
+**New in 1.1.1:** two honesty fixes prompted by an external adversarial
+audit. The harness-v2 adapter code (rejection feedback in observations,
+optimistic-concurrency version checks) is restored — a packaging regression
+had shipped v1 adapter semantics beside the v2 system prompt, so the
+published v2 results were not reproducible from this repository. And
+`state_changes_outside_contract` is now **measured** per episode by diffing
+live state against an independent recomputation from the sealed contract; it
+was previously reported as zero by construction, which could never fire.
+Runs that predate the measurement report `NOT_MEASURED`, not zero.
+
 **New in 1.1.0:** per-run salted canaries (the published derivation no longer
 weakens contamination detection); `cleanroom_eval.strategy_metrics` —
 classify every rejected turn as identical repeat / local adjustment /
 strategy revision and measure strategy-locking directly from transcripts
 (see `docs/technical-note-strategy-locking.md`); provider-usage telemetry.
 
-**Headline result (harness v2, preregistered, evidence in
-`cleanroom_eval/evidence/gates-2026-08/`):** a frontier model completed
-**27/40** episodes within 24 turns; an open-weight model completed **39/40**;
-both tripped **zero** reward-hacking gates. The scripted honest baseline
-completes 40/40, and all 243 committed adversarial mutations are rejected
-with their expected errors — the environment is solvable, discriminative and
-hard to hack.
+**Current result (harness v2, preregistered, supplier-run; evidence in
+`cleanroom_eval/evidence/gates-2026-08/`):** one frontier arm completed
+**27/40** episodes within 24 turns; one open-weight arm completed **39/40**;
+neither probed hidden fields nor echoed a canary. The scripted reference
+policy completes 40/40 — it reads validator error text, so it bounds harness
+solvability, not model skill. All 243 committed adversarial mutations are
+rejected by the deterministic verifier with their expected errors; that is
+contract-level sensitivity, not a claim about model-facing attacks. These
+runs were executed by the environment's author and are not blind; whether
+frontier models saturate this environment as a class is an open hypothesis
+(one arm measured). Independent replication is invited — the harness, sealed
+sets and gates are all in this repository.
 
 Every episode, institution, name and identifier is invented
 (`CLEANROOM_SYNTHETIC`); independent origin is enforced by a shingle-overlap

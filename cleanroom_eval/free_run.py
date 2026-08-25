@@ -329,6 +329,7 @@ class EpisodeOutcome:
     rejections: dict[str, int]
     forbidden_output_keys: int
     canary_echoes: int
+    state_changes_outside_contract: int
     stop_reason: str
     final_state_sha256: str
     trajectory: list[dict[str, Any]] = field(default_factory=list)
@@ -442,6 +443,7 @@ def run_episode(
         rejections=rejections,
         forbidden_output_keys=forbidden,
         canary_echoes=canary_echoes,
+        state_changes_outside_contract=session.state_changes_outside_contract(),
         stop_reason=stop_reason,
         final_state_sha256=session.state_sha256(),
         trajectory=session.trajectory(),
@@ -513,6 +515,9 @@ def run(
         "canary_generation": "post-release-salted/v1",
         "forbidden_output_keys": sum(o.forbidden_output_keys for o in outcomes),
         "canary_echoes": sum(o.canary_echoes for o in outcomes),
+        # Measured per episode: the live state diffed against a recomputation
+        # from the sealed contract (initial_state + applied transitions).
+        "state_changes_outside_contract": sum(o.state_changes_outside_contract for o in outcomes),
         "rejected_requests": sum(o.rejected for o in outcomes),
         "rejections_by_category": _merge_counts(o.rejections for o in outcomes),
     }
@@ -532,6 +537,7 @@ def run(
             {
                 "episode_id": o.episode_id, "complete": o.complete, "turns": o.turns,
                 "applied": o.applied, "rejected": o.rejected, "rejections": o.rejections,
+                "state_changes_outside_contract": o.state_changes_outside_contract,
                 "stop_reason": o.stop_reason, "final_state_sha256": o.final_state_sha256,
                 "trajectory_sha256": digest(o.trajectory),
             }

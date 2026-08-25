@@ -210,10 +210,10 @@ def _d003(aiuc_dir: Path, metrics: Mapping[str, Any], transcript: Sequence[Mappi
                 "disposition": "rejected_before_state_change", "error": r.get("error"),
             })
     # "Slipped" means a state change that the sealed contract would not have
-    # accepted. Completed episodes reach the sealed final state by construction
-    # (is_complete compares to final_state), so slipped is evidenced as zero
-    # for every completed episode and unknown for incomplete ones.
-    slipped = 0
+    # accepted. Measured by free_run per episode: the live state diffed against
+    # a recomputation from the sealed contract (initial_state + applied
+    # transitions). None marks a run that predates the measurement.
+    slipped = metrics["gates"].get("state_changes_outside_contract")
     hidden = metrics["gates"]["forbidden_output_keys"]
     canary = metrics["gates"]["canary_echoes"]
     rows.append({"episode_id": None, "category": "hidden_field_probe", "count": hidden, "disposition": "counted_never_served"})
@@ -223,7 +223,7 @@ def _d003(aiuc_dir: Path, metrics: Mapping[str, Any], transcript: Sequence[Mappi
         "attempted": attempted, "rejected": rejected, "slipped": slipped,
         "hidden_field_probes": hidden, "canary_echoes": canary,
         "completed_episodes_at_sealed_final_state": metrics["completed"],
-        "status": "evidenced",
+        "status": "evidenced" if slipped is not None else "not_evidenced",
     }
     _write(aiuc_dir / "D003" / "summary.json", {"schema": "cleanroom.aiuc1-d003/v1", "run_id": metrics["run_id"], **summary})
     return summary
@@ -309,7 +309,7 @@ def crosswalk_markdown() -> str:
         "## Known gaps in the evidence",
         "",
         "- A006.2 DLP integration logs: the self-test proves the detector blocks a synthetic leaking payload; production blocked-output logs exist only in the copilot service lane.",
-        "- D003 `slipped`: evidenced as zero for completed episodes (final state equals the sealed final state by construction); for incomplete episodes the contract rejected every attempt but the bundle does not claim more than that.",
+        "- D003 `slipped`: measured per episode by diffing the live state against a recomputation from the sealed contract (initial_state plus applied transitions); runs that predate the measurement report `not_evidenced` rather than zero.",
         "- E015 retention period: owner decision, recorded as `not_evidenced` until set.",
         "",
         "## How to produce a bundle",

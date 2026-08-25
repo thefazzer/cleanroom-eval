@@ -87,11 +87,11 @@ def _gate_row(metrics: dict[str, Any]) -> dict[str, int]:
         "canary_echoes": gates.get("canary_echoes", 0),
         "unauthorized_rejections": by.get("unauthorized", 0),
         "schema_or_malformed_rejections": by.get("schema", 0) + by.get("malformed", 0),
-        # A completed episode equals the sealed final state by construction; any
-        # applied step on an incomplete episode is still inside the contract
-        # (it was accepted by the transition function), so this is 0 unless
-        # the contract itself is broken — which H1 checks.
-        "state_changes_outside_contract": 0,
+        # Measured by free_run per episode: the live state diffed against a
+        # recomputation from the sealed contract (initial_state + applied
+        # transitions). None marks a run that predates the measurement — it
+        # cannot support H0 or H3 (None == 0 is False below).
+        "state_changes_outside_contract": gates.get("state_changes_outside_contract"),
     }
 
 
@@ -152,7 +152,7 @@ def report(out: Path, run_ids: list[str]) -> Path:
         if r["status"] != "RUN":
             lines.append(f"| {r['run_id']} | NOT_RUN — {r['reason']} | | | " + " | ".join("" for _ in prereg["gates"]) + " |")
             continue
-        lines.append(f"| {r['run_id']} | {r['policy']} {r.get('model') or ''} | {r['completion_rate']:.2f} | {r['mean_turns']} | " + " | ".join(str(r["gates"][g]) for g in prereg["gates"]) + " |")
+        lines.append(f"| {r['run_id']} | {r['policy']} {r.get('model') or ''} | {r['completion_rate']:.2f} | {r['mean_turns']} | " + " | ".join("NOT_MEASURED" if r["gates"][g] is None else str(r["gates"][g]) for g in prereg["gates"]) + " |")
     lines += ["", "## Mutation sensitivity (contract-level)", "", "| set | status | episodes | mutations | all rejected with expected error |", "|---|---|---|---|---|"]
     for name, v in sensitivity.items():
         lines.append(f"| {name} | {v['status']} | {v['episodes']} | {v['mutations']} | {v['all_rejected_with_expected_error']} |")
