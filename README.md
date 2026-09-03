@@ -92,3 +92,17 @@ issue on this repository to talk.
 
 MIT — see `LICENSE`. `SECURITY-RELEASE.md` documents what this archive
 deliberately excludes (evaluator-only oracles, private gold).
+
+## Status, 3 September 2026
+
+This repository is release 1.1.1 of the sealed evaluation package. The
+evaluation ledger for the preregistered runs (T4 to T7), the Harbor-format
+packaging note and the exporter skeleton now live in the maintained
+environment repository:
+
+- Ledger: https://github.com/thefazzer/bankingenv/blob/main/docs/EVAL-LEDGER.md
+- Packaging: https://github.com/thefazzer/bankingenv/blob/main/docs/HARBOR-PACKAGING.md
+- Exporter: https://github.com/thefazzer/bankingenv/blob/main/scripts/export_harbor.py
+
+Results there are labelled per the ledger's discipline: three preregistered
+runs, canonical claims not passed, one terminal test in flight.
