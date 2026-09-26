@@ -6,11 +6,20 @@ this pack; changing any run byte invalidates the pack.
 
 Usage:
     python -m cleanroom_eval.evidence.bind_gates_evidence \
-        [--runs-root PATH] [--out PATH] [--verify]
+        [--runs-root PATH] [--out PATH] [--verify] \
+        [--run-ids ID ...] [--episode-set ID=PATH ...]
 
 --runs-root defaults to $CLEANROOM_RUNS_ROOT, else the private runs store.
 --verify recomputes everything and fails on any divergence from the
 committed pack instead of rewriting it.
+
+Default arguments reproduce the committed 2026-08 gates pack byte-for-byte.
+A custom campaign (e.g. an S2 engagement against a private sealed set) passes
+its own --run-ids and --episode-set pairs; an episode set given as an
+absolute path is treated as private inventory — its location is recorded as
+an opaque set id, never a path — and campaign deviations are read from an
+optional ``deviations.v1.json`` in the runs root (the 2026-08 deviation list
+is specific to that campaign and never applied elsewhere).
 
 Content-safety rules enforced here:
 - transcripts, per-turn request/response bodies and provider credentials
@@ -108,15 +117,73 @@ def _hash_tree(root: Path, rel_to: Path) -> dict[str, str]:
     }
 
 
-def build(runs_root: Path, out_dir: Path) -> dict[str, Any]:
+def _episode_set_dir(rel: str) -> Path:
+    path = Path(rel).expanduser()
+    return path if path.is_absolute() else REPO_ROOT / rel
+
+
+def _episode_set_location(set_id: str, rel: str) -> str:
+    """Absolute paths are private inventory: bound by hash, located opaquely."""
+    return rel if not Path(rel).expanduser().is_absolute() else f"private-episode-set:{set_id}"
+
+
+def _campaign_deviations(runs_root: Path, *, default_campaign: bool,
+                         prereg: dict[str, Any], identities: dict[str, Any]) -> list[dict[str, Any]]:
+    if not default_campaign:
+        recorded = runs_root / "deviations.v1.json"
+        if not recorded.is_file():
+            return []
+        deviations = json.loads(recorded.read_text(encoding="utf-8"))
+        if not isinstance(deviations, list):
+            raise SystemExit("deviations.v1.json must be a JSON list")
+        return deviations
+    prereg_models = {m["arm"]: m["selection"] for m in prereg.get("models", [])}
+    return [
+        {
+            "id": "substituted-frontier-arm",
+            "preregistered": prereg_models.get("frontier"),
+            "as_run": f"{identities['frontier']['model']} via {identities['frontier']['endpoint_class']}",
+            "reason": "originally named arm unavailable at run time; substitution disclosed in the report",
+        },
+        {
+            "id": "substituted-open-weight-arm",
+            "preregistered": prereg_models.get("open_weight"),
+            "as_run": f"{identities['open_weight']['model']} via {identities['open_weight']['endpoint_class']}",
+            "reason": "originally named arm unavailable at run time; substitution disclosed in the report",
+        },
+        {
+            "id": "harness-v1-to-v2-revision",
+            "description": (
+                "The first frontier run executed under harness v1, which treated provider 429 "
+                "responses as fatal and rejected correct-but-more-specific version assertions. "
+                "Both defects were fixed (retry/backoff and grading), the harness re-frozen as v2, "
+                "and all reported model arms re-run. The v1 frontier artifact is retained in the "
+                "archive store as superseded context and is not part of this evidence pack."
+            ),
+        },
+        {
+            "id": "archived-aborted-runs",
+            "description": (
+                "The archive store retains aborted attempts (a smoke run and two aborted "
+                "open-weight attempts) by opaque id; none contribute to reported results."
+            ),
+        },
+    ]
+
+
+def build(runs_root: Path, out_dir: Path,
+          run_ids: tuple[str, ...] = RUN_IDS,
+          episode_sets: dict[str, str] | None = None) -> dict[str, Any]:
     if not runs_root.is_dir():
         raise SystemExit(f"runs root not found: {runs_root}")
+    episode_sets = dict(episode_sets) if episode_sets else dict(EPISODE_SETS)
+    default_campaign = tuple(run_ids) == RUN_IDS and episode_sets == EPISODE_SETS
 
     # ---- 1. hash every immutable run artifact -------------------------------
     artifact_hashes: dict[str, str] = {}
     for name in ROOT_FILES:
         artifact_hashes[name] = file_sha256(runs_root / name)
-    for run_id in RUN_IDS:
+    for run_id in run_ids:
         run_dir = runs_root / run_id
         for name in RUN_FILES:
             artifact_hashes[f"{run_id}/{name}"] = file_sha256(run_dir / name)
@@ -138,13 +205,14 @@ def build(runs_root: Path, out_dir: Path) -> dict[str, Any]:
     # ---- 3. bind episode sets: repo assets must equal what ran --------------
     episode_bindings: dict[str, Any] = {}
     config_by_run: dict[str, dict[str, Any]] = {}
-    for run_id in RUN_IDS:
+    for run_id in run_ids:
         config_by_run[run_id] = json.loads(
             (runs_root / run_id / "config.json").read_text(encoding="utf-8")
         )
-    for set_id, rel in EPISODE_SETS.items():
-        count, ids_sha = _episode_ids_sha256(REPO_ROOT / rel)
-        users = [r for r in RUN_IDS if config_by_run[r]["episode_dir"].rstrip("/").endswith(Path(rel).name)]
+    for set_id, rel in episode_sets.items():
+        set_dir = _episode_set_dir(rel)
+        count, ids_sha = _episode_ids_sha256(set_dir)
+        users = [r for r in run_ids if config_by_run[r]["episode_dir"].rstrip("/").endswith(set_dir.name)]
         for run_id in users:
             recorded = config_by_run[run_id]["episode_ids_sha256"]
             if recorded != ids_sha:
@@ -153,7 +221,7 @@ def build(runs_root: Path, out_dir: Path) -> dict[str, Any]:
                     f"{run_id} recorded {recorded} — repo episodes are not the ones that ran"
                 )
         episode_bindings[set_id] = {
-            "repo_path": rel,
+            "repo_path": _episode_set_location(set_id, rel),
             "episode_count": count,
             "episode_ids_sha256": ids_sha,
             "bound_runs": users,
@@ -161,7 +229,7 @@ def build(runs_root: Path, out_dir: Path) -> dict[str, Any]:
 
     # ---- 4. model identities: from run commitments only ---------------------
     identities = {}
-    for run_id in RUN_IDS:
+    for run_id in run_ids:
         config = config_by_run[run_id]
         commitment = config.get("policy_commitment") or {}
         identities[run_id] = {
@@ -178,7 +246,7 @@ def build(runs_root: Path, out_dir: Path) -> dict[str, Any]:
 
     # ---- 5. telemetry summary (aggregates only; absent usage is UNKNOWN) ----
     telemetry = {}
-    for run_id in RUN_IDS:
+    for run_id in run_ids:
         metrics = json.loads((runs_root / run_id / "metrics.json").read_text(encoding="utf-8"))
         calls = metrics.get("policy_telemetry") or []
         statuses = Counter(str(c.get("status")) for c in calls)
@@ -216,38 +284,8 @@ def build(runs_root: Path, out_dir: Path) -> dict[str, Any]:
 
     # ---- 6. deviations from preregistration ---------------------------------
     prereg = json.loads((runs_root / "gates-preregistration.v1.json").read_text(encoding="utf-8"))
-    prereg_models = {m["arm"]: m["selection"] for m in prereg.get("models", [])}
-    deviations = [
-        {
-            "id": "substituted-frontier-arm",
-            "preregistered": prereg_models.get("frontier"),
-            "as_run": f"{identities['frontier']['model']} via {identities['frontier']['endpoint_class']}",
-            "reason": "originally named arm unavailable at run time; substitution disclosed in the report",
-        },
-        {
-            "id": "substituted-open-weight-arm",
-            "preregistered": prereg_models.get("open_weight"),
-            "as_run": f"{identities['open_weight']['model']} via {identities['open_weight']['endpoint_class']}",
-            "reason": "originally named arm unavailable at run time; substitution disclosed in the report",
-        },
-        {
-            "id": "harness-v1-to-v2-revision",
-            "description": (
-                "The first frontier run executed under harness v1, which treated provider 429 "
-                "responses as fatal and rejected correct-but-more-specific version assertions. "
-                "Both defects were fixed (retry/backoff and grading), the harness re-frozen as v2, "
-                "and all reported model arms re-run. The v1 frontier artifact is retained in the "
-                "archive store as superseded context and is not part of this evidence pack."
-            ),
-        },
-        {
-            "id": "archived-aborted-runs",
-            "description": (
-                "The archive store retains aborted attempts (a smoke run and two aborted "
-                "open-weight attempts) by opaque id; none contribute to reported results."
-            ),
-        },
-    ]
+    deviations = _campaign_deviations(
+        runs_root, default_campaign=default_campaign, prereg=prereg, identities=identities)
 
     # ---- 7. the binding manifest --------------------------------------------
     manifest = {
@@ -266,13 +304,15 @@ def build(runs_root: Path, out_dir: Path) -> dict[str, Any]:
                 },
                 "report_row": next(r for r in report["runs"] if r["run_id"] == run_id),
             }
-            for run_id in RUN_IDS
+            for run_id in run_ids
         },
         "mutation_sensitivity": report["mutation_sensitivity"],
         "verdicts": report["verdicts"],
         "verdict_qualification": (
             "H0-H1 supported on the frozen harness (v2). H2-H3 supported for the substituted "
             "arms recorded in model-identities.json; the originally named model arms were not run."
+        ) if default_campaign else report.get(
+            "verdict_qualification", "campaign-specific; see gates-report.md"
         ),
         "report_hashes": {name: artifact_hashes[name] for name in ROOT_FILES},
         "artifact_count": len(artifact_hashes),
@@ -310,12 +350,14 @@ def build(runs_root: Path, out_dir: Path) -> dict[str, Any]:
     return {"out_dir": str(out_dir), "files": emitted, "artifacts_bound": len(artifact_hashes)}
 
 
-def verify(runs_root: Path, out_dir: Path) -> None:
+def verify(runs_root: Path, out_dir: Path,
+           run_ids: tuple[str, ...] = RUN_IDS,
+           episode_sets: dict[str, str] | None = None) -> None:
     """Re-derive the pack in a scratch location and fail on any divergence."""
     import tempfile
 
     with tempfile.TemporaryDirectory() as scratch:
-        fresh = build(runs_root, Path(scratch))
+        fresh = build(runs_root, Path(scratch), run_ids, episode_sets)
         for name in fresh["files"]:
             committed = out_dir / name
             if not committed.is_file():
@@ -354,13 +396,27 @@ def main() -> None:
     parser.add_argument("--runs-root", default=None)
     parser.add_argument("--out", default=str(DEFAULT_OUT))
     parser.add_argument("--verify", action="store_true")
+    parser.add_argument("--run-ids", nargs="+", default=list(RUN_IDS),
+                        help="run directories under the runs root to bind")
+    parser.add_argument("--episode-set", action="append", metavar="ID=PATH", default=None,
+                        help="episode set binding; absolute PATH = private inventory, "
+                             "recorded opaquely (repeatable; default: the repo v1+v2 sets)")
     args = parser.parse_args()
     runs_root = _runs_root(args.runs_root)
     out_dir = Path(args.out)
+    run_ids = tuple(args.run_ids)
+    episode_sets = None
+    if args.episode_set:
+        episode_sets = {}
+        for item in args.episode_set:
+            set_id, _, path = item.partition("=")
+            if not set_id or not path:
+                raise SystemExit(f"--episode-set expects ID=PATH, got {item!r}")
+            episode_sets[set_id] = path
     if args.verify:
-        verify(runs_root, out_dir)
+        verify(runs_root, out_dir, run_ids, episode_sets)
         return
-    result = build(runs_root, out_dir)
+    result = build(runs_root, out_dir, run_ids, episode_sets)
     print(json.dumps(result, indent=2))
 
 

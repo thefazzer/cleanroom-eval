@@ -1,0 +1,201 @@
+{
+ "$defs": {
+  "asset": {
+   "additionalProperties": false,
+   "properties": {
+    "bytes": {
+     "minimum": 1,
+     "type": "integer"
+    },
+    "distribution": {
+     "type": "string"
+    },
+    "path": {
+     "minLength": 1,
+     "type": "string"
+    },
+    "records": {
+     "const": 500
+    },
+    "sha256": {
+     "$ref": "#/$defs/sha256"
+    }
+   },
+   "required": [
+    "path",
+    "bytes",
+    "sha256",
+    "records"
+   ],
+   "type": "object"
+  },
+  "counts": {
+   "additionalProperties": {
+    "maximum": 500,
+    "minimum": 1,
+    "type": "integer"
+   },
+   "minProperties": 1,
+   "type": "object"
+  },
+  "sha256": {
+   "pattern": "^[0-9a-f]{64}$",
+   "type": "string"
+  }
+ },
+ "$id": "https://finexhaust.example/schemas/cleanroom-citation-task-set-v2",
+ "$schema": "https://json-schema.org/draft/2020-12/schema",
+ "additionalProperties": false,
+ "properties": {
+  "assets": {
+   "items": {
+    "$ref": "#/$defs/asset"
+   },
+   "maxItems": 2,
+   "minItems": 2,
+   "type": "array"
+  },
+  "classification": {
+   "const": "CLEANROOM_SYNTHETIC"
+  },
+  "coverage": {
+   "additionalProperties": false,
+   "properties": {
+    "categories": {
+     "$ref": "#/$defs/counts"
+    },
+    "expected_answer_kinds": {
+     "$ref": "#/$defs/counts"
+    },
+    "scenario_families": {
+     "$ref": "#/$defs/counts"
+    }
+   },
+   "required": [
+    "categories",
+    "scenario_families",
+    "expected_answer_kinds"
+   ],
+   "type": "object"
+  },
+  "episode_count": {
+   "const": 40
+  },
+  "schema": {
+   "const": "cleanroom.citation-task-set/v2"
+  },
+  "set_id": {
+   "maxLength": 256,
+   "minLength": 1,
+   "type": "string"
+  },
+  "source_sealed_set": {
+   "additionalProperties": false,
+   "properties": {
+    "manifest_path": {
+     "minLength": 1,
+     "type": "string"
+    },
+    "manifest_sha256": {
+     "$ref": "#/$defs/sha256"
+    },
+    "set_id": {
+     "minLength": 1,
+     "type": "string"
+    }
+   },
+   "required": [
+    "set_id",
+    "manifest_path",
+    "manifest_sha256"
+   ],
+   "type": "object"
+  },
+  "status": {
+   "const": "FROZEN"
+  },
+  "supersession": {
+   "additionalProperties": false,
+   "properties": {
+    "reason": {
+     "type": "string"
+    },
+    "resealed_at": {
+     "type": "string"
+    },
+    "superseded_manifest_sha256": {
+     "type": "string"
+    },
+    "supersedes": {
+     "type": "string"
+    }
+   },
+   "required": [
+    "supersedes",
+    "superseded_manifest_sha256",
+    "resealed_at",
+    "reason"
+   ],
+   "type": "object"
+  },
+  "task_count": {
+   "const": 500
+  },
+  "task_ledger": {
+   "items": {
+    "additionalProperties": false,
+    "properties": {
+     "episode_id": {
+      "minLength": 1,
+      "type": "string"
+     },
+     "oracle_sha256": {
+      "$ref": "#/$defs/sha256"
+     },
+     "sequence": {
+      "maximum": 500,
+      "minimum": 1,
+      "type": "integer"
+     },
+     "task_id": {
+      "maxLength": 256,
+      "minLength": 1,
+      "type": "string"
+     },
+     "task_sha256": {
+      "$ref": "#/$defs/sha256"
+     }
+    },
+    "required": [
+     "sequence",
+     "task_id",
+     "task_sha256",
+     "oracle_sha256",
+     "episode_id"
+    ],
+    "type": "object"
+   },
+   "maxItems": 500,
+   "minItems": 500,
+   "type": "array"
+  },
+  "task_list_sha256": {
+   "$ref": "#/$defs/sha256"
+  }
+ },
+ "required": [
+  "schema",
+  "set_id",
+  "classification",
+  "status",
+  "source_sealed_set",
+  "task_count",
+  "episode_count",
+  "assets",
+  "coverage",
+  "task_ledger",
+  "task_list_sha256",
+  "supersession"
+ ],
+ "type": "object"
+}

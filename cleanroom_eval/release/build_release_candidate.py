@@ -19,6 +19,7 @@ stays local until the owner's publication decision (Phase E).
 from __future__ import annotations
 
 import argparse
+import pathlib
 import hashlib
 import io
 import json
@@ -264,7 +265,16 @@ SECRET_PATTERNS = (
 )
 INTERNAL_PATTERNS = (
     r"/home/[a-z]+/", r"/mnt/[ce]/", r"/Users/[A-Za-z]+/",
-    r"(?i)\bpfarrington\b", r"(?i)C:\\\\Users\\\\",
+    r"(?i)C:\\\\Users\\\\",
+    # Personal identity tokens load from an untracked local file so the gate
+    # itself never ships the identifiers it exists to suppress.
+    *(
+        pattern.strip()
+        for _f in [pathlib.Path.home() / ".finexhaust-scrub-denylist"]
+        if _f.is_file()
+        for pattern in _f.read_text(encoding="utf-8").splitlines()
+        if pattern.strip() and not pattern.strip().startswith("#")
+    ),
 )
 
 
@@ -308,6 +318,24 @@ def _shingles(text: str, width: int = 10):
     words = re.findall(r"[a-z0-9']+", text.lower())
     for index in range(len(words) - width + 1):
         yield " ".join(words[index : index + width])
+
+
+def gate_registry_identity_scan(members) -> dict:
+    """Hunt every identity the extractor recorded, not just what an operator remembered.
+
+    ``gate_internal_identifier_scan`` depends on an untracked local denylist and
+    ``gate_source_shingle_overlap`` needs a ten-word verbatim run, so a single
+    real name written into fresh prose passes both. The needle set and the sweep
+    live in ``registry_identity``, which is deliberately outside the allowlist:
+    this file ships, and it must never carry the identifiers it hunts.
+    """
+    try:
+        from cleanroom_eval.release import registry_identity
+    except ImportError as exc:
+        # Expected when the audit is re-run from the published archive, which
+        # does not carry the private module. Never a silent pass.
+        return {"status": "NOT_RUN", "reason": f"private needle module absent: {exc!r}"}
+    return registry_identity.scan_members(members)
 
 
 def gate_source_shingle_overlap(members, corpora_dir: Path) -> dict:
@@ -509,7 +537,9 @@ def gate_tutorial_replay(archive_path: Path) -> dict:
 def terminal_state(gates: dict) -> str:
     if gates["private_gold_leak"]["status"] == "FAIL":
         return "PRIVATE_GOLD_LEAK"
-    if gates["secret_scan"]["status"] == "FAIL" or gates["internal_identifier_scan"]["status"] == "FAIL":
+    if (gates["secret_scan"]["status"] == "FAIL"
+            or gates["internal_identifier_scan"]["status"] == "FAIL"
+            or gates["registry_identity_scan"]["status"] == "FAIL"):
         return "SECRET_OR_IDENTIFIER_LEAK"
     if gates["source_shingle_overlap"]["status"] == "FAIL":
         return "SOURCE_OVERLAP_DETECTED"
@@ -536,6 +566,7 @@ def main() -> None:
     gates = {
         "secret_scan": gate_secret_scan(members),
         "internal_identifier_scan": gate_internal_identifier_scan(members),
+        "registry_identity_scan": gate_registry_identity_scan(members),
         "source_shingle_overlap": gate_source_shingle_overlap(members, Path(args.corpora)),
         "private_gold_leak": gate_private_gold_leak(members),
         "path_metadata_scan": gate_path_metadata_scan(members),

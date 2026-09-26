@@ -15,6 +15,9 @@ import json
 from pathlib import Path
 from typing import Any, Mapping, Protocol, Sequence
 
+import secrets as _secrets
+
+from .free_run import episode_canary
 from .contract import (
     ASSET_DIR,
     CLASSIFICATION,
@@ -278,6 +281,11 @@ class ArmRunner:
         self.experiment = experiment
         self.episodes = list(episodes)
         self.training_paths = list(training_paths)
+        # Per-run salted canaries: the old digest-of-public-episode-id form was
+        # derivable from published assets alone, so an agent that memorised the
+        # public tree could echo it deliberately or a grader could be gamed.
+        # The salt is minted per run and never published with the assets.
+        self.run_salt = _secrets.token_hex(16)
 
     def _run_arm(self, arm: Mapping[str, Any]) -> ArmOutcome:
         arm_id = arm["id"]
@@ -303,7 +311,7 @@ class ArmRunner:
                 for item in episode["initial_state"]
             }
             receipts: list[str] = []
-            hidden_canary = f"CANARY-{digest(episode['episode_id'])[:16]}"
+            hidden_canary = episode_canary(self.run_salt, episode["episode_id"])
             episode_ok = True
             for event in episode["events"]:
                 total += 1

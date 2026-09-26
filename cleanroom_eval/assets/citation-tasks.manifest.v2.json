@@ -1,0 +1,3561 @@
+{
+ "assets": [
+  {
+   "bytes": 3369066,
+   "path": "citation_tasks/citation-tasks.v2.jsonl",
+   "records": 500,
+   "sha256": "528cd34d4f2cac552a4dd6abf002aab34df68f5c0a606c0046751aeca9b0b20d"
+  },
+  {
+   "bytes": 416226,
+   "distribution": "evaluator-only; never published",
+   "path": "citation_tasks/citation-task-oracle.v2.jsonl",
+   "records": 500,
+   "sha256": "322713d08bfb5c97919f4da249b5d0ae73e0eaec920fa08833cecd0d8b7b1b68"
+  }
+ ],
+ "classification": "CLEANROOM_SYNTHETIC",
+ "coverage": {
+  "categories": {
+   "polarity_adversary": 80,
+   "qualifier_adversary": 80,
+   "relation_adversary": 80,
+   "supported_claim": 100,
+   "unsupported_addition_guard": 80,
+   "unsupported_refusal": 80
+  },
+  "expected_answer_kinds": {
+   "answer": 180,
+   "refusal": 320
+  },
+  "scenario_families": {
+   "sealed_booking_allocations": 63,
+   "sealed_collateral_margin": 62,
+   "sealed_evidence_sufficiency": 63,
+   "sealed_lifecycle": 62,
+   "sealed_permissions_release": 63,
+   "sealed_reconciliation": 62,
+   "sealed_settlement_exceptions": 63,
+   "sealed_temporal_causality": 62
+  }
+ },
+ "episode_count": 40,
+ "schema": "cleanroom.citation-task-set/v2",
+ "set_id": "cmo_cleanroom_citation_tasks_v1",
+ "source_sealed_set": {
+  "manifest_path": "cleanroom_eval/assets/sealed-set.manifest.v1.json",
+  "manifest_sha256": "89334bee72e7cfa0966b472a13d0ff65eda20d6693633473d55ee55d0f939b15",
+  "set_id": "cmo_cleanroom_sealed_v1"
+ },
+ "status": "FROZEN",
+ "supersession": {
+  "reason": "v1 task ids and ledger disclosed per-task category and expected answer kind, making the answer-vs-refusal gold publicly recoverable; v2 ids are salted hashes and the ledger carries hashes and episode linkage only. Aggregate coverage counts are retained deliberately.",
+  "resealed_at": "2026-08-29T04:02:36+00:00",
+  "superseded_manifest_sha256": "ae162bb9ec60c2234e0000ea8e5d9f328f0f4f48adb46dac589a5f63a1cbb80e",
+  "supersedes": "citation-tasks.manifest.v1.json"
+ },
+ "task_count": 500,
+ "task_ledger": [
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "8e2d95400d0ff2bf0d47d5f9dfc3cd3df2b52f6a59425ade29f78761135940d8",
+   "sequence": 1,
+   "task_id": "ct_00f6e19d1e7eb69c",
+   "task_sha256": "e4f96e596240164e6af42832c2487b97f0ec03d3d80f1c4dc03bd25bc7831da2"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "c2e1d67b6b86b3fe9f68137ce9bb7ee0f61ea2c383ece81ab0d55c56e8c9c49a",
+   "sequence": 2,
+   "task_id": "ct_01041625f1e86b17",
+   "task_sha256": "d2be965668801425d867ac4acf5dbbd32515190dc2fb58d329e3ec7827f0374e"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "831868f7f1f1b4922cf4077588cd2f8fc113fcc5243d091b726fc1737ca84521",
+   "sequence": 3,
+   "task_id": "ct_01927b6b7437719a",
+   "task_sha256": "e3ede7757a50b8a8f016d84fbc1b85d9b18273ecb522617470fa82cd9416fefb"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "91253416850f9112925667e0abeb5f73a32bef442f5c53e3f4132d6e1b27c643",
+   "sequence": 4,
+   "task_id": "ct_01968427f33d571a",
+   "task_sha256": "79159e3f5135f3ca4f7e276306f61286ea59677da03badf90b4a8a40daee01da"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "e59827dec0dfd873f31351ba6101b07ce993ea67d8b28ce2f0819769c8d6ab8d",
+   "sequence": 5,
+   "task_id": "ct_01a7bf771e2c217c",
+   "task_sha256": "4b50949c47c6121c3b4ed1f7d32c3098667aa29316f66f9c5eb7ec1172df22b5"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "8569030a76a72d21c65e421facb8ce4700385bf2980e4d2672e3c4c42f9a4f4c",
+   "sequence": 6,
+   "task_id": "ct_01bb8cba7c3defa4",
+   "task_sha256": "67f6878b6f4c6fdb812a09a988600621e08a129c6010c6f301d73337274e7c1c"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "511449b929a9adffbfa0ab86ec17cdbac41e5c03fd421f519bda4f3d09f875e9",
+   "sequence": 7,
+   "task_id": "ct_03209a9f256d6589",
+   "task_sha256": "5745d7308cac31864963dd9160dfe953e69b96c71ec3942493b2dcab6794f115"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "d3d91a09b4969c9dd1fccbeaf25d9151e43aa42f158efd1487202f9f5d17f81c",
+   "sequence": 8,
+   "task_id": "ct_037ccaf59d4f7d3a",
+   "task_sha256": "ab8cc25dc20c2c7c964a9ea45a6e804d11a814c67f892be4261b06ba79bf599f"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "0f6cd8c4788d5cc36a767f639045e55d9b4210ebe44687630574cc9def6676eb",
+   "sequence": 9,
+   "task_id": "ct_038300355cf14052",
+   "task_sha256": "41b64fd67e266084accf5badcf41625ab15f739d5b582557b5244158c4c76a6f"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "d8f62e8142d59224a4590376f44ed6fcc487c7654cf31a9d41adc88646fbea8b",
+   "sequence": 10,
+   "task_id": "ct_03dfaa8f8ec0b6b8",
+   "task_sha256": "7f58e4b7e568f5803fc0f15dcc96c6105a1f2d9b93f1d050fedf30b7089266af"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "89aba06b610d57e1fddb2bbaf8dcba04440f5a2e286d1e33324739a13fe19c03",
+   "sequence": 11,
+   "task_id": "ct_03f670f9891d9254",
+   "task_sha256": "5e050854c56d745a831efecbd5da43ea4558e4117bd9b1868d182f40f471d5fe"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "2568f34726758933a53dba41f48200ff9153c0e9eb3610c5ff6af460d1084fbe",
+   "sequence": 12,
+   "task_id": "ct_0413d1acafaa76a5",
+   "task_sha256": "a94bf03fcc8ed1dffc8fe78e492942c5fddc0db59ce970ad6532bb38c9cb6231"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "487f78aea80d9a5dbeb3e157fee084b17f7dd9d2a2fa7fb254d47e780aa7383e",
+   "sequence": 13,
+   "task_id": "ct_061678a34121bca1",
+   "task_sha256": "75581e461aa057dabd46ff196a8857814b208a38b837cbc021dceed746284e1d"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "71ba26d078c8dba70ac963c6b7bcc8e4240ebcf43988399bab63188a6e22426d",
+   "sequence": 14,
+   "task_id": "ct_0635bd3f1448e018",
+   "task_sha256": "8203c855a7c4a8685e1a34d28c8bf176390a63ccfd6456b43e70b3e6d126bf77"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "195b10d5907b72096f468f1e8a3fecd9c226d92d88c56d90473c58facbf97ec2",
+   "sequence": 15,
+   "task_id": "ct_0812e694a0779719",
+   "task_sha256": "15e2ce5691e8f86483a5feb45d70a5a9733c8a7ae3d85ff55751fafaa4fb0a3e"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "c75ecd5f29409019d323acfcd1614d6c0d9f35801f79fd2291286a748f6503c4",
+   "sequence": 16,
+   "task_id": "ct_082fe66773bf9b69",
+   "task_sha256": "91fa372535bc0085ba26ab717fd5ee9dd5b46483822bea19c87a9dbcafeebeb0"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "1c4bafdcc3a5d25f92a2407b09260d337e1c66bb32e00ff63ed8241ae56b5b80",
+   "sequence": 17,
+   "task_id": "ct_08715f17b940e3c8",
+   "task_sha256": "da72224579d59a32a85759c86e9d12e8653425d8f232641904a174a76efbd404"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "93a4a7c88eda5600c19c79004ec3ca15959da2839372507444e4aac1a3cb6023",
+   "sequence": 18,
+   "task_id": "ct_08ca7fb6ec8fadee",
+   "task_sha256": "27187a1fc62198a1c5e2fa1ae17d39a27d009ac556343450709a19c5dfc9fbbf"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "add805c536ba4a88cb9c52e2312e3e35697f675cf03a9cc3adacef0b4d847eb9",
+   "sequence": 19,
+   "task_id": "ct_08dcf52d76fbe50b",
+   "task_sha256": "bc4e020a3ed4804a1f3a61ff4a42b7c3c463409ea16c155f6f20af752a22cd84"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "645a5dd63dda28fe31a3c2a623f56e56d02a1087f3d9e78d9ba089bc323d1e77",
+   "sequence": 20,
+   "task_id": "ct_08ea8a1b58c0f3c2",
+   "task_sha256": "44e05811ade61239e1416797803d4c79f6cc66c81a26836044c26879ba1e33ef"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "7b2c63b9b1a00e646cbb32a5d96af4be82c837b50d6b7a94b073aea50cb717da",
+   "sequence": 21,
+   "task_id": "ct_09b85c2131cfbe83",
+   "task_sha256": "8296389f92291eacd44b2924b5bcbead0a01b5bcae1e272fe3bd123a016a0332"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "01335d64ae9f68a4291662a389913337f16c58bc12211363e72b4f38852554ba",
+   "sequence": 22,
+   "task_id": "ct_0abe4ffddf10a65b",
+   "task_sha256": "643a3581f5a4b63d07d764828bb38e01e2a71380fce667a5ff5291a53b50df86"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "7db104a82f9da74ee33ff06798a764688578f921651836fa19288d27b9b5ad92",
+   "sequence": 23,
+   "task_id": "ct_0af1856dd9848ccf",
+   "task_sha256": "67fac0fe9c91dc80a642c79bfc5c9a3e1260c9af3174fae134942109c14ab16d"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "66190f6c958c965ca4843b654e08fb626cdc2120d49c7d50996f3353def5d931",
+   "sequence": 24,
+   "task_id": "ct_0bf9c0e3a259ace1",
+   "task_sha256": "eacaec49df5989e680f504708c3e7ba54911c2bdfc52d1079bde62104ab15945"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "5fef5b64b5f7bffec136e1200f56eb43729144e92d2439286a418e053b93ce91",
+   "sequence": 25,
+   "task_id": "ct_0c12eb0ba5779ece",
+   "task_sha256": "432d7aed11490571c402fc9dfaedd2fcc63a77ebb794b1c7f1f269ce4defaa98"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "566731de684d071ba5c440ba00c56b5613f2d44181a93c416b79288f2a33e2d8",
+   "sequence": 26,
+   "task_id": "ct_0d2ba56e0b09af93",
+   "task_sha256": "dd36301c11ff559e5396b6a5a4aeaedeec4cc35d6e51d6c72deb357363683457"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "0ed77cecdc23a32e0354a328f8d84fb8cc3d6e1c27b9c2188dd4eb6cdf121cbf",
+   "sequence": 27,
+   "task_id": "ct_0eba1e9fc2631d3f",
+   "task_sha256": "e497e957ca921ebae9caa03607c28a5f745e41623f58e33013645c690a71a41a"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "aaf65e8dbea097146891f04ddb2904f7082babf8d1fabad004226cbf3362af6e",
+   "sequence": 28,
+   "task_id": "ct_0ec8c10592f669f8",
+   "task_sha256": "82699e0a9fb5e47f79c8c77e6fbbe70c14a7722ce49aab6ac16fa947f21e28ac"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "4b475c234e21fd4ac85d66bf1883aaee9137bf6c87448605b52c29d89078ca90",
+   "sequence": 29,
+   "task_id": "ct_0ef8c409fe03fd89",
+   "task_sha256": "afd9920797a367b823bcd6ba42ad37aaba68a519563023f062a40c94b7d2caf3"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "9ff448bc8a48e0bd8ee1c9017f4d8382f13f532e9148c38cb96e0b755d0c499d",
+   "sequence": 30,
+   "task_id": "ct_0f1471c0ef74f3b0",
+   "task_sha256": "edda04fdd1cade2f1bac9643d6943435aecfb0fa25e040c7c619d82a6838105b"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "10a82802defb03174b568b36e185f6d8746671158d176981649973e5aac61897",
+   "sequence": 31,
+   "task_id": "ct_0f19e617cc6bd18e",
+   "task_sha256": "18a2828ff6ddc82f01ba0160b379e3305a307cdb674fe011ed259f6642927ef8"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "dbf56cffbe01bba597cbdc99b3931aa8fe6ad12626c85cca81c9c116e3df5454",
+   "sequence": 32,
+   "task_id": "ct_0fdfe5989cff97f7",
+   "task_sha256": "c964ef7984212c23831f141ca6eb70e49a10b0be3b57a869adac3967fcd40019"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "0de383403137ceb996d9755c33dd37a0886e3e715ed2656298d0f9f97e26975b",
+   "sequence": 33,
+   "task_id": "ct_1011b4929347e25a",
+   "task_sha256": "51a0f21bfe87afa0cff6b2ee0a55a4ce3a2f5f2df98b9a263693d4968395aa02"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "455054d8904504a8e0920503e6ee3f40d0ddf9860ccb5b77cf9c450dc89fc101",
+   "sequence": 34,
+   "task_id": "ct_1077f184452c8c3f",
+   "task_sha256": "f0648ab75425d7ba27a7c7ebe389851b705f1d3db46c9da430cbca1084a047e3"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "b915b862f961def32af6844b01c706a061fd40fc54c51f30964dc55aa1d55c53",
+   "sequence": 35,
+   "task_id": "ct_11cc4021e0b30106",
+   "task_sha256": "cdb4db1823c067f1cc7a44c7e019405023d95358ac2e3e785a667a347b6f7270"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "74e4e4c837519cc4166f28a496651e17e897812e9bcfe76c7c88f2142c003b72",
+   "sequence": 36,
+   "task_id": "ct_120413ebafc6794d",
+   "task_sha256": "a0327c17bd3b00bef48a6678bd4046551dbd9da08fc0b014330c1ce82597fa7b"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "fa778d6afec285327686c7f67d69cb39b704286081422857e86f360e07d95a03",
+   "sequence": 37,
+   "task_id": "ct_124f05b46a7bd40b",
+   "task_sha256": "608fab45a89cc75e4d4c816cb61c71db7cdbe1c9feaecdb11ffd71b00687b082"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "e1782f3ca50cfe4bb0e443a3993c66d234e92595f24668a305623d6759cf27fe",
+   "sequence": 38,
+   "task_id": "ct_128a8007f7676f77",
+   "task_sha256": "e76d92cec5c665d1026cfbb7dc17c1d2797c53f7adeb86de6a03f3dfff6cafbc"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "ede1131341580e2b612677414ea23586ed2b0d81c79467c3fb8c8e6ccb6e51ec",
+   "sequence": 39,
+   "task_id": "ct_12c54301c0a020db",
+   "task_sha256": "791b232a2667991fed83c17603cb6ddf20003ed69ed71f9c6841ffda2b8e2a4b"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "41360c37b23c9f1c9244c1673f061aaa27f87853d218e2bc1a34b75505c9c0eb",
+   "sequence": 40,
+   "task_id": "ct_1355c84d9fe53de4",
+   "task_sha256": "894a0e1c8e17c75ae7aa224698a9b5cf2cdec3bc3de54946260da5ee926e014f"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "ae39ce510b5b2b2a7fbe8d7063ef9d1ef4a1738380df03ebbd3a0c6df67bd699",
+   "sequence": 41,
+   "task_id": "ct_144958028e696e01",
+   "task_sha256": "48315c2683955d3c879017404ee53fa473ace0803f7400fe9f4e40c3981a3e0f"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "9b2b22c21414fa18b5146072a37d66cb4afe982fa49c141d0cf5ef6bd2a2e95f",
+   "sequence": 42,
+   "task_id": "ct_147817aaae18c188",
+   "task_sha256": "548dc6e63496babaa3f6b5eea3b0fa7aa5eec5cc71af4968ee80dff6c9c613f7"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "a951e1247073f7838933115907cf35fe81542e1af24a2781dbb4c28b4fcc2366",
+   "sequence": 43,
+   "task_id": "ct_15207d7627bfb3b3",
+   "task_sha256": "fcc684857b7a8fddc69ec357185cc03d77cecbe9e2c3e2503993478306dcd9c2"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "ed6e33421d50917973055e13da419cad79ab1c4492a75c8ec4014e452b1be383",
+   "sequence": 44,
+   "task_id": "ct_165132cff541f3ff",
+   "task_sha256": "099710a4575f917a18b8b8f88410e6c37c8a7071fba054b3d6116f3197c88622"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "f2e72892c4e11646a399430405a9a5806a73b6406e72fc64d60fd7094dffdb04",
+   "sequence": 45,
+   "task_id": "ct_165e757bd01224df",
+   "task_sha256": "02a2fbd3c4eea525ff712dc8da7720f6b9dec06626c80108197651668180702f"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "f3d87673c9dd1404016aba3e5babd81fc906e7dcb9b5659ae77181d54f2c19ce",
+   "sequence": 46,
+   "task_id": "ct_168c90be2ab6ffe2",
+   "task_sha256": "ec30cd139d40cb47a375b620a79b7912387078570f3565763f4978f15a7da73a"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "3d8cc3d33dd4d7783fa99a8ca6a558e9a957a7edf8580253a8a980e4d3d5f44a",
+   "sequence": 47,
+   "task_id": "ct_1698a8a0f1c5a182",
+   "task_sha256": "946d82a5e569824d8b2da2c035ea0855e514963b0c271c3b84cea4d82a1a65e1"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "c571b3afbc4f2d518c531f2dcb682ad3b2786b762e3cd9d3ec077e7cb4221cca",
+   "sequence": 48,
+   "task_id": "ct_16bf40799c88e927",
+   "task_sha256": "0ee3786a95f605d6bd1adde5f2f7a264a6a5a43f0d99c4cd6a0c3295b4dc99d8"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "2ab1dc0a5118ca8677d579944bae2c688350d67cdee20499d48be4992718bb1a",
+   "sequence": 49,
+   "task_id": "ct_171e9386773d6c1e",
+   "task_sha256": "d4d7f2acf2b89032822846bf5c52cebb52c78ddc93c2e6db2fcf3fc9a5dbbe1c"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "648765bd5c39e5fe87bad66d6117563c876445bfb7c0d8689981334cac7bf724",
+   "sequence": 50,
+   "task_id": "ct_17cec29abaa319a3",
+   "task_sha256": "46249205c81e3102c6c389c7a333eacfc715d227dd0958ddbf31e93b0d723338"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "e5b08d955dbebc60c45f256d22019b628ae10466eca87d81af4a276926d0c047",
+   "sequence": 51,
+   "task_id": "ct_17f7017bbabebb21",
+   "task_sha256": "8373a990c783c84aae45e09a398414f1c5ac0e78bc580a89a0840e1eb6c9bf6f"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "82f616ad0fa5a1ba1b26e867953d5a1ca97f00a2489562e86b940cbedd73e85d",
+   "sequence": 52,
+   "task_id": "ct_18e79bb4cede82bb",
+   "task_sha256": "39cd93e1fbbb9340297e2a626a607ef4fb11e70e8ab1aa1a7e7a5c467b3253e6"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "dd20d7b5cc2a24c6f4327b24ad72de67bf7ee02a1d96cf6811f43270362d1ff7",
+   "sequence": 53,
+   "task_id": "ct_19255d73c7b7b23d",
+   "task_sha256": "c1452216fc828f4c51d92a6600b85ee35868dc748e600c759edddd22c22e8a84"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "6eb64548c0c9d234cc8fdec40e7c62e6a3e95ec27500c61ddad73afb93fbeee2",
+   "sequence": 54,
+   "task_id": "ct_197740fc9f6c54c6",
+   "task_sha256": "5962a2ff763d4a4c17fb82477a0d71b875aedf1c626b7e986f5a7dcecceb30bf"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "4308a69f61ac61db4bac7180428a2261f2517a3d0d0c560b50beae9253faadb4",
+   "sequence": 55,
+   "task_id": "ct_198ebd8a886d0948",
+   "task_sha256": "6aa4179c828c300526acf3face483ba1a4b0621c7a4bc463f33b2ca036d25ecb"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "42c04d29aba66b13c762efe351d469b70d2f2fb97539974da69f81a1bcdee5cd",
+   "sequence": 56,
+   "task_id": "ct_1aa201241f24ce27",
+   "task_sha256": "f36928bc4ea96501c69310eed3f31b93fb60bdb8e522f0737afe9d9eb9df8875"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "fa042a79328e5a153a45bd8643a77cf74a2e011028a75599f596a568d0e4eece",
+   "sequence": 57,
+   "task_id": "ct_1b131285a5381dc8",
+   "task_sha256": "c9c2e864840ec09e89fb4dc1fadcc6065146b975ce34adb7f186ae1758127ae2"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "534780e3da6ad03d47c7f5db76f9757b1c4d580f20d6ac15e4ba14e942637c53",
+   "sequence": 58,
+   "task_id": "ct_1bc1e91d30de1c3b",
+   "task_sha256": "8128dd50ae84b60e0a9aa260d78f4bb0d6f996ed081b73cf9b5dbcdf0bf92958"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "0f19eff439f65f22701f57e0f8116ff5ca296793002148b6b3becf182f1ea972",
+   "sequence": 59,
+   "task_id": "ct_1bcd479784466571",
+   "task_sha256": "df7565476b673015a5ce7c24d9b8550139e0fd13aaf2288f8a114d1ba23b18f8"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "e510f93b3d15e9ac94a4ca1a983ffd4babb79bf753aac142d335c800244e1481",
+   "sequence": 60,
+   "task_id": "ct_1c282642266056c8",
+   "task_sha256": "a154ac73ebbe83ed1d801307fe13854e5164cc01abbef716c1d44d885f791afa"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "20c1027660a636f378485e89397cefd9c4762481a554948cc2f996aae61ecc69",
+   "sequence": 61,
+   "task_id": "ct_1c30102228730058",
+   "task_sha256": "e54a63d510f897bc53dc820ced869d0487d5a1d622b2c9810f6e2f08bc1ef63e"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "31c5b5d71e9969585631b1a3b131ebbcef1cc9634300c0164ec8ac549b08932f",
+   "sequence": 62,
+   "task_id": "ct_1c5689b887ab3d28",
+   "task_sha256": "80b8211124d459d3d53219f1f993aa1afb499d5f0fb16b6f90ac7ca98c011097"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "561268051bb1b5ef4d69d2b06d0579604972cef9ee0adf618473fa8e9f5408df",
+   "sequence": 63,
+   "task_id": "ct_1d17948adecee217",
+   "task_sha256": "a375f8f3967a1ded721b28e68cec579af6a9399d04508df083f32b452b268064"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "a91056d5a74df482a44e3e3378091482a6cd9ea538c880a50bb39b4cc0112523",
+   "sequence": 64,
+   "task_id": "ct_1d28245530cd5635",
+   "task_sha256": "7c42f21a65def8301269803cb87c3f7248ab11cc4cbcee924711700b98013cb5"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "4f12fd6e8b397ad1d041935751defa5b1a7422eb27b08797f2349f47ee003e37",
+   "sequence": 65,
+   "task_id": "ct_1d4764d4956765e1",
+   "task_sha256": "29cdb44f3e99c5349048f2b4a7c2063a2499c04713ccab4f7fa8488def0f0f75"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "d00608f2b0ee83aed379882b590dba51811d249c02d4c160459c11d1c5a94189",
+   "sequence": 66,
+   "task_id": "ct_1dd06a41d5813243",
+   "task_sha256": "cf499299019a0b1e725f9bbb528ba1493a4e92410ed5d2a426228da237af7e14"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "cdf29197ff003237c1210884355f1979a0e32b2d5cfb9f98a28a68968abe3cd4",
+   "sequence": 67,
+   "task_id": "ct_1f29ad21fc581ddc",
+   "task_sha256": "32f7734adc464fe48d66b72b34edc29a53551f0eeebd52816217eab2acec5e27"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "3a57ba006bacef5d2e14f4115a80de22985d21ccf5eab4fef108d2c1af25fa40",
+   "sequence": 68,
+   "task_id": "ct_1f6e8bd3b3866fb2",
+   "task_sha256": "deb8677bb0af1b64087e920c3b1f2b657412b74a7972da4fc40553779457f573"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "1dd8745ce4360a0fd980089ccbde171e230e95b54c19edcf243cae6ae449e709",
+   "sequence": 69,
+   "task_id": "ct_212615c2c9a5abc9",
+   "task_sha256": "53cd9a410845b5ce5cab721df7bf30589f703910a6027599d3dcb0a83366d1a8"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "9aca4f46ea15cbac34dae75336d1fdec64341108faaf22afdc6e2b4e02ecfc66",
+   "sequence": 70,
+   "task_id": "ct_224dc4f386d8bb84",
+   "task_sha256": "8ce26fc3d3db27572221e64a4289464d2ce9dee741331abb2688ea7c7701f004"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "93a2ffe1134cf0cfc13c955f2cef71619349c7579dcfc3880b743988fbd3c4f3",
+   "sequence": 71,
+   "task_id": "ct_22acccec935fa168",
+   "task_sha256": "e65cc0f84b2d6deda791f9b44216ba68cca63797986217745d1835b96c74a045"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "ca2f5453e0b5eeb509e1117a16f2f3506c4b1ea04e634c2dac3987676a839fcf",
+   "sequence": 72,
+   "task_id": "ct_22e3d476e07b6662",
+   "task_sha256": "a71a5aeda83cdcd2d300b67c3ab6da9438107c599b8c984472b31538ce9c427b"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "de7c22977ed03a5787d429a0d9401f7f28de8d60e66ce813f6d4c9505c05c6d4",
+   "sequence": 73,
+   "task_id": "ct_230961556b678806",
+   "task_sha256": "be3f59957ccb4950ad0706789e72d8c9d2915f4c9166d8e8e5dd7c59f0f4e241"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "fe613b7faae8998ff1a3af8109ba353134f131cdd0819ed58cf334150cde85ce",
+   "sequence": 74,
+   "task_id": "ct_2398d7270432f283",
+   "task_sha256": "a6baf89393fa9541d73562376275e5fa9781827fd0fb4891f5b90d24286faab4"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "d717dc68ba330b59a83f1d369ed5e3338be7dd875c90e1c98b1de1e237cc9490",
+   "sequence": 75,
+   "task_id": "ct_23c757a5da3e3ee3",
+   "task_sha256": "ec4b6a1b7572d062294a37db8b009b634ba707b19f32bb971016babd6e3ab36a"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "c56301652aa3104539128688ee5fcb9e19bc510a7e5b313f17c5d3b1e64315a1",
+   "sequence": 76,
+   "task_id": "ct_24107916dcb90679",
+   "task_sha256": "1a5ff5548d876748c5fdbcb89d212abecc7e82b93ee8be7735117a13514874e0"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "fb7e398f5c8a9c01d9a06ea0c06ae0bfddae65552109913d46fde4ff1bde9cd5",
+   "sequence": 77,
+   "task_id": "ct_2475c5a6f73600dd",
+   "task_sha256": "7dfb61073ccee911cd8949df4737820c4312f780896e3ab91b546f1cf2bebbfd"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "b1c96cce7ba69504ce566b6c58783d7477c778cc30318ffb1b6470ba98ecb2ff",
+   "sequence": 78,
+   "task_id": "ct_247f26ddee0c6ffb",
+   "task_sha256": "e91974b96677d79bcf3842169e8a17a7230eefb381d97488fc969598e0398152"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "5b87bebebc65934ce40f2cebe1dde571f7117cbc5a50607a79158ff3bbe04cd3",
+   "sequence": 79,
+   "task_id": "ct_25e21ef35fa73602",
+   "task_sha256": "9f73915a87dc3bc0850cb46c88ba7c9a35223604f1a7c39ac9ee8a24c0241d1d"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "f16d0373629c23a097e86c4012a9b667a48d7afca40e0df2bc42aa7b526c5e8d",
+   "sequence": 80,
+   "task_id": "ct_26e99aaf961dab5e",
+   "task_sha256": "5e839707d6163e371586af45ab63aeae8928699798f3b382d1d7afe9acedd49b"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "6d6be32ceed394f00ced77331a73c68e97a8f6dd55e858381d09149be10fa145",
+   "sequence": 81,
+   "task_id": "ct_271632d82ef91250",
+   "task_sha256": "d8d10d42fe4dcc71369fcbb8a49e658504a772c00d318d873563011d65a7560c"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "443e6c8e75e8f1ac60ab37b58aeb20718915dd9e4a17adb2d6126f6e8b15af08",
+   "sequence": 82,
+   "task_id": "ct_28f18558ae5b4389",
+   "task_sha256": "f755f0851e24b6b36c1ff6847dfdb5e8b5e6e15a61cd307a75acd063b130d8d0"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "21e04bef5317dd2724fdc1139b3609354cade22abfab2a94dfbc3f839eec5904",
+   "sequence": 83,
+   "task_id": "ct_297085dcbd39d6e3",
+   "task_sha256": "9c1b302b2c549fda047a86f1345e34fd25faa3b744b5e318f2a961a7af41838f"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "90fdb752411c095927241b4ef099fcff5cccf9102768674f031f52888fe04efe",
+   "sequence": 84,
+   "task_id": "ct_2b133e4067f697ca",
+   "task_sha256": "73f044d4a9cbd2bb43ee5ce8dd5a0e50953fa8bd0d044e200cacd79c60c95190"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "f0d52c180b26f3f85e21856e3f3e912a4f8e1ff9646df302808fc96ca763f32f",
+   "sequence": 85,
+   "task_id": "ct_2beeaf2a08bdbaa3",
+   "task_sha256": "9a241787011c5d15f02a5523d32681af965a30ed2b537da14a29f3e58d0f0bb9"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "3d8470b01376f0108fd7c5d5203412e57c27d3d194ca65304635c6fd50b7e38e",
+   "sequence": 86,
+   "task_id": "ct_2bf3e546dd729e46",
+   "task_sha256": "1063723bce29446ebc1f8550fbb7b8cc5899f5c0a739082fb07c635dbb60a954"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "febce72f058cc98eb6f564342e24fb1aa86c911c83a5eb5889a95533ca225024",
+   "sequence": 87,
+   "task_id": "ct_2c11cad0f8de3506",
+   "task_sha256": "ecbc6bd94e04ce9c78f041f57d03c9f003d193835277cee0b1767d70654aa330"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "6a003a14efb14933a832928747e9f2b94cf874c5560012edc297ae0e12e577b1",
+   "sequence": 88,
+   "task_id": "ct_2c143b7bce5abb06",
+   "task_sha256": "b3d48d8ef31766510b24edbf0a5f0020aba08fd05c863a77f88d4501fa6aaee6"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "aa4df991b86830f7b57388e39ff984654f3d1abe598a937528b00a132cf6d7bd",
+   "sequence": 89,
+   "task_id": "ct_2c1e5387cdd2e205",
+   "task_sha256": "d8ba40058cd6a9154219031f1a2d299de9582ecdee67a6cf784cd6e2eec2c90c"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "4ca207f51b42c235ef2d617c9f4d2c374adf82d09abbce384201ecf6de82eaa2",
+   "sequence": 90,
+   "task_id": "ct_2c2fb936c4191e44",
+   "task_sha256": "968f46d647ec71b2e6d1ce8dd833fa3021078e63fb43dbfaf13b86ee2a89c578"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "17929a3165e05c8721244993f6166a2ca565868cc8694e22c2691fed279fd11f",
+   "sequence": 91,
+   "task_id": "ct_2d105b3a0b4296ca",
+   "task_sha256": "c9bd3144c85c09dec27193418291d377020f5f9fb9c90555bed0b2dad347e75e"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "70a0fa1c542de29daef9ed83d2d16659afbe0551241ad012d53d8d73ed607a58",
+   "sequence": 92,
+   "task_id": "ct_2d36f050d01df8f0",
+   "task_sha256": "03a36290467ce77aaa39c62769762a945c070fa4da7e347633d3164b4b3729a6"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "a17d23d6ec5190397f76abc19b30202574f80d8e3c4f93290cabba22f88eccd2",
+   "sequence": 93,
+   "task_id": "ct_2e61d50cd5beb8f0",
+   "task_sha256": "b665ddc1319f6d2d8e6bfcbcfdf50fffa77cc097057edb94be00d899eb8398e4"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "d98c965a69c8edea0852ddba726821884f5f4b7743027b09d95ade755e758275",
+   "sequence": 94,
+   "task_id": "ct_301c390495cf80bd",
+   "task_sha256": "ffa7b99022db2a5aa12d2a98abb7206b9d5a096fcd1cad60b2c3f4f7037848db"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "76d6742cb7ea8a8407dd9fdd5e72edd6745366114b450608a904bd1a229e9aa6",
+   "sequence": 95,
+   "task_id": "ct_3115c008fffa5aa0",
+   "task_sha256": "32f7d397f665691b30ff4324648e453042b2fee5e56e2af6ad6ccb3ebaa263cb"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "6d2be8f230281e67064d3c61fd5029a44eae74e77b448e9a132d7e4a5aa1a1e7",
+   "sequence": 96,
+   "task_id": "ct_31230ae11943e242",
+   "task_sha256": "911496b1679be989b5ed45a6acf98936fcc4943a2279e9e1913a4800cfeb8b65"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "b1632a959d8d52b909e346c70740aab2eea080ca34e5c9bd1b9e2b2e0d8f9666",
+   "sequence": 97,
+   "task_id": "ct_314d1f88a4590cdf",
+   "task_sha256": "cee3d00c3aa0e4ab2bf6fc320674b11483b46e68b48b4a6d2685eb94d43e1cf4"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "b796e26c860209d28b37cef845c9d236570a67d6d213a34b7e04d25dc309ab5d",
+   "sequence": 98,
+   "task_id": "ct_316d0c0dd1dda137",
+   "task_sha256": "2cf73826f4aed5c93cf1ffd32cc5c09fec4f1359bfcc886c66de7f952a04e0e6"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "b9f821183d10d05bc94339929394e94a70a598159dbd4407e720c51c02e2155b",
+   "sequence": 99,
+   "task_id": "ct_3194af51745a85da",
+   "task_sha256": "edd78e887c0daaf32950e7060523a6ad8b3c6b1763592cf050f3f95e1437b958"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "3f918010ffe10b6a106f67366b92a6d432e402314ef4d9c7b4eef96e00618b44",
+   "sequence": 100,
+   "task_id": "ct_327155086adeb7fd",
+   "task_sha256": "4e7b6569dc247d5c3379743fc28cbf752a75e3a7e8d8aece2ee2efd15adec89c"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "3de01c7fad6ab225094995dc3968e5403b502f5a02b904688a7fd31dbb40ff35",
+   "sequence": 101,
+   "task_id": "ct_32a0e140615a49f5",
+   "task_sha256": "15c3afab9c5144a0f026505082b73cfa10f9071d95d2ce9d1a9425e32a7f51b3"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "0d11d3c902251881507b81ac520f422ee66cdf610ae91a9e95f09539a55e9e6b",
+   "sequence": 102,
+   "task_id": "ct_3304b5d7c8eb3e7c",
+   "task_sha256": "2324c783f62bc7f4cc95c4bbc9c3875ffc91fe2ca25c9b08cfa6dbe9bda1a573"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "0b814f2c7e4a2031b4bd85e322a328efef6ab9b561f3783d6fc534e27b2736af",
+   "sequence": 103,
+   "task_id": "ct_335539c266f96f56",
+   "task_sha256": "3cc0954a2d8b00592d26c8751c7499447b73b67ab6ca5a753a6ed9bd73044457"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "b2fc717428da96ba1445ea9e14bd1a028813d25de5b881010c88848c62dcedee",
+   "sequence": 104,
+   "task_id": "ct_342a4d236d3a76c2",
+   "task_sha256": "2b9457e3b26407f0e7863d80336544890c205504949a3928dfe9f9bdcd4cad9e"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "435b41899b1a6c1f83d7f31bf71301990eaddf20fca1049682c0efc7d5f1dae1",
+   "sequence": 105,
+   "task_id": "ct_343e75e3cc0e555c",
+   "task_sha256": "7ed2b7367a606bdd14449e79e96f0bdccfd1de043f927aa2dcbff03ec53e195a"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "8ca857b85f168483dfd3aa07a2e196a9c21ccedd81083c19888730512a0c5260",
+   "sequence": 106,
+   "task_id": "ct_3457bdeff4112197",
+   "task_sha256": "c63c2fb03acbfb2a6bbf1dfeb459378f62a18f922e747ece796620768ceca360"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "19998c51cdfe8d9c2c6f7f4715a760c6becc8210687df37375628afb933f6b75",
+   "sequence": 107,
+   "task_id": "ct_35424ccd1c7ce1c4",
+   "task_sha256": "2c9901487aa12ff902066f461d98da3257a3eff5f3a85d751314c61cee56ef0d"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "c805bc9dcff4ab42fc042a7e8cfb242e9ddea1888f9b2435d7172929934412fd",
+   "sequence": 108,
+   "task_id": "ct_35b83a453243ac85",
+   "task_sha256": "0e0335176533529cc26ad74577ae130e22c49f8bb584a5b557892603ccb0d0b1"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "67e4e5bf0634239fae0c44e9692c58337197867874a17d3a182096ecebf4c2be",
+   "sequence": 109,
+   "task_id": "ct_35e4ce2605da70d1",
+   "task_sha256": "8fdb44d98ff8edb0edd91b4f3b928af9d4a3fb640480719db92144f5aa33f036"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "b3ff87ba95237a7ca1e44c781e178b811e2f114a5e2072760452a5ed56af12ec",
+   "sequence": 110,
+   "task_id": "ct_372bb30ce4fb85f4",
+   "task_sha256": "c09760c6a107a8c3c633295e208f00691305739a83fb7123e652a558092a360c"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "5977e1565f0aae219af9aa1f740f33f3cdde1ad49e3e5160eaf8cf778c249973",
+   "sequence": 111,
+   "task_id": "ct_37ef989c7faa8242",
+   "task_sha256": "188764d1170cf8b1fa635e915660cdb52ee6dc6e923b5af98972ad1ba5cb0f6f"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "a09125e9e79b52b495af5954e5b225f5fcd4d0396337d8dbccf2698bda4782dc",
+   "sequence": 112,
+   "task_id": "ct_38153d79eca50f9e",
+   "task_sha256": "2114c0e32cc1d8cc9d9b922a0577beea8ae104ba96017df14478f99d3b5f284c"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "b4ef4df455fa9c6ad011dd967c445df4180f0472a334935d9721d9e7848cce40",
+   "sequence": 113,
+   "task_id": "ct_394e7c27ce5713af",
+   "task_sha256": "16a9c9dabd6b0192d3bafb1985132ea52994ff7e96404ef495de9e420162086b"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "3912ca8d9085632549667fc0aa77dbcd5f42db46cceb5a48624391a609139c76",
+   "sequence": 114,
+   "task_id": "ct_39bf113869902b42",
+   "task_sha256": "f60ea350ff291ab6f53b2822aa9075e4cdd8fbf9033add39568157c674b9e7d9"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "e6f35c5e90ad187bead1208f1e7a28af049da9f1e664bf66d34a670ed0c4f025",
+   "sequence": 115,
+   "task_id": "ct_3a0d4ae27198445b",
+   "task_sha256": "ab4a12b8a03efcb4d449771ba5545b88dcb639ef630e30b4bd2aff793c8c5da8"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "fd02eb8507f7253b9812465850e1fb4de2778aee40a5c51a645beb646b832b25",
+   "sequence": 116,
+   "task_id": "ct_3a3bf73e16dda1d1",
+   "task_sha256": "67a35a4813846c423257f359f50dd6cdbb354fc26fa74886e3b6a0735db2c952"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "853288b0308022a9b7fa67d512a532ddcfed7505abf91ae19f53fe36f17795b5",
+   "sequence": 117,
+   "task_id": "ct_3a62bbcd6bf5328a",
+   "task_sha256": "d9f2e525339e2e0515e55e616660cc17447eebc51d755fee3c73c4102025b353"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "1d04b733b843eed2da7db5ad1615277e2632bf2ca6ed7aa156365396a9b7f0c2",
+   "sequence": 118,
+   "task_id": "ct_3abf566c4011ff79",
+   "task_sha256": "18eb3d533c64279c7bd9b2d530f97a20bc14c2214ea3d698d2806bc1d4f19411"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "23e88d9ff5cd5687b5522bf3e704e636b0ff189da00cb09d50720c25be1d8104",
+   "sequence": 119,
+   "task_id": "ct_3b42ce248ae2be82",
+   "task_sha256": "e6681131e10698dd947eec8afb5a5d9fd0d4a32b45730486c8a6f21abd3869d7"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "d5fa9ec2f1490ea14d898424124bb6e700d6e4b8004c84bc4c2937b1ec831306",
+   "sequence": 120,
+   "task_id": "ct_3b50d87eb5bd0d58",
+   "task_sha256": "3fc7639d733a53ce0aeb459eb6b28c7b134be75c7f30c822e846f6c03477a9fd"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "110f46cdd238edfa6908af5d995d8f592fc3110caac8a5e253fc6f583b6e553e",
+   "sequence": 121,
+   "task_id": "ct_3bbc9aad5bb29924",
+   "task_sha256": "d74d78258a7ba2fc9135a445f6872195a01f50be230b0087c77b62b259e02d12"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "de80972fda69735619f4bfd178e5fb23d56e4bfd3b48a45c9af5d35cfc3fdce3",
+   "sequence": 122,
+   "task_id": "ct_3bc9b469d54b50f5",
+   "task_sha256": "310c5dce745db0815a6f082d49b4b15ca0864e47b4766dc25f96336c0980c936"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "881f6adfa7e4f20128404d169f2b7336418fd69ebe2318c50eaeacf6961185d1",
+   "sequence": 123,
+   "task_id": "ct_3c3b8d4c90701b4d",
+   "task_sha256": "d31e4e2333c3f5085ddcd50280bdee4b352010e9d7adb9ff323d63eeec967503"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "6b03100c1a3feffb41e55bb9196bef86b3ed0980c3a539670a0b108c599ac62d",
+   "sequence": 124,
+   "task_id": "ct_3d5ca6717d3df350",
+   "task_sha256": "355d9caa753ad401b8bacfb32e32b6769cc82d0881ad19d86837d31995b9880e"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "abba32a598dea9db8f1e2ac59a0b5ced9772488a0e83aac056e7f19abe2ba46b",
+   "sequence": 125,
+   "task_id": "ct_3e36daec6fe931d1",
+   "task_sha256": "5247da56c84a4280c1cb119c3c57ae8e7142a21d9a8d80de863d0a681727fc3a"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "b8c8d7b7f15490d212a72867b5db86258c493b7b4cf21f3ec21aeadb126bef1c",
+   "sequence": 126,
+   "task_id": "ct_3e489a75871abeb2",
+   "task_sha256": "de0f2d8b2fe7c610e797f61f0d2fefb031350f72765a3bb0f95dafb28c567696"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "ac6e4885b624aeb4f5c547aea8ca7a658fd52e3b5113346893da83f4a848102a",
+   "sequence": 127,
+   "task_id": "ct_3ea6fefc171d8a26",
+   "task_sha256": "df55a67e41f77cbfa3a41ebfdf31de872a4f5673fba4789aa60c0c2e62af6e9e"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "38db6f73a537e6539b31649e2df9c6233b39b03fe35d8e48b015d588b0bbf8bc",
+   "sequence": 128,
+   "task_id": "ct_3f5ba6fa087bb12c",
+   "task_sha256": "153ceea4e251d1aeb3e74fe78dfdb22af14fa5645bc6c10ff1612e1a3fa14a57"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "06baa44870daee03b94553582bd93100627f0b842a7a5eb40704906b3f05efb7",
+   "sequence": 129,
+   "task_id": "ct_3ffecfc8cfb7613f",
+   "task_sha256": "7bae2bdd11583d14e6d52d7e937921c1d9d004594f0f978bebb349bc714c1f87"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "98734e7b3fec97f7d776b2201a4c4be7cae34e9cc95496200b65762801c3e601",
+   "sequence": 130,
+   "task_id": "ct_409f9750969b5b2b",
+   "task_sha256": "b1c249d5a0eaa94543ff0ebc28f4fe84e3f5b9702d1f1ac51a741591b4b663db"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "6d39a79fb33338287b74d876e37f467e4cb48956762b9f241e143e9f7024bd55",
+   "sequence": 131,
+   "task_id": "ct_40a81003a243a05f",
+   "task_sha256": "a1ef65da387f59cf087b6efbf87bdf80a508e55f4354bd9d3f5fe3ac916f5398"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "34a2b50c5ed598943719e2fb78ff2449ca41ed5d20dadffda957d4a335c3864f",
+   "sequence": 132,
+   "task_id": "ct_40cbe57ac31b1048",
+   "task_sha256": "baea1fc07f6ddd1c80d1b35b1158279da7c4661ad6f08aba69e125dbf46412bd"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "99a0697b588b285868ace51f6533847d1526aeeba2c193487075f64ce403057a",
+   "sequence": 133,
+   "task_id": "ct_410f21efd65dec0f",
+   "task_sha256": "0dec092ee81a1dc6acb343d7b3e664d1da7fc850ae9b6cf07ecfa7219ddd253a"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "505f30fb5a6bf15f3471f2e1a98c2170da5de94c09b72dab87916c66009c264b",
+   "sequence": 134,
+   "task_id": "ct_411df1bb0794915e",
+   "task_sha256": "13a81bd6a89a8b43416f3cddf3fb4fce8c11c30e92f565fe37639753b11e5342"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "23f3fdfb874771b28d4182af70c350d4fcee86d6441e92925b1b866ab68c6ddf",
+   "sequence": 135,
+   "task_id": "ct_419ccc2cabf7ee47",
+   "task_sha256": "f7dff721a6ed8df7a63ee35616bae5cbbb0955322381f2cc178defc9ad65e394"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "678af04698f6b54aaafe2b92ce7b6a7e8cee8662b0d63bbe2adc23d7bd7bdb8d",
+   "sequence": 136,
+   "task_id": "ct_41d5928057a5fafb",
+   "task_sha256": "70e586b69b2dd71b33018b2f1174daf90b92eb0e0e792406c4b1ab211c49a93e"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "0823e7784233dec636c6dc8abcaf781fffd1663bf7022d08ea3ef0f6b57e8112",
+   "sequence": 137,
+   "task_id": "ct_4277805c4b1762ea",
+   "task_sha256": "f1672a5203ca4a3d93bb0606e1d0d92d57456df1b1b5f6f8ead8e67f7b55928f"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "b66b928783eba6a7504ed1493ab17d1c8c088be86625c4ed4cd9a6b67fa78cef",
+   "sequence": 138,
+   "task_id": "ct_42d49f38d698a830",
+   "task_sha256": "ab485c3e1fde91e1a7e4f920be92e28b9198c7ec0bdef0d73c9175c625a80330"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "2b909f3dc97411ce5319a9d2fff11b20a41caebbee524203cbcebc65ce7f4d58",
+   "sequence": 139,
+   "task_id": "ct_4402dfe618b9c9c4",
+   "task_sha256": "c193b017701c1a5ac008c08a5a676338e51fd000ed7cb26561827efca5823f27"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "a4e7d880932fa52e6a96f94da013bab8d984eb4789277e3ed48e580b549ea97b",
+   "sequence": 140,
+   "task_id": "ct_441f7be2feffd93f",
+   "task_sha256": "d311b04685c36baace1a88535b7246e6318090bb7555c55a022c0200fbfc6f56"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "3ca952b928892007bbcba5b8cab482aaf598346201ea4476aa7c3af7fb71c3ab",
+   "sequence": 141,
+   "task_id": "ct_4429934ce9ef2388",
+   "task_sha256": "53ffba0f78c08b9e8842a8c6dddb92ffa408fa6976d1512ddb126d4b37c80035"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "130604a154c50540c0883ea5aa12968292952f329ce68574d63b232e946be452",
+   "sequence": 142,
+   "task_id": "ct_453e0fc6c3f1f47b",
+   "task_sha256": "6ab5bef2eddae67e0b99ace42c0a05bafb4b0be2b94fe1e4dca6a9b50d1e3ccc"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "c1915850ff18bac6dec3393c84925476c6ab28d5453ead2360825d878701b699",
+   "sequence": 143,
+   "task_id": "ct_4558348a1374ec29",
+   "task_sha256": "5be780740ccc070c37c59b20f466151f11fb318268d4bacfc733d8914f3f1352"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "c3a7e79f495d86a8f1f2b931502d5bdb77137278cb36b3867ae8033d4bdb6afb",
+   "sequence": 144,
+   "task_id": "ct_459dfa0440a464df",
+   "task_sha256": "ccf74b0b01590a42dde6e2dc5026b2f03c6d45b15c8df681f86c314a876469a7"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "9e6307e77914c9fc96b801ef92ea0e36c5150aa8da3db955e640a8e5cd69db1b",
+   "sequence": 145,
+   "task_id": "ct_45ead885ea08c1ed",
+   "task_sha256": "6b7ae12fa3fa8f39f6b39879725ea82b59de3ab2b11e8c6789d993d044bcb9a9"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "fa9c0b4f429e8d4c951e4c68cab872ab42feb4b1d078a4373de7e3603fc11927",
+   "sequence": 146,
+   "task_id": "ct_4634f602bf598b6f",
+   "task_sha256": "5352e75b84bdb9a8a7278882c8057bac14d7fac92677f5e3940a4f34a9529e11"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "92d3f8e3d4a230ba441af97ad6a5c1d3601b0ec025137ebd04e13511371ef4d2",
+   "sequence": 147,
+   "task_id": "ct_46e8cf2eb09d4a45",
+   "task_sha256": "cdd3fa907f96e682611db23529de41ab0dce7f864fc73f2423bfd084d5d0099d"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "045147006aab9e9e7e14ef876b98e977d7fcf43a8955112b6f56ce39d616384a",
+   "sequence": 148,
+   "task_id": "ct_4734180b81c14ff0",
+   "task_sha256": "a19c4d53ba946206b0b94c1fb51d47f144fb80c737cae80f2f764499d40c6f55"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "132373fd22398b46132ddddbfcbfe018971b44228c0e5abc689fcfb16d9dcdb1",
+   "sequence": 149,
+   "task_id": "ct_4816e3b7939c986f",
+   "task_sha256": "a14e12094bedf9787dc481e9911b357025e3c8311855e9bf87fe118c29a143c7"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "0e4a4e0717bcebf16e4dd440b4f43ea99bab55313171ccd5fcff7f8145beceb7",
+   "sequence": 150,
+   "task_id": "ct_490b54cc751d0439",
+   "task_sha256": "62bd6b8c45a10b80b4a2114c15060f14d07b85f666b66ae65cbcc448707d2466"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "b2bd72830f02fa2f0c8dcd636501967cc8526fd35041fc392e372590f7cc7e6b",
+   "sequence": 151,
+   "task_id": "ct_492b0b086cb68cba",
+   "task_sha256": "c86a99cf372e6ebedea00ed75479cdd7dab5248be46b23861bd775f5c7b19110"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "da50bb1a5f7ba04ce73a165e7dced6edf3826ec4c64dcd3ae199d52e74c10901",
+   "sequence": 152,
+   "task_id": "ct_495bdec2e9d6694f",
+   "task_sha256": "9491aad72ddbf880affa61c946e28c3e6c5a305896eedad7d317c9e9a02c0e98"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "8caf030c55154b7363515d36c5a39ceb520c984180f5045ebf2ecec6b9bd3f58",
+   "sequence": 153,
+   "task_id": "ct_4976404793f84b3c",
+   "task_sha256": "ab42e6caa342ab7a3e74c815b4f02db6326267457d4cfa93706256a836b6c8c7"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "d2eb1be0a6819890f6db94d1339fe286b1a5440204f92813175c461a4e44f366",
+   "sequence": 154,
+   "task_id": "ct_49d5e86c41d8f54a",
+   "task_sha256": "8c41c0d1848fc5309083f5165e1ef0b18489d9c5432482d5cdb98473ae10cbfd"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "40a2e13b9361db93c9abe1919cd4f649da0f37b99e872724ea50224a99836421",
+   "sequence": 155,
+   "task_id": "ct_4a8848992d31ff4c",
+   "task_sha256": "15d8b5a205d3a324910014beeeacfe51ed9afa5bc6811ca7b6b399ec27138c46"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "0ca76074c183ad43d23e6b82fa8b63f73604ee4551a1d373bb694a84d0b369b2",
+   "sequence": 156,
+   "task_id": "ct_4a91a9a1df449718",
+   "task_sha256": "ad80c31eddad1479caf2b89a75057954c97c6fcbd7c382b0947c3454c8a70734"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "9eddf6bfa1f90e2a327101031ac4ce8aba3d49dcf64a9906e2972b311f06722e",
+   "sequence": 157,
+   "task_id": "ct_4baf2278adab5ef7",
+   "task_sha256": "24928ce46b8a9e93dbde686cb0b249a97b0901792f6c1729865477d73db3d2e3"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "3c45236e311c297becef8788a841115132c06f539c01035b67624fe3d9db5c46",
+   "sequence": 158,
+   "task_id": "ct_4c0d5002fe924065",
+   "task_sha256": "8e93d6aa2746963c6215ad0de5ad429db0dbdcb73fd55cfb044fb41a73f17861"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "599796174b943cf370cc90983a8a7120800829f9fd6387a01b0a29ef8f2e6876",
+   "sequence": 159,
+   "task_id": "ct_4d9449383def092a",
+   "task_sha256": "3a4658565e2aa30962ba57d22387ce738fc3893bcb3bb2244a3a897405260681"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "52fd10934f24c0ccbf7d7177082aa6371a4e301b99f69a2c759fa9dbb0663a1e",
+   "sequence": 160,
+   "task_id": "ct_4dbb37da0fe6299a",
+   "task_sha256": "ece462a422882173706cdaff1b536c6efbad8f571620d887c5456bc1d80b35ce"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "2284d3b0543893ec39124066540caab78d98e34665b81f8c913cc7859f2d5865",
+   "sequence": 161,
+   "task_id": "ct_4e8974efb3b6801d",
+   "task_sha256": "c9c463026ab71bb90442133f74bddcbcb595f5d6a7c8c3db0093a2858104ca02"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "e79a920c22a9b6a46ac80d5846f8bcec1b967ae24ced316681b692e607da718b",
+   "sequence": 162,
+   "task_id": "ct_4fa96e40bfc7eb2c",
+   "task_sha256": "4b304cb0ce190c57280c49e418bc9d5ed32df984dd18e92a1da5d22552bba62e"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "e17f49582cb2562940dd3deb1cf84f38cc0a8a15e0438626853e95601eaebc3b",
+   "sequence": 163,
+   "task_id": "ct_4fe5d45454ae318c",
+   "task_sha256": "ac930bdc1201cc458656b99e422f986dc9d51772414d8cbbd257b823a8af5d5a"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "c84dbb2155aa131c50d3d56f3744ccefad011b3706ff568c89cbd3b6858e47f8",
+   "sequence": 164,
+   "task_id": "ct_503cd1d4b7fce17f",
+   "task_sha256": "d77c5595b3634f310b29d00a204ae38f9866621add9a4bd0f0cb61ebc745567c"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "5162317b2f8b05bd08c55dc51954fd7eeff662015734b1d5fcbd9e1f1fec8830",
+   "sequence": 165,
+   "task_id": "ct_51013ea548c7184d",
+   "task_sha256": "de947f45ba1d89a124cd042311994d9598700644c7f666c4cc81665d0065c00b"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "64cc6e38a46c663567226a152adb1c7becb348083c07fdfddef28cb740d1ee2d",
+   "sequence": 166,
+   "task_id": "ct_51b8e2e17d0c0c5b",
+   "task_sha256": "f07d54fbd3e427ed56a80eae7bfd5e8580cc1d45e704974dee09ba30cdca8f82"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "7f9686953154c4cd1b397e8e11820da6721ae831c9b5072723e955a52fbb385b",
+   "sequence": 167,
+   "task_id": "ct_51fc18d3bc8bd5b4",
+   "task_sha256": "bd4c2723e67cace765be548a536c8f27b7e96c47adb040917320eac2fc167c99"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "cf65c2bb96503c72f6b881044d98e15ce1bb243ab5f195ef72de797aeea6f6af",
+   "sequence": 168,
+   "task_id": "ct_52163ba66a87c050",
+   "task_sha256": "bcfadb765ed9e4b94f4ee57214adfad2ad6d575611a29b3a27585d747050d817"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "d2c4b45104735c2329addd2166944b4206d588e6bbb8ea429f053727ac6227ac",
+   "sequence": 169,
+   "task_id": "ct_52796fffbc776920",
+   "task_sha256": "90ba22b969e68644a6d67817735191d130f71aab9ae9317e4ce434ae977d2438"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "543a362bca8ef90f2968bed288dd1c4f0fd1a620e6a65ff4246c21b3569756a4",
+   "sequence": 170,
+   "task_id": "ct_52b4bdb056d858e5",
+   "task_sha256": "33321b78cb8addf2207ef0fc09232fa74c8b114002f70a0e73a269b89b8ad13c"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "9a4e2a8acac054557c819736eeaccc4d1051cf31e468e94e2e319ac88f102a6e",
+   "sequence": 171,
+   "task_id": "ct_53036008f9179c8d",
+   "task_sha256": "724aecb27d00e70d7a227d46a67779295850fc6f93e01b47129761351dd37a5a"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "e8a4b8527a2d12ea372424544c9faa1d9102135ed5c7e094bb228204f1313103",
+   "sequence": 172,
+   "task_id": "ct_534a089e6cfeff4e",
+   "task_sha256": "ab62429541217868d1809157008f668d7d5e0b23550a1e8aa2834f335aabec69"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "d9ba0539a52c952df7af7b465b89fe95596d981a859784f3a255cc1571a3bb4e",
+   "sequence": 173,
+   "task_id": "ct_53e0b1f2c77665e4",
+   "task_sha256": "446fcbc7934e125ea7c91fcece1d8c03bfb496fbfb0f284a52f44ef1c9745304"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "8ce064e43b3033802b90a01223d0cf16f4493b27c683d0f8525c12c3fe92cd1e",
+   "sequence": 174,
+   "task_id": "ct_54103bb4e615ab21",
+   "task_sha256": "942d9339704903ed5529d9ad114779bdacc82ffea027a5a43d78d03e2ade2b6c"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "08f689cf94babdfe8767dabf52cee80d95866fd5c3a635809dc57f46ba4157eb",
+   "sequence": 175,
+   "task_id": "ct_5410e0ae1687dea6",
+   "task_sha256": "48a4e6d6caa97c7a05e585fe6ec04155866b7bb1b334dbc0d3f5de1abff1f7ce"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "a5b44ae8c20a76655ea6e93d20b30d225ec38e1e7cd73e753554841d833042d8",
+   "sequence": 176,
+   "task_id": "ct_5421ac87e0abe380",
+   "task_sha256": "d71d46f5d2848a78170fd56474fb2658657e1c9c6ab2702252c6e72be0a876ce"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "8e5d944b20d98a7897083f1bff2f172fef2a731b7dc29c9d822374faca5991db",
+   "sequence": 177,
+   "task_id": "ct_5460924856dd1f88",
+   "task_sha256": "d6534ae7f5c08ed38892a1a917f92906ae02f858f430762b981d433e280b833b"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "5633d14be7007c8b43aa8f22b17bbbe1d9d0cd7ea25feffd8d1bf620503be4cc",
+   "sequence": 178,
+   "task_id": "ct_54b69e6d16088e43",
+   "task_sha256": "cc9b4f25361c882176393e783a742b645e86f23ed457966ccb91a7e4129e7b06"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "4655f79c23c655ee27cf0245a4c841f5da9dfe90b25c272cbb3268cd52bab274",
+   "sequence": 179,
+   "task_id": "ct_54dfe99b181537a1",
+   "task_sha256": "96add9dac3efee5b619a3a419b84ac1de348914edbc0deb8c5c94f40a884a733"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "c96cd182f9d4deb2985b817049b5ec922bd1aa2083a4b0c27ae739358d026e9d",
+   "sequence": 180,
+   "task_id": "ct_554cfb39322e8577",
+   "task_sha256": "27c59941b4d4bb0cf90000fae35d857b921321f13f466227b3bb778ab1c4a90a"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "f37c0a9906b6dc221a9b4eb8fd64e5b8ce9976a46facb89bf119ee54dfc70569",
+   "sequence": 181,
+   "task_id": "ct_55b9dcc8b8262ccc",
+   "task_sha256": "7d06e2d1f35740d8497dbe3ae71ba7641feac160bc3ce9e1d436518392c5cce9"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "1c60990f1e578322e132d3a8bb0d65a6d4173a938a42f97594615902740e74cf",
+   "sequence": 182,
+   "task_id": "ct_5616f845695d2370",
+   "task_sha256": "a0ebf5ce57141e1f6386093b97d953df7fc0af82eeca1a6294df331177e21c1d"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "2d6c4088a599853483db30ea33c0263cdbadd075d91e6025c11925b7db122afd",
+   "sequence": 183,
+   "task_id": "ct_5629291cb77fa905",
+   "task_sha256": "469478204d9f732353309fd04ccb986463c7b9ccd81473d6f9800607085d9763"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "c816ee3cab2fba743ed51c051da9529913c8778aee3f51505e8688fa74c64156",
+   "sequence": 184,
+   "task_id": "ct_5692b4cf6bac5289",
+   "task_sha256": "8b2cf5ce1e3e34813f9032cca652d027118e5e7fe74d455ca2e9c96c18adb9a7"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "8f0125cd534d1a8c47a814f64b02a2346ac205e898d6b7c5abf79304be166023",
+   "sequence": 185,
+   "task_id": "ct_56cb6d2bae9e7dc3",
+   "task_sha256": "561bffa051669d193e7360672c063d6964e3beb34024820fcfeeaff0787f79fb"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "9224afa5511600d2ee27bafdbc727113ffb1093be51ff33a484792a8c5921778",
+   "sequence": 186,
+   "task_id": "ct_56eead00704ec16a",
+   "task_sha256": "ef3441222816f471e409bb10fad4c8c654936059f6e4ae7a68294d117023599e"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "2402dc6d5833e681b0019ac4ee5aa16645a0efd90e4b74bf78eefa7993c84397",
+   "sequence": 187,
+   "task_id": "ct_57273f542ea2f2a6",
+   "task_sha256": "cd5d2fb9e8828c3fc0d90b4eb41f2a6c34516a604bae3c4927d4798114786f27"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "749d8a674655da2c2ba1c1d427c1f9d6dba581a2f6d9cc3abc15d45fa04c5712",
+   "sequence": 188,
+   "task_id": "ct_58a3b35e66d3869e",
+   "task_sha256": "e6309397b075b0911d2de9a541cb05688809405a757368a68acf8a0ccb303d82"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "ff7ddf4cbf9c9832b5fc04116e346a4848c9b827b5634fdc89b3ac5f6400337e",
+   "sequence": 189,
+   "task_id": "ct_59329fc70deaff57",
+   "task_sha256": "a30876f9627d8f89002df95a5d8ff448c6e11adc1be6ed7d287a793e6ea052bc"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "872f277d6e1d9905f4edac78aa8b1b694becaaf99661fe201df02c870e02b4c9",
+   "sequence": 190,
+   "task_id": "ct_5a63bbcec9f90b06",
+   "task_sha256": "76d91f068882ee3646461f911f55698cb46526c09bfe89c063230b2fe40de7f4"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "48ea0c696b4dc26e4ab5c583f6826ba555f0ecda33192fc602a56fb59b1e684a",
+   "sequence": 191,
+   "task_id": "ct_5a77ef5ec9f42d03",
+   "task_sha256": "41d25933767a5bf92afbec365af1203e68a8170b3daf40036edf67087280e103"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "34fe9fe7d3dec6dcfdd5249d3ca9c20dadadaa4b9a6b18327f3b51f5f1b71529",
+   "sequence": 192,
+   "task_id": "ct_5dc8fd31f99fea92",
+   "task_sha256": "f97feaf20edccfc6e3080ebfe0dce244c2315848602ff7b8c5f79e40f25959fe"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "eba5fa452b40ae8968c173a1c511ff2c6ec191456be05871f1a163119c71a859",
+   "sequence": 193,
+   "task_id": "ct_5e16a606348546dc",
+   "task_sha256": "cea72fa87f1a8dcb714713c4bb2709940ff3f773c03cac04d707b8d0cc223bd3"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "bd1621d2023d71705a3197b0429d5be9839b65647fd7dc48450a328d19187f21",
+   "sequence": 194,
+   "task_id": "ct_5f99c7b83682c9ef",
+   "task_sha256": "2e1647fb4e1c9cfd90e715512ba1fa72ca3c9ed0ee10919fbf9c9ad074c18541"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "edb43a4aa3bbe9096284cd00533f9cccda304460861a269fd600f2ec5f4ad5e8",
+   "sequence": 195,
+   "task_id": "ct_5fa1359832531441",
+   "task_sha256": "1f339cdb597f1e7eeff3eaa2fdaef876ff5a814492355df627e54c2dac02cb4d"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "2e27086a2dd8c0ae572af1361d78f4c1acb93eb029ccf5ea3707dbb372a56235",
+   "sequence": 196,
+   "task_id": "ct_603a333baa8f94d5",
+   "task_sha256": "0812573d6ccbcfacc0b92c2d074a28ddeb12b2844014ec67040820fff41b4153"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "ff3e335b2bbf15878d5d9e74b8a4d20bff73fc2145b6036a1ad7b0eaee4d9573",
+   "sequence": 197,
+   "task_id": "ct_60a13c8ea18c45d8",
+   "task_sha256": "3ea1df0daa90fb971798427629a0996265b10fd563c7d51e0f31fa0cbea3d796"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "f6c682c2b68d6b5e12ef3b3ce32a68df89bb9647620fa8d1e31ba94bafc2629e",
+   "sequence": 198,
+   "task_id": "ct_60f36a0b7cf22b25",
+   "task_sha256": "46c9f2ec5f8f34256a6c1ea8b6996843d0a88cb25537c08501da5f42110a7ede"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "2c53f0665d311b83c402dd3e70626c927aebbf5a4e8a00b0a3be3e4b7384115e",
+   "sequence": 199,
+   "task_id": "ct_615ab331b092733f",
+   "task_sha256": "1c97026aa80b2fac2c0a2e972b1468d1ec4f8d4f49bfc2e120c502dac95d29d7"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "a994ffbbf7d312916eaea8c81f075a5d6b0b3a9355499ff348b616d26b756228",
+   "sequence": 200,
+   "task_id": "ct_6236d21d2d76480b",
+   "task_sha256": "aaad08bbc1bac814b48b2533cfa9b1b9758a4a659ba1e5287052b464c68c0a02"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "ed77bd5d03a4ba3489f9f0c5f0aa067dc85d72487849f2b1c34d027652e91c17",
+   "sequence": 201,
+   "task_id": "ct_629aa2dd81c8bcb4",
+   "task_sha256": "6f0bf0a64a37cb527310ee8e71b6c16626dcf76baa33542b19178d712690ba7c"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "f2f875381f08557599bac910d85efc6152674676ece06c3a491b46fc88fde4d3",
+   "sequence": 202,
+   "task_id": "ct_636f2351e068cbfd",
+   "task_sha256": "a07ffd4ec1e6ca6c594c61d842eea0ab01971f3cd6191aa83f37b922249f06a4"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "7df4f5c26aff9a177260ff3620867fd94feeef5c5442eb2a1e8b5f0c56b08392",
+   "sequence": 203,
+   "task_id": "ct_64174d0bc3d41f93",
+   "task_sha256": "cf1a2935147ed7012228ac9aec1d2feaac9e3672ff4c11ef5bf1b5ef89af5079"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "86b6d5df032fcaab02ee66d62ca6a190a645281abb4ed0e3d36347f6a2c55b48",
+   "sequence": 204,
+   "task_id": "ct_649079c6f1e12811",
+   "task_sha256": "cdaa0e15404404b0ea255f1f0197d6e8c5a877bdaf97a7a28dee7de847a6437d"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "0000bb4bab566e7d9a9df4d0e02c98d1e234beb03ae10ee5731146dd845bee4d",
+   "sequence": 205,
+   "task_id": "ct_6692bdc706090449",
+   "task_sha256": "56e7464dec26af9355ee51baae9a6343ab8d522f27b1735a5cd123cfa78d562c"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "41b7f843a48e0e9024187a8d056e069c3ff726ba3f8fced9e37a3ce069ce4219",
+   "sequence": 206,
+   "task_id": "ct_674b7fab0b772b3a",
+   "task_sha256": "225bf17b90076532aa8b002c0562f261c86f01d4823e72e2c7d2a4c7486b2818"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "ad04951595bf610dcbeefacf94105fea36a3cb85d8d7a6a6751f3f18357479a5",
+   "sequence": 207,
+   "task_id": "ct_6764747e422a0701",
+   "task_sha256": "a06fd33262d31e073861eb00c5b71644b640acf126760d4af040ff7a7e2cdbcf"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "8ba477aa0b5ac87be773cad9b85ccd4f0c4493f3f29f3771b029cd93fa1397e0",
+   "sequence": 208,
+   "task_id": "ct_680285c8e639f5c1",
+   "task_sha256": "954332440f0512c3882a09de7fb9096f17cb75d37dfcfeadca35ca72013feb21"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "53eba61ca328ee56415edc3a8199f01ce4ac4c000dcf8fb170623f8af9136008",
+   "sequence": 209,
+   "task_id": "ct_683aa279facbf6b0",
+   "task_sha256": "ec0e5dc1c6125e725f88f2d00703140d040e8b767f560a22705082aead05b288"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "44aac4e66307b4f80027f645c59c2b5d3b8142b395f6a09c42d618f9c14ae490",
+   "sequence": 210,
+   "task_id": "ct_688e22a805db7072",
+   "task_sha256": "c48697496f5f5f19bf8548b6648a16f8108bfe2e0d280b78651a4af4e3288d88"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "10b684ab6365995535edb0c6f9a9b6fd313054b4e37229185032176b70ac76ac",
+   "sequence": 211,
+   "task_id": "ct_69b17376fe03ecff",
+   "task_sha256": "984b0145cb381ea5ddf81e17575af16514a9b13c9ea32aa79b22b71208fb1b29"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "7703c988909b995bc50c951205ea555d4c83e1ce95d4ed0dae71d0065ba1f378",
+   "sequence": 212,
+   "task_id": "ct_69b2d648aabcbccd",
+   "task_sha256": "53d28c40a7c360169d3f426b91afcb52503744b23d01188ce97935776d29a4e1"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "c4914121ec873d90fbd8ecec55f6082e019ab7713970fdb40892a2978cff3d33",
+   "sequence": 213,
+   "task_id": "ct_6abe1678c52e2792",
+   "task_sha256": "98107a3f6e4ad1e6f7dab7cfbe73d9aeddb84b180e5f23e5c42fbc4cea77e2b9"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "58f82c3b6f8392c6b6a7cf8a55ebc5082dae3b104b16629131e70a97236ac667",
+   "sequence": 214,
+   "task_id": "ct_6b8335eef9a988b1",
+   "task_sha256": "b8fd7b9c0e1330a0a7529fcfddb2095bde97e7b28e179d64e1fe19d150e1d806"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "0a920cf0d311ee4c0300a0015813138d35ad4ca6575181c0ff0c0c50d5ed8f5c",
+   "sequence": 215,
+   "task_id": "ct_6bd1d33507e962e7",
+   "task_sha256": "13c934afc0cdbec9b4b7c87bb35df0e5b7f9c8f18906d68d82099ec9bfe4e91f"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "b484b189861a0435329315757c2a04a6e67889a413376f155686b95b9076abc8",
+   "sequence": 216,
+   "task_id": "ct_6c2d21b6885a87f4",
+   "task_sha256": "c29d47f190673757a4f552919f6f2e75affaea27dd57cb5f6410edc6e6a3bb81"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "564a6c2adbde2cfc78ca50c4df2191f0ceb286d5ed1075408eb1ac463408b338",
+   "sequence": 217,
+   "task_id": "ct_6cc702ac1a0eeb04",
+   "task_sha256": "34d3367b06e0269b2530fa91689380b3c75e7c7625d47c178325821934872fad"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "ddec5adddb4ac0facb3ef1e080143e32251909049b98805afcf3a607dfa794bf",
+   "sequence": 218,
+   "task_id": "ct_6e9021b8356a0bb5",
+   "task_sha256": "52746574045ba823e5e93699564df29dd1a5566b761017a51393fba7d7eeda65"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "583ccda086a7ab5ba47e2e47d09fc3a1fb8c1114f6f3162fbc0128380a607072",
+   "sequence": 219,
+   "task_id": "ct_6ed16eaf77dbb146",
+   "task_sha256": "0ff6e7b8844431d57ee20b261555a27bd94910dc60db316ee0adeadf2072e9ff"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "a681e02bd1d294e1db075c2afdd0dc043d16c93c39b9d7010a93caef5646d3cc",
+   "sequence": 220,
+   "task_id": "ct_6f20c89aaa89fc9e",
+   "task_sha256": "54fb42d403617f4a112f44059094d66823ef2dbd3ddb53b52378cae28fa11c30"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "6af6580d5b1f994eeacccd43df7de08173bbfaa08481a2167833f97e3688140e",
+   "sequence": 221,
+   "task_id": "ct_6f83553f7a3a67b5",
+   "task_sha256": "263d44965d1f0114387877c69e841892e0158fb4113709f51aacc979df20a92e"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "a86a271006970a7a3a4f17d912040a86d19de12cab24221f7af3a673c2e987fc",
+   "sequence": 222,
+   "task_id": "ct_70e119f493aeae94",
+   "task_sha256": "14fb786ac03305aff8f487be50c051f9064895822d1245ad989483e0c3f39f04"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "24488b262e91b236c5c87ac110bfb41b9f34892d466b4266e3f380f53efb81b3",
+   "sequence": 223,
+   "task_id": "ct_711ce17df4c7703a",
+   "task_sha256": "6d4b4b7d9becb2757eed6798a57bf1b5dc0baed740f8470f168a794723bb00a3"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "6d5359aacd35ba4fedbca23057f44b53062c9e22242cdbc3166bf48daeac878e",
+   "sequence": 224,
+   "task_id": "ct_711da4df70d53710",
+   "task_sha256": "fda70a70c192135bfcadfcabd0c1ef73b92e7d21e1e44dadcefb4c945cd66cff"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "cbbac61a9992d18f035958d52bd5e90afc46664649a588c3b0bb0bcf7fb42d89",
+   "sequence": 225,
+   "task_id": "ct_717d11905ed61549",
+   "task_sha256": "32c0ebfcbf4c6ed610113d8cc2d9ec9a7800b223ad3413e90694979d6532fd93"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "0636215988149a6388ff436776a062fe5dcbfac92adba3af55a0fc65ccb3c0e8",
+   "sequence": 226,
+   "task_id": "ct_71ecaf7c89ccc679",
+   "task_sha256": "c9893ccd77765682edf7d51da9cb3aecdd74c95b6d0d790f057eaa6b1553100b"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "0f1b686774649e751d23475323f016c7972383297a414141da29d703a26320c2",
+   "sequence": 227,
+   "task_id": "ct_724cbfb4056ec771",
+   "task_sha256": "6724e013176a280b8cf2f25a990ffa8c1edee244065ef30aef9c4ff1ecbead6f"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "7b0f6a2d3ab8c8bfc2e8b62a302df28cd42f4d6935874eaeb588fc9b40ef9216",
+   "sequence": 228,
+   "task_id": "ct_7278133a54f985c6",
+   "task_sha256": "302fa13248df12a3fa1a4ed5ca52c1faa6e177e1c80a2705eee40a2aec7dc007"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "2e5a1830d2f21bb235626916583e19b1d4473e190a165d566f766d44c3e5ee50",
+   "sequence": 229,
+   "task_id": "ct_727ff5a7789d267b",
+   "task_sha256": "3d7db9292f2f4f4750a03f8838ce81ac2a9601d374d928925facb173c4eed199"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "d9e0106617563afa5a95dc96b309aa548ee49d0ec4d99e1598de7932bff91467",
+   "sequence": 230,
+   "task_id": "ct_72854d02ca3f88fa",
+   "task_sha256": "d7054348cdaaf186475d6d0b1ecf48d4d025b787819da8510ea8f64e99207ad2"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "11c294efb2d73308f2dbc982b70ad322d38410fd0d5f50ff5ca271c751c4243a",
+   "sequence": 231,
+   "task_id": "ct_73c0366a6164cfad",
+   "task_sha256": "7a7e18471551bfdb370f3689d4ff6b60e7bfb212c3d7e95a89b9dc7bc92454ee"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "5d3ca4edcadd40057635f63b185efeb6d628c2cdc49f9d31bcd377015cec1c1f",
+   "sequence": 232,
+   "task_id": "ct_73e64fd9bc89a921",
+   "task_sha256": "47c615f662b4a6c929ea8556a9c29638fb6176bdd12f0d42822eb593759723cb"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "67cfd0ae53d25a2146a04a5c5e98a1f6816abdaa41e205e5bdbc6f85b943d919",
+   "sequence": 233,
+   "task_id": "ct_74515474fab80c29",
+   "task_sha256": "5337547a3961a13a358526efefbc590872fe3892dfbab166dc7d9616522e5a51"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "e9118954cee8cde0a2b2357eacbf489fa2d7e25a0e08817df58227f76fcdedd8",
+   "sequence": 234,
+   "task_id": "ct_76418ba1e903b104",
+   "task_sha256": "1057e271fc26883193e3c1f0ef93573c847c574750c05ab68a4510cc1e7a794d"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "df9fb2f8b8cdefb9fe9633a1514d1ec561960d84b01163bff95287975079e102",
+   "sequence": 235,
+   "task_id": "ct_7760365ea5876a99",
+   "task_sha256": "61b8d37697a47527b5c53fdabd818c13d82215424ee625cce4e2f71632ce26fa"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "13e38f451c6924f740b9ac4df4f55cc621d853be7c89e3637a687e59b754cf52",
+   "sequence": 236,
+   "task_id": "ct_77dfa8e5085af195",
+   "task_sha256": "d7079dd48633970c86a6910d1756eae0c68bbcc590b24dad95819a9034081eb7"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "9e85a23eac5d6baa6426fecb24e2059acce5ce8ef105290f5c476c705e104545",
+   "sequence": 237,
+   "task_id": "ct_780959398a0235c6",
+   "task_sha256": "83c737ae57e22f0297294e4379d5a49d3ddfacc5ef457d8b9413810e759f574d"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "784e163045f03a9aa9f1f629831654fae1d2a9dcdd9417038a45e481dc3a8cda",
+   "sequence": 238,
+   "task_id": "ct_78afb8b6552e7a30",
+   "task_sha256": "66a3b3c2ea660c695ae91f9676957df933ab9dd52e8b41e748ccf1168dafac16"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "312622d6aed6856e57673635fa0e8bbb9a1d4d9c64dbc536024c3826a82e1162",
+   "sequence": 239,
+   "task_id": "ct_79232cf6d4b6e116",
+   "task_sha256": "8b80ac05549483f9b0b1b0dbed9a04d4d0dc5d1057adec6e84422ddf1e6f7c79"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "e11bf107ae65b757242d8358180ffd30db9cb6958c7cd010ec6d0671db42da9a",
+   "sequence": 240,
+   "task_id": "ct_79558a97444b2fda",
+   "task_sha256": "91bd2c5d1b693a6ed7e4061653a8eecd74dfc1587e070d5618826faca18d4738"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "98cbb8df21b05e503395875c42b0523347a8b922baecca0d84abe52fd6b963d2",
+   "sequence": 241,
+   "task_id": "ct_799c3a885c71019b",
+   "task_sha256": "c26f2d947e18383648e1b02b942bbf8173510405430bb68fb1ade9b5636554ab"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "2a972bd09f04d0c57fc05fbbc6aa091bccc33b404525915e156f9f32de6045bb",
+   "sequence": 242,
+   "task_id": "ct_7ba7802ae314d50a",
+   "task_sha256": "eddd52ba87efa2daab9e579b32db5eeb29196ced2b27ac5bd6fa2d3a74bc7301"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "c936f99abc8e9d193a94e26e1e92b0ada0ba0f5484381d7aca24f0765a1b4e7c",
+   "sequence": 243,
+   "task_id": "ct_7bde5f4390cb7c6a",
+   "task_sha256": "3bbc7fabdd9bdecf321f7e56efd2a4fd4508e1c8644f78e7fab9410e98581bc3"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "2bfd571d84a9a4fd97383d7c96a0b919039b495644849acb03b5f98e7b16d914",
+   "sequence": 244,
+   "task_id": "ct_7bfe72a961dcae16",
+   "task_sha256": "3d648ea051d7df2e059b41268b1c58558b105447498a7366b205063fec7e5b4f"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "e37dc551fc55bc480a7013c938d723eb0e84b9fc7efcc61c67fd06b7d2c511c6",
+   "sequence": 245,
+   "task_id": "ct_7ca97d642f0b3201",
+   "task_sha256": "469ca0fdd16f28b8684565f0295acd3707f4d7e0cf6684521c30d4b56f9fa5cd"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "2e767cee2212844c36573b20079d6f09ca49d4cb7efe6393027087174716abf3",
+   "sequence": 246,
+   "task_id": "ct_7cab6211cccd95a8",
+   "task_sha256": "1726eabee694ab0d23668762bc3ac76e134e4484f56e0339f9fc93d617436961"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "7d6ced32b9c1af229b109e7e08278c5dc29d70d4264098842e647a477d237fe1",
+   "sequence": 247,
+   "task_id": "ct_7cbd7364e121d8be",
+   "task_sha256": "a21e65ab285009c92fd1d150ab5a0da57ec833c7c3aaba78d65a3a22062a7a1e"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "28423acb3f2d6873e2fad3e86c6e6ea558bfe993f3248f4f50ce4726d166430a",
+   "sequence": 248,
+   "task_id": "ct_7cfdd51e803c8443",
+   "task_sha256": "3a4401859886406047f65dbeacfb98aba1377dd37418ae0a4dccc8068cd36783"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "e1a53299912908d87164102c30a98b5ad57a710aa4503600415500c7d38c585e",
+   "sequence": 249,
+   "task_id": "ct_7d04428f9e48071b",
+   "task_sha256": "26347dd6e824d7756409cdedaa9eeb59a09e5eac28ebff3ee88d9a02d8dc2b4a"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "8606454f710f67148eaf48a7710fa45b716908d6febd463047f2e5b446e210fc",
+   "sequence": 250,
+   "task_id": "ct_7d3994a54221d221",
+   "task_sha256": "641cbced509e5cb3650499c5dc75591c795d606a264e23bfeb1bd79a2ee80e27"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "9c1cabd2bedb85004c636b7933e9ab206a4e4d8e56f1c5ddf87a9fbd8082ffea",
+   "sequence": 251,
+   "task_id": "ct_7e07f59b151031b4",
+   "task_sha256": "5618ba3ed2aaaafef206aa37b9ba85d98831a9393595356c71d94f6de5bf004b"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "48657d9f19f41845247f6e3a058c0e82e8c3dd6fffa2bb4e775795129a087aec",
+   "sequence": 252,
+   "task_id": "ct_7e766e668afc4816",
+   "task_sha256": "3845493c3d202006eed72007f61436e7657652cf2f6054c29a662ac5b35c4797"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "465b52d70211f3bd82016bffcd952147ff2be11333d3c46fd278750ea72e07b8",
+   "sequence": 253,
+   "task_id": "ct_7eb409dcc6338fc2",
+   "task_sha256": "e7f5a8b6bb38a298fbfd99c7c5b8332d60c0a77bc4a28ad0974a78167d06a6c7"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "57f278f5c5d38f99f43a0afa0b45bbec52372b4cf205d2b2100e2a61de21459f",
+   "sequence": 254,
+   "task_id": "ct_7f4a9ff973bffa64",
+   "task_sha256": "2f911447b76a8fa2c35c472da255317db580312edd196d99dd7c54e11f0f030d"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "6f63f04742d3960eea51f4f9f8ebe55f0ae693943e90a144d954c675b3c8ae8e",
+   "sequence": 255,
+   "task_id": "ct_7fd284249d12e411",
+   "task_sha256": "f26e1aa0ec4418c47ae643519a869d9cfbf9a19364701ce7e2d6d620026f4378"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "6e8e5e0b019737898d692cd2bea73fa5fceea84afd2d9ab3413bea2ce9bf7231",
+   "sequence": 256,
+   "task_id": "ct_80726996b4980b1f",
+   "task_sha256": "7159107cebc164ca20d46f8bd98befa315096b6724b4ff140fda57f7f6cd8f73"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "381d7c6568b7933ef55be9fa1bed7b15c72213faaf6257fad307997a90b1f08a",
+   "sequence": 257,
+   "task_id": "ct_80d4612101b52e3d",
+   "task_sha256": "acbbdadf331bf4cf89fd7b980ed37631e39b044caddc59f620a3eeef9ceaeacc"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "40c05c3fea571bf7ae8af2b9a75763dfdb8925170d647f151ea7b264b5074bc5",
+   "sequence": 258,
+   "task_id": "ct_80dbe6eaa7beb9bf",
+   "task_sha256": "c855373f2ac50d47b519422299e612d681b5b4d21e62dfb1946a10ada9fcd73b"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "e21d5b3642eb24330b98740beddedb0255f40fe12b85ff9163f63d32cb82a6fc",
+   "sequence": 259,
+   "task_id": "ct_80f38e094fd90cba",
+   "task_sha256": "7422c9da19b5575fd5581eedc259b94b9ad5be92a8e535cf1042e4b92fc7dd2b"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "79f4667b1813692632426cfe8f5e55bebe77fb58a8cae3d3c001f60503248857",
+   "sequence": 260,
+   "task_id": "ct_8117be0c743e7d08",
+   "task_sha256": "f24465703d7214801f0426fd16ff4b1b3fd72306b78651fbb046902fb967b0c2"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "db5b43dd1b01766aa231ce3f55e8dec2508f5eaea8091ab1abc5b7587a8b378d",
+   "sequence": 261,
+   "task_id": "ct_8186eda068f865d2",
+   "task_sha256": "28b1a96e3b446dd270a994c3d55f7b65fa9fcc980f53eb783b95e62b719dab51"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "a5a2cb697b5bca92da90ab97605d844f6aa702745210b7ca840339d243a68bca",
+   "sequence": 262,
+   "task_id": "ct_81d078b7da273d73",
+   "task_sha256": "ca2a2c1972020bd7cfc56e89155212fcea26dd621f227ef653425db760ee03c8"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "44451c04bb412968e31857b8c15f01616335f8bb273608bfe7d688859fd0277f",
+   "sequence": 263,
+   "task_id": "ct_82c804989009ac16",
+   "task_sha256": "aaec14b6e99e2c0c006d02f10a179b1469d46d7cb5188840a2d4b37e91fae673"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "fa87c2597cf5c7da7234f83b7db52b5d06d701caaa02a9a99773451a382ca268",
+   "sequence": 264,
+   "task_id": "ct_8317c257f4d992e3",
+   "task_sha256": "c1783d7c658a5da0d6934f215ced606fc70a899d1b814d052bab234d6910d7bf"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "467f25719a7f931931486f082a0c01df772a6875cbf5d9ef6bff4cda01646154",
+   "sequence": 265,
+   "task_id": "ct_831ae1055c831bd2",
+   "task_sha256": "70d1b094cf1277dd34259b9ce1b94f25cad5883c89ebba77759ba9432763bfce"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "3eda00691fd89b76b484765efe4542641f7003d9b7dbe056bd02bfc2b87f3f48",
+   "sequence": 266,
+   "task_id": "ct_832877653477e07e",
+   "task_sha256": "456c8cacfc5d602a2765a3d665b37d58c38835a34db338c1a49d227431f5803c"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "53518ab847c124822184125fe304ad91839a7d151280c628737c89cb22dc0ede",
+   "sequence": 267,
+   "task_id": "ct_8384c0f205881df2",
+   "task_sha256": "c0be2414b4771cf755febd436f3c35cdf83fee47cf16c49718d382648ec66f8c"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "d4db28f168c32b6c2ddd353307e26417d2a6ba57cae01a52479b1a0488758e17",
+   "sequence": 268,
+   "task_id": "ct_844030327082f4bd",
+   "task_sha256": "894798314e941e32f4fc2d87da84edb1603032438de22b4b6e2fdea92e49934c"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "a61b1eb1af18e04a1b1f27288fcd84b07b31d322711062a0329963c3434f4f30",
+   "sequence": 269,
+   "task_id": "ct_844d200b3d581f6a",
+   "task_sha256": "222edc2dbd9dd3dede63e06ba02919b0ea67242eed33a86ed48a3fea74086e69"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "88d1fd148b9bca91fda6c74067c217239164411c8757ea53925e2a80199ea43f",
+   "sequence": 270,
+   "task_id": "ct_846a70b9a7e8f024",
+   "task_sha256": "54343d3264cb452cc42dfcb707183879c65f6d5e4c76d5e88cb03c3f46eb1659"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "7a1c9fb0445f2fdb69c9f1f1343658315bac24338aa9a13cc7d1b0834924e4f9",
+   "sequence": 271,
+   "task_id": "ct_84dafa45f687c37b",
+   "task_sha256": "2e8a88d36ec463141f0c7f4561ed056ecb0ecd1e12963e09c361606b53106ba6"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "61fb2942fd60d916f27d7d3722998bf10b30a3ed272320f6c594ed2e14d7d112",
+   "sequence": 272,
+   "task_id": "ct_84eda2d175106d31",
+   "task_sha256": "076d0b3db1f7817e3bf567a4c5682f8489748167386c3f81f058c5c73e3f5aa5"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "ea5e791a28e8a5b49c3ede50e9161c90373c15e5a245e1f37bc375adc1b514dd",
+   "sequence": 273,
+   "task_id": "ct_858b2f9725e3f897",
+   "task_sha256": "ccd19a4a121be5ee826b83442cd3ee1358aea63d7b9d4c9557e1e1b7a91b5984"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "6c60c8710fa75cd2bff93f6326e5031799c8576504a9dbba4ca8f0e4436fbf31",
+   "sequence": 274,
+   "task_id": "ct_85ddf6b4c62e15b7",
+   "task_sha256": "67ce0d35321fa49d9561c67997002baa194a961b601851cb349b70147f8da15f"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "7188589ae4e9b34458e487209ce9d5c2fa6eb17c8f7d0892d61f01e156d9e0bb",
+   "sequence": 275,
+   "task_id": "ct_863125e21572b533",
+   "task_sha256": "d608f9041609d7edd728242d021b884e58518b398c0d71f74483964b1dd118be"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "358ad89211449cfe2e81d9f514ab11ad5ddba61284ee3fc783acfc3cf3942de7",
+   "sequence": 276,
+   "task_id": "ct_86dbf85c6cb36244",
+   "task_sha256": "46d7abdd039bd2c008d744ea54176e104514f0754db78270b5381b0ce5d54830"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "27a379834b90c9cd22ad99869380af5535d2eb028bb957f0fa5e72bf64f4ee9f",
+   "sequence": 277,
+   "task_id": "ct_86ea52ab2f179498",
+   "task_sha256": "2271b8068cea7d7d21bef810ad33b76f46ed504cd3ed9e11ea0e9b3cf279706b"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "a01dba020016bbdb4c9897b8ef4261db80200d0f44908b3ecada13b9cf1e7b7c",
+   "sequence": 278,
+   "task_id": "ct_86fe67c1010f476d",
+   "task_sha256": "5f1015656a1d2cd5354d8beff6a1991f7c3cb30eb82f23b1b118057356eec724"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "7f067e1f5cdda6b26266ce4b8f330235d81315e3881076ad092998c5bc7ff67e",
+   "sequence": 279,
+   "task_id": "ct_86fef430d808c745",
+   "task_sha256": "cc6908c16a04708beebcceb8bb42e57f8acff44e6b63fb1af45c0d32c842b980"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "d236b6b81f3627c6f8dd8d0c8f19aac60508de22879501649a1397e9c4c5e2be",
+   "sequence": 280,
+   "task_id": "ct_8706949d8715cbae",
+   "task_sha256": "b1462507e21b869fa471fec6bad4b3ce07e8eaddb3511302df5ff0736d4f9f24"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "be6682a6740527ff2f0a1fed11195d932629b9ae5eca79a7237ffe4e144d264b",
+   "sequence": 281,
+   "task_id": "ct_8719fc4bd6d17950",
+   "task_sha256": "aad885559825c4f55467912752f7215caf0423e960703b0c5e8cbba1f5c477ad"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "0d8168082468865fd0ac8209304d66836c306214a9cbe1b39a0cc43620c111f6",
+   "sequence": 282,
+   "task_id": "ct_884ca17c806ccc4f",
+   "task_sha256": "9d0857d4114dbb8d339a32c08c7fdbccbdef3f2bba235a30393ad1b06ec07286"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "51fdfa3bc47aca1f0d13caee25dfc609661de5c125642cc54e2728038de5aac2",
+   "sequence": 283,
+   "task_id": "ct_889c0c9ad94b616d",
+   "task_sha256": "4ee4f5d728fb5081c0712364b325ee56e0e04723936a934647a96556e80702fa"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "c6e46b9a4d18a970982a560829e4e51fdcf8b5053c8a086969a713122f29421e",
+   "sequence": 284,
+   "task_id": "ct_897755e56830588b",
+   "task_sha256": "7660c748affdef4fb40419f6c297c52beff6db287804fa198cf7f7ab01423744"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "82f8ef2b9292708eb2ed0f1f9d5e0d99ae114ebf21ee9455ed11d257730c8e32",
+   "sequence": 285,
+   "task_id": "ct_8a554f419c3433a8",
+   "task_sha256": "06a48017c489980161defe08ff06d0a7348021431fe168e986b8f453ce10fed2"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "9a67fa62276a2bb58652abd2f2f7d54b4f6f092c874ba72c8c2e9f0e1bc918dd",
+   "sequence": 286,
+   "task_id": "ct_8a79f6e7e59e4ea9",
+   "task_sha256": "92dde7ef433a58a23c10483954956fe564aeb9e4c8a74c7526894a78fc1de23b"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "5940c7487facca78de322872ceeeb25ac12052de00ee8faf9f6d88111c25cb02",
+   "sequence": 287,
+   "task_id": "ct_8beebffa18afbd4c",
+   "task_sha256": "7ddc81b48c1c92418935eab1699bb435ceecbaf2c2f274b1f26d69cbfdccbf03"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "3c55e76b728d3b4c67c32e2c7c049beaca739fd66cc8a37a36edd0ea9431218a",
+   "sequence": 288,
+   "task_id": "ct_8cb1038495727dd0",
+   "task_sha256": "cbab59cc65de18ee6441963676d050a20f319963290d8156faea8146d054b483"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "17c0fa71d24f9d37cbe010ae3b947e9550ca876c606b58e2acf6f8bda2163a7e",
+   "sequence": 289,
+   "task_id": "ct_8d99e8dfaf94d095",
+   "task_sha256": "2f0b1a0c8acb88dbc7433b96aa5f00b731e6430076f581387ce1c9e08911246b"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "1c43dee3049e1ceaf5e4946b14a0634e1258f17fa927f8384ae2adb92a73dc0d",
+   "sequence": 290,
+   "task_id": "ct_8e3b9b24cd68cd2b",
+   "task_sha256": "92c3d8087a3ffe71f748dbf3e1b13e7c0a85bc6505f0f3ebe1138ff22b645e06"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "f49350f3605c4d227de8aba610ed8cff0a3808f4931fd9c6fd87f839993c292e",
+   "sequence": 291,
+   "task_id": "ct_8ece5d2f82ed9b73",
+   "task_sha256": "669a4b5fead8b3f31bacd227056e2abae0184d6ac5df7a06b080d1e334e07586"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "d21827ff5e44f2301b01075b0b0a00e12ceefc373f1b1aeea61c3a32c1b7749b",
+   "sequence": 292,
+   "task_id": "ct_8ef9c00d8df12fae",
+   "task_sha256": "4eb8723d620c9a1e6bf3d4d7ddce7e5c29b4ee66bb3126a71e24ec23c0d09008"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "dad2e6687acdb7c8297fa934be5d4280d065cb359d5dc23a26bec7fccc13ca9d",
+   "sequence": 293,
+   "task_id": "ct_8f23f0397addce78",
+   "task_sha256": "7f5d530d59c53ed416692a6126bef2f7f8a8a743d186a6af060873f3f1a56db1"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "f127425514a29cb6ed28349557b0eded7ad9b1777f63f29fc905b78f0e6d5fa4",
+   "sequence": 294,
+   "task_id": "ct_8f27cb70f20b1902",
+   "task_sha256": "08831a7d3d39ae8430120cfa932404655a842c1b4f88d7b0b99d2c779d4b5e3c"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "7606c45ee025f7f2eb25a76a11b718af3f48d2d8f430d7332dbd586756de0bd8",
+   "sequence": 295,
+   "task_id": "ct_8fc5b4ed2cca28ac",
+   "task_sha256": "90761e8e77ed3ed7df2193cc8dedfa8d418186352a476d7db4b126e52231f2c6"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "bf2ffff5a940bbe02b65a47a3999431d66da5e896a15e80df042d542ad009718",
+   "sequence": 296,
+   "task_id": "ct_9088073068f5becc",
+   "task_sha256": "1c6f066a70800ef2eaaa0d7ccbda571815b70cff5e462b897bcba53a4a9ea85a"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "f80edc19fea334f5d53b13e498e2e618197716e60f57781e0b3a37591338532f",
+   "sequence": 297,
+   "task_id": "ct_90eccbc8209d6c47",
+   "task_sha256": "d984a6eb511353450c80a81ffd92a394dd0ff94593699f4d508e75fdd4419f8d"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "54b27d5c855cf564d8ac648f8dc060c28f095aea282e43015e9889f01f8db855",
+   "sequence": 298,
+   "task_id": "ct_915c5879345a8306",
+   "task_sha256": "93fc69c2a6f140ac1fc72d907ad22197b4506e6c22648dd9ef32658389275b29"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "798108da9272deb1d73caa18709e4c22020f103be8c73c4129690a2c3c14d795",
+   "sequence": 299,
+   "task_id": "ct_91622970cf0fa15a",
+   "task_sha256": "1bc275b90ad767be4c6a401648416d17de87ed0ac291963f06197bc21958500f"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "a21ff8a930aea46fe87ad3c4ba1447a971e8cb01a138bd5e5d59d0744f9dda41",
+   "sequence": 300,
+   "task_id": "ct_91fdba76066794ea",
+   "task_sha256": "00633e568af4ac20fa410adee7a3618949d7bc08ecbcb5d8c00a326fb9e990a8"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "50f56bb02a862e721b5da6a158be9a0f174d8ade680f97e03cc3659797ce808c",
+   "sequence": 301,
+   "task_id": "ct_9249501655cc3e61",
+   "task_sha256": "5f80950e9a74f7787008f1d414869a658bd9f4a6af40f89feb102cccb65fd4fe"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "8246b967d542b566f4f1162de248fb7ba8f29048d03ae956f635a630ed726e86",
+   "sequence": 302,
+   "task_id": "ct_92b09e3718374a93",
+   "task_sha256": "99cf6c44b06ba79f5bd7be78a64f00c184604b55dd6f139cffddfda873372a59"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "1041515fa32a85e4555bfdc70a00efadd8d70e1dd595a48a940db0c6e47246a8",
+   "sequence": 303,
+   "task_id": "ct_932aefbc9af77904",
+   "task_sha256": "f00b9ad67579eb77f6d8e365a47c02d79ea56375f98e6e898ab4ba908aa3fde3"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "11e13e13d410a399190b394f73d059939f97b7a63adfa85682e3dd593cc54dc6",
+   "sequence": 304,
+   "task_id": "ct_95779046a8bc3035",
+   "task_sha256": "2d1c3ad8240ff717d59bcd5ce315518625b8592b1f207a60ce3ea7e28cbf36e2"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "7d15d83cc29aea4c8ba159e9c9efd520c1d7fc04f0a8f06ea86d47c96c248a06",
+   "sequence": 305,
+   "task_id": "ct_95c62682ea2602ab",
+   "task_sha256": "480c873e05c2c1de652f2638efb5d76bcadee15675580a870238b3e054c65b39"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "0300b655da85d95340c65a37a03d9bfe4add89ae4815509cf529020665660732",
+   "sequence": 306,
+   "task_id": "ct_960f25f05e42b411",
+   "task_sha256": "19e87ea7df38ecbbf7e4da65b9a5fd2f9af3fc7d685688c3e300e00b537ed6dd"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "1c6042178689a700c6384ffd2f52e025abe94aaa3a0306eb20a2f002a571756e",
+   "sequence": 307,
+   "task_id": "ct_97280c0510020bc4",
+   "task_sha256": "873d05fc8472b8d58a6918f2a4b53bece9e0d80d9b65fb63423e1c88a29ea514"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "1251cae8e3e056bfbeff43fbf9603e1fcf7d20fb1568d717348dc07a96e7a1a4",
+   "sequence": 308,
+   "task_id": "ct_97cba51bfe5be809",
+   "task_sha256": "045bfc77dad0dcc613c935ae689302a47677afb2d2d768fcb8284ce5d0155099"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "4714803645300f0899b4f45dbd28f8a022e3209eb8b500792cccffc4ce7d4d3b",
+   "sequence": 309,
+   "task_id": "ct_97ebfb2b14483484",
+   "task_sha256": "0e587728d19e5efb994ec2fe0acab0c174888f4ec2645a5426166946280871ce"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "6a1e2c6b7b03891cc9fd78f8b0ff8b718ddd2ea2f987d1f525a064621326861d",
+   "sequence": 310,
+   "task_id": "ct_9a00e8428a1899d3",
+   "task_sha256": "6347a13e780c1ada98a262355084abe92347bdec41b5e8c2b8a85cff66797ea1"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "3d42335b474c862f6938fac6eccec7af1e1fb9ae70c930506ba65f3158c10cc2",
+   "sequence": 311,
+   "task_id": "ct_9a56474286c5ff8e",
+   "task_sha256": "c24dd9a9f68c9e64cf8cdf6ff492f159a37c8964d189ab5ff02e3fe0da768e1d"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "db518b66bc8b6e7754803dcc4995702ef79348103b639152d5ec453ce317be4d",
+   "sequence": 312,
+   "task_id": "ct_9a6b55b16ec53f7d",
+   "task_sha256": "fe42c02de96bd95ea0eddc635237c094b4ecf976f81a27ccf3ca8aa43db6515e"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "60ca57c0b040ed7c2ebc4dda4c0e6478225b1aefe0c762b8d42f841829ca8a2d",
+   "sequence": 313,
+   "task_id": "ct_9ab1d26eb6a6d710",
+   "task_sha256": "6c29c9c5f11a61742fb19b7c4504d04577aec36f42a286eaa99d2256f9901047"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "cf5e1983826d9698f30d3330216de29c64879d1a2d0049da726ef2e6dd1a6505",
+   "sequence": 314,
+   "task_id": "ct_9b6c2a35c176cb9f",
+   "task_sha256": "eddf630dddd974c0302f815fc5cc49b8a75f1964d25fe43058719f25b9b088de"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "e8c7afe4a5c47487b69c58866315c350c79710bef1eb8d4a6315e73ab1ea7e04",
+   "sequence": 315,
+   "task_id": "ct_9ce7f2d9433b2702",
+   "task_sha256": "5b50fa58c55af9aec6350ea0da897c18aa3b35f5d203f0d546a8445ef27be526"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "4b4fa6afe55babf0d536044e324b543fdabff8a074bb87ea3f6126fdae854162",
+   "sequence": 316,
+   "task_id": "ct_9d02d3025b02c8eb",
+   "task_sha256": "5c463e7d4b6594dfee75b41d913fffbd345ff4143d1a98e723bc37824ff86abc"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "bbe092eec1ce816c97e2a32f1ea01f950e5d2504c42aec515dd1af7354199d27",
+   "sequence": 317,
+   "task_id": "ct_9d906aefbd0a12d3",
+   "task_sha256": "13df01f19699ed1f5db0339834af1ebe16120329b4246ed6b2ac890adaa20440"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "51c6a23a7ad2231695a9179b6394ee45f6b6df9ea1f0a6ccc97175604c6b8e5c",
+   "sequence": 318,
+   "task_id": "ct_9d9461a185c018c3",
+   "task_sha256": "f3c041e01d951f505fb864b9621abbdf643f50365533dc7866971ba0896909ea"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "bc5db09cb72fe3f2a2347acf9145b845b8f39619c830574accb933bfc438665d",
+   "sequence": 319,
+   "task_id": "ct_9ea4a768e1d409d9",
+   "task_sha256": "947a75e93a62cc844ee47636a671ee2d024832f9400206cfebc91fa1605ed61c"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "86fedb0c0c43ea3958c0d313ca24e5dbe7445e7929c23afd4e68b984732799ec",
+   "sequence": 320,
+   "task_id": "ct_9fdad1693930bdb7",
+   "task_sha256": "f113219c0568b171519758bd960fb4c59066969830634fa1359e5051ae3ce620"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "a04f27c4cb5b5334da4643d7ca9cb6fd60bfa9d323b4eb809d815cb6b514b734",
+   "sequence": 321,
+   "task_id": "ct_a227d544a745899a",
+   "task_sha256": "5b2a8359ca9b26ff5bd65a9fc186943b7fcfdb373396a4c50da82fb762084ad8"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "a852550be3a306e23e975d7e20d88c6c9b3fad4236cbbed083b102bc32d5249d",
+   "sequence": 322,
+   "task_id": "ct_a2370f6695bc5a2f",
+   "task_sha256": "22041d069e6a1b315426596dfc89ae4d435ade227b2819f2282b1a537b54e2a0"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "a6f8babac32fcc3d03a3ea4bd5e25a193d80c01592ae94d1977794ed229e5441",
+   "sequence": 323,
+   "task_id": "ct_a259981102b11107",
+   "task_sha256": "fdf410ec37099f83df0e191f4eee34cb98d177f8dbf794b20111a0a9158ab4b5"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "35b65b088f689d6cf2cb3a99a47ca1cc207f8cfd51500d71bd9317062ae3a56b",
+   "sequence": 324,
+   "task_id": "ct_a2cac074127e5c16",
+   "task_sha256": "a2923d501bac6fc36d4a1d73a2a1cd1db95d0b1f04b6fc16bd025675e2859eae"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "8f72b49959ffc9ab0ba5f5eff736958b158818281ee15e46577cba71db3fa9a6",
+   "sequence": 325,
+   "task_id": "ct_a33ea8da5693843f",
+   "task_sha256": "52adb9a0b87eca2d43f879eeec88e5ca208820546021631cabf79d89956f62dc"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "68fb82b9e0d68eb5507474caae24815db986614cf6e964160e17fe32b877337a",
+   "sequence": 326,
+   "task_id": "ct_a3afbe483729087d",
+   "task_sha256": "74be412970b0e2076debca8824bda2829da32a94a3fe1cf5d65955136956d85c"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "87980c4f8195d118b90a06d02fe7b6d9f3e8dc24f20d797be47ae42a4c0de1e5",
+   "sequence": 327,
+   "task_id": "ct_a4709cd01d1d3797",
+   "task_sha256": "0b1267b88136d9d8c35893db6a3770602734c3091c8b233156a2aa507332204b"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "dbc0404422784a3e8e58dad4c1ee51f7e2a99cd473f5bf85c5958249ff511552",
+   "sequence": 328,
+   "task_id": "ct_a5ac24739b14a4ab",
+   "task_sha256": "c453f17fb3aac1de72c35db5b30b2d561bbbfa5e600622e8a4ec504ce7aa5287"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "ac8eae047e61c5d1d11eb89cd476cd9806f686cdfd83ebdb53a902ae942ed8bb",
+   "sequence": 329,
+   "task_id": "ct_a682cc2dfcf15184",
+   "task_sha256": "4ad6891da83311a95036aa68a001a1935af222a3c6da52c4724eaad7761a2969"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "d057ed56e45792f634620fa0302e42771a7c1a99ba8fcf861a6cb55e60100c9c",
+   "sequence": 330,
+   "task_id": "ct_a71bea293f7e5b50",
+   "task_sha256": "1a9ba90aec781dac8474c707720b717d1e2699adc092eb2df89af9c94dab7e37"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "1e9adf313a01bbe75cc4b4dec9be9adfdc3667f1cdbd37ed0a91a5c60e37334e",
+   "sequence": 331,
+   "task_id": "ct_a799da7e066eca79",
+   "task_sha256": "8600dfa1d8a75510c7ffaecd3f1e53abcf0c84c5830ef6a4c24eb463b08dfb6b"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "d23f87fb71f9af462bb94bcc169229280436cfb2539b26c8caf13a45347f95ed",
+   "sequence": 332,
+   "task_id": "ct_a842a559a09bdb85",
+   "task_sha256": "a527e9db2059a1a52a8ed24b12718e3ef9192121b27c4aa0ff0b661b5066a92f"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "b89dfd35fd62a01beffd05854083aeffd4ed00304ce5c8043632c4873800c179",
+   "sequence": 333,
+   "task_id": "ct_a87e7d624437c072",
+   "task_sha256": "d5d8ef955085101db7509887bbb48550b623e2463e93647bc1b358ee7dd83dea"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "b05bd38ca56f6d43d267024e75ea10b60ac1b377881da5a23de6f1160afe7dff",
+   "sequence": 334,
+   "task_id": "ct_aa072f2c73165f7f",
+   "task_sha256": "fa2e510e69f547aefea2642f070c1d360b4469f3675085ff66bda476182b3bc4"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "b7178d2b5e0b24cbc9a582372ab8c9f00c06bc8b1c906c95473c1393078c5699",
+   "sequence": 335,
+   "task_id": "ct_aa29834eb7573666",
+   "task_sha256": "ed13ede9318fc7c3618d8192716366f4142d4672dc89bf119851ea05fca0aa79"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "f6626fef022becdd039ac8bc3156b2289fadd84f495921ff0deb8dc0009d43ac",
+   "sequence": 336,
+   "task_id": "ct_aa7601c326048672",
+   "task_sha256": "f5fdb45e5731ef48e07455f412f18c4ff580e19ac0d331fbfc660d24c196ead1"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "d987fca0d6ba2ec026d9efcb6af923dd6279899d4ce14b1b62a2b56e40afccb5",
+   "sequence": 337,
+   "task_id": "ct_ab593d59eda4cad9",
+   "task_sha256": "118323804a013dfdd52441c236a758392041ad82bdb8c8ecb46b26fd9be24ccc"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "d33e411fa53c12282a0d872298679134efef498b8a5773bdd2fdd1c96e7c5d1b",
+   "sequence": 338,
+   "task_id": "ct_ab903a7c1efcf61a",
+   "task_sha256": "4e0631c5796fc041e052c35072302c9f83d1b6011fe53668e8df88d163938cf6"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "3a31eefb649fdbb0c2e3bd3cf80a42094d099ee621bb403c5f3502f86b948082",
+   "sequence": 339,
+   "task_id": "ct_ac26b5186b7f0e93",
+   "task_sha256": "6d4088cdcc91e9f354052fb829e4535b00f7fb2314167edc0139aeef18e766a1"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "62d5969114206e4810fd8b6e6d09ba10e5d3e290028f33be85b5f271d8c2f36f",
+   "sequence": 340,
+   "task_id": "ct_ac4bd4f8bb1619c7",
+   "task_sha256": "ddce498a7387602b0e40d6655d6b0eda14cd7201c2c3e2ba8c16f1833625db2d"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "9c072cb658c938b9f44e5f9a2d20675a64f25fc08c34e318d5dce154814f06ab",
+   "sequence": 341,
+   "task_id": "ct_ac61406ad12b605f",
+   "task_sha256": "8598fa9ac3a69f9255144df1621a2d6e08402def6c42b51dfc6b2db601a083e9"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "332a5ceefc73466005b178c44c46cb486307f289936465db73840f2d4db129f4",
+   "sequence": 342,
+   "task_id": "ct_ac685ff002f65f1a",
+   "task_sha256": "619f988d37cfe35ad1f855cf52a52f7f37af486bb920dc31ea69cf4d461bb0db"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "5ab93595fb411337f09b1d3f4683e1c43eb06337964304bffec27c783523b65b",
+   "sequence": 343,
+   "task_id": "ct_ad9d0e95413ded7c",
+   "task_sha256": "f7314bbf2ff2409137de1ec2c7be110c456dcdd098d269169876e18cc67b3de5"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "0d203ad949310025c854759da6c19bac6cb9f187a86e4dd52da8ba9fda5eeb74",
+   "sequence": 344,
+   "task_id": "ct_adbd07af59e18233",
+   "task_sha256": "4f6dc8cf5b0cc7d6d479b367f5e0124628146d992502f1c3630393e54a33fc56"
+  },
+  {
+   "episode_id": "episode_collateral_margin_charlie_v1",
+   "oracle_sha256": "1548bbb85925405762f9a19571828c01fab868407993a2a0b2efb35a29f692b2",
+   "sequence": 345,
+   "task_id": "ct_ae8fdb141b4f805d",
+   "task_sha256": "23f333f30b1f88a7b8eb3f501bb202bf7413396b7c0d987ad6ad717a9e555068"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "8d4ea14243ceb0b2cc8a45eaaa8f9f435ce4d0c501cdba0bd6415bc234855f86",
+   "sequence": 346,
+   "task_id": "ct_af57bdad2dc59bb1",
+   "task_sha256": "f184d1f459d2aece1f375e6cf3087a5755f96f8caea2421dfd48f499772dc0bc"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "3ae5d51e9f9c1db0a82efcfce67991b426b06458b793f470a0b8053d84901372",
+   "sequence": 347,
+   "task_id": "ct_af6d7a1b91841f93",
+   "task_sha256": "aae37ce17e0c2d0dab080d9c067d1f5577d5cf4d1fd57e1dae2f64ea1c9ad1d5"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "714cbf4b1f2bc115930b844123899ae93d8cac03111cf82695be0831c56d4a6f",
+   "sequence": 348,
+   "task_id": "ct_af8a72494536e76a",
+   "task_sha256": "d0f12deb28d6a8ba1705a7e8cf06c0a88df29b04f950e101c62ed3402ff02ba4"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "6dbe5540734861f0d6717b9b27eb35354ba78a21e285958f8cdbf4a3421fbc14",
+   "sequence": 349,
+   "task_id": "ct_b16f3fd710201899",
+   "task_sha256": "0a108bc523cc97b8d2882cbe371a1f09f68993cf41f31c2a6a7674b8efc1242d"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "2abca0dd72d1e3620fa3b01aaf96325e4bb8b154259fd80c5dae9f84d0f2bfa8",
+   "sequence": 350,
+   "task_id": "ct_b19929967730f1a5",
+   "task_sha256": "04e8f52d6d686be4a3e2bdf854fad2796c87b0ef4045f915beedb52e8d6ed4cc"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "1fc21f45ed0622f1fd0d837b5c5587a1e71fe6a6ca89ea71176e56ac534a9f71",
+   "sequence": 351,
+   "task_id": "ct_b1a0b84c67bc37ed",
+   "task_sha256": "14985981b2430cbbde4ae3821feaa91ac6efac0ba44a923bcf28016e9fc490d7"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "e52dd8680fd0f7b69a8b86c59e05cc2cc7883cc183ece81ef630fac38d1755a0",
+   "sequence": 352,
+   "task_id": "ct_b1a1fc9e17b58c6d",
+   "task_sha256": "8cc2ca91acc6c5b2ecfd573a2d5ad0c7937d128db1512233f82f8944c2a617a8"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "ce6357d6770aae206818e2c62edb715dc90735a7c0bba437b12e84e9dc9c8b60",
+   "sequence": 353,
+   "task_id": "ct_b1bfe63ffa8bd81a",
+   "task_sha256": "a3aacf78f4b25f08590c89a3e65e7690c49572c046192e8f66795850c9f76f1b"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "207a0f081b1d3a02e569e8ca21c8e5e848bdeee69874cd46d0552743610ec39d",
+   "sequence": 354,
+   "task_id": "ct_b1cd130c887ea5b8",
+   "task_sha256": "59190ca77ac9ce77f5d6a35ccc58b1fc34b7852a98ef5ca5ed58543def7f930d"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "eb7ab7b45e10aefacc84b094f449210c220e5f20866a99ea56fb481b8dfb209e",
+   "sequence": 355,
+   "task_id": "ct_b1e7eed9822c0a8c",
+   "task_sha256": "03555379e6e697ff712e26ba29a6ff2236fa8d371b05c4a3813443ac74a52eb1"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "c6f9a29565d0878c85eaabb74d36d72f8b50a8272ec44ec41bfad468588582db",
+   "sequence": 356,
+   "task_id": "ct_b2575fd70ffd6c91",
+   "task_sha256": "fbdb9c99b8ecab5439fdc6cfd6e08a9dbb71e87529b45eab3b350dfbb1d5d0ee"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "2af74851c5fc1764d23f08b6f1e95a66bfb05ba39bbd0627ef94c953d62f40cf",
+   "sequence": 357,
+   "task_id": "ct_b3aa2bf5bab2c9ac",
+   "task_sha256": "a9482bd6647f78d70fe00b5b2e074ffc162eca0a9901ad1880bc047446689283"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "dc43bf2d631c22dfaecd79207b7d4a22064f652be195041e2927ba245de67084",
+   "sequence": 358,
+   "task_id": "ct_b3e03871f5a01fff",
+   "task_sha256": "c8c8e7ca3515cd0a00eb16b45fc6eed6b33be3b78913a44f2c54961bff064c5c"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "3a510f6472cbe5fc7dd06513f797cc5bc10a86e3ace11a7e28507c48b12730d7",
+   "sequence": 359,
+   "task_id": "ct_b42eeda6b5793eb5",
+   "task_sha256": "51e2ceacbbedc6639bfd6065ea2da7daddf1fa8e5334db0fa28397384ab1634f"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "6091c72bb3a3f6406fa632e15b31898de6aa06754ec090c33da4fcada38b4312",
+   "sequence": 360,
+   "task_id": "ct_b4ed31760e2b21be",
+   "task_sha256": "50b578eb9b8112509270fd52f8d2564ac741ec951aa771c116d3e7bd43308363"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "08259871c82a664fc34b261493d158c0e35fbbddce3c8fcccdf32c141d1ab1c6",
+   "sequence": 361,
+   "task_id": "ct_b55a4aa676722841",
+   "task_sha256": "cca62fa8894a5f9f82f21ef5fbf19a1ce1a2830e16c5a3b5406413208f199f3d"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "5c064c8edfb07ebb4eb038dbd1ce0f647319c5429500cdecf6c0f2bb69a3a1bf",
+   "sequence": 362,
+   "task_id": "ct_b574bd0ec708bf2f",
+   "task_sha256": "9bf460683fec429dec1af7ebd123118868170d03a32c02f189dfd6efb87a75f6"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "a4c8e43d7473833ffc95de9bce45d8d098302336b261ae25f2b84e0f597db0e5",
+   "sequence": 363,
+   "task_id": "ct_b5d014b0e7455d4e",
+   "task_sha256": "15fc8ec60b92ebc94ae51842e3789581b7c864c8372583f31b580dc9ae06dd91"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "74c45330f84d525f81f0fe115448c41f477613be21429accc6909e3b67ea24c5",
+   "sequence": 364,
+   "task_id": "ct_b5e33cc154b84cc3",
+   "task_sha256": "2babfac720b159da7d5743b1df0ec07b211e4e5627c6f4560f5bf07a2d1cd25a"
+  },
+  {
+   "episode_id": "episode_temporal_causality_alpha_v1",
+   "oracle_sha256": "a9f69e52941d17f4c4016daa551e70dbf1b77775a0bb749c28cde92c3671f9cd",
+   "sequence": 365,
+   "task_id": "ct_b602ded06cf39d32",
+   "task_sha256": "75e1218d8de4ce12e1d220504c0fd86bba37594b4df31c26e4d3e70e48d733a7"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "321c09508938007b12924f2dace3493d369bbb94d9c528705f3008cf8f355a69",
+   "sequence": 366,
+   "task_id": "ct_b6ccbb5dd8972910",
+   "task_sha256": "fa0dace0efc4f7e6fbf4aecf292542119c25780976c530c1966b0dd81431b832"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "c0e4024050177fbdf4fca71adc46ec0834c89f1c16db3914a6346210b7e6a523",
+   "sequence": 367,
+   "task_id": "ct_b7662afa407b48b6",
+   "task_sha256": "a5027577b1c4fc2d1d7cbbc882e565aa3ad9057fd85f44f14b6f4a67f37dd3f8"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "bba8ec984a918c2579496c41c2d5315bebfdeb0cc2dcf577af1c92a851975a07",
+   "sequence": 368,
+   "task_id": "ct_b8e3312576bd2b3e",
+   "task_sha256": "f6a91ca51dced59c87fc1e34d4f8db04e8cfbe53c948663378ef4fa07a7d242d"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "36a7fe19b8de10c4ba1902c37ae705ce636cb5e206fa2f2b91f3435f91cacd15",
+   "sequence": 369,
+   "task_id": "ct_b91405d3d3624048",
+   "task_sha256": "43f6c100f7377e7e3669131926c9ed669018c43b9193541e91cdee0c084b694a"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "e15f5f69e5e64fb966ba4a614b7e23e9e611ea19d0e1043b390dd52311e6605c",
+   "sequence": 370,
+   "task_id": "ct_ba1ba7f30401288f",
+   "task_sha256": "9fc147e46d3ec64346514142488142dc7d038ce2810fc6a581d4e4fd5e700c17"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "3377f716f3299649a2f179648160f784d403c5566da5e0971ed5cd91be84c25e",
+   "sequence": 371,
+   "task_id": "ct_bb7c74c4c8567b3c",
+   "task_sha256": "74bb3888fb6c4b3516e2ef586ef50a6b67888d9228555b0dae665b0acbbdc22a"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "5f6c7206c56b47873d36b8f846932fd4d90d4f9c6018131df0c8400e78d0b700",
+   "sequence": 372,
+   "task_id": "ct_bce7821ccae490fc",
+   "task_sha256": "b8646159f4d2e99bc0e0ea6790b8e29475f5e0fab4d04c280043bc2a1441f09f"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "cbdd75499cd64c6ecd8a9429019d26cd083d7187bab25a6e27b82d22407f0f90",
+   "sequence": 373,
+   "task_id": "ct_bd1fdf20d071a941",
+   "task_sha256": "3132f03ea895ae5646be89b99d3fbc19b1bec7f9bfeff988f693f144cc3c6b33"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "3c32ccf62ca9248e0182501b5116e34d5885e53a01040fd992704038d0ba06c4",
+   "sequence": 374,
+   "task_id": "ct_beb0826a0232ffc6",
+   "task_sha256": "422037d3a342a21ce55ba8238d2ab08acbae69f584306da06c3854725f6d4052"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "b954b9cabaab861924ff60566f6a07527127a1f3c3253b88b397289388231460",
+   "sequence": 375,
+   "task_id": "ct_bf0f66c1563983c8",
+   "task_sha256": "91d5242857c630a7dc67d4b7d6748bd1261aadb3c2f97a0ba3d78dba8592bac0"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "654af0553f9ac6298043ca97a7f6c438084fb9a3280dd4cee732a4a61126ccc9",
+   "sequence": 376,
+   "task_id": "ct_bfaae8bfd5d611d9",
+   "task_sha256": "8f6025a9990dd8d4e3b812905e553152c8629866eff57550bd9a9823cfbe9ce3"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "68c4aee4ce7f3ac030dd6a682fd0aad0d278387daa967b4299f6fe645952c969",
+   "sequence": 377,
+   "task_id": "ct_bfb1de4d619544e3",
+   "task_sha256": "4c6b2e9d756ea80922ac45ccc63f38e853e88f6e9ea96ea971916f7d0cd27d1a"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "36f07ca8533d05e3cfc5c76f531d81f4fe0d02c42f7af2bc079822153809b2cf",
+   "sequence": 378,
+   "task_id": "ct_bfdfec7ed4560503",
+   "task_sha256": "22ec371a2b174e80c5241f89b0f330664eba7d4c80ef1bdecf632ddfeae6c993"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "7bfff9d2f8b20f06fd6f224999c2160f97e257a6fedd9f732ebdfab56dcc3f1f",
+   "sequence": 379,
+   "task_id": "ct_c07f156378746ad8",
+   "task_sha256": "491527541f91ececb91e0d83b6ae1b1b54b5fc9414461bf8797f5b2b65f65b71"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "ed66ea266963f5598e031fb90aa57285c5303f5d9b68b938e477aa1f29ceb023",
+   "sequence": 380,
+   "task_id": "ct_c0ef15d802aa7109",
+   "task_sha256": "a9c9c5559bcd2d533475c69e2946b2be093dfb24931f2e8c2a94273d0288885a"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "f8f7396ffe3a3abde08bdde26412ad51412cd4fed69bce25a433d089401c1524",
+   "sequence": 381,
+   "task_id": "ct_c108931b779999a7",
+   "task_sha256": "e0ea243dea03c4f5b61f5d58be71c1eb58a6336dd86a7964a3ce7004e92b152a"
+  },
+  {
+   "episode_id": "episode_permissions_release_bravo_v1",
+   "oracle_sha256": "3208cd2cf7b1698e5ac316aaafe93e63b22ac7b7f84642ca86dad7fbf0519cb5",
+   "sequence": 382,
+   "task_id": "ct_c15c978969480848",
+   "task_sha256": "8c588746e7e43d2a33c70fd160d87309ab7dca1800dcc057c8ba0542e1dc33f1"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "144e8ef1d4a02084d564079bbd316d51e9177959fab6fe3469195739e56ac735",
+   "sequence": 383,
+   "task_id": "ct_c4710f1ab8097e09",
+   "task_sha256": "54b6bb4e9dc9023b0330a113044acac7acefa2b69432cc2dc7082ccda313f926"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "f3255331d0ad1e69082b6ecffbfd3f046c5b38dca303f21d0f864d580f19f567",
+   "sequence": 384,
+   "task_id": "ct_c528a4d98f3f5c76",
+   "task_sha256": "17829656c3410c22647e70d70d11c23c86dc4dcaa091ccc40c03ee73ebd280df"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "b7301f653dd3f0d95e0585f9d06867cb09321a41b94c3f916c40834c1a43712d",
+   "sequence": 385,
+   "task_id": "ct_c5cdadc48acf50ab",
+   "task_sha256": "66aff0682ddd37cc959795988a67aceb44a6e691d6672dd69ba4de46290f1c3c"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "6b8c320ab0716cb2bbdb29c5abf23a79e1451be8c0c1a5f2ccf2dc42460daaaf",
+   "sequence": 386,
+   "task_id": "ct_c718f91fa0750184",
+   "task_sha256": "2c29db64ad9f3cca628a4b6377194b294816aac4a4a31cc5986d34137b57fda6"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "98d759091ebd6238dea104e7594525f98e13f932e841293038e12fcd98d6771c",
+   "sequence": 387,
+   "task_id": "ct_c727eb4767e13343",
+   "task_sha256": "943549fb4f5b9e7a3bbf8898cb54a997514488a9a0594dda6df142d2a0103e38"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "1cd50d04e095006ef2fa317170b199e45608a13b91c082d4a775feb1101c7d5e",
+   "sequence": 388,
+   "task_id": "ct_c8851a32ee3ef774",
+   "task_sha256": "a86eb505acb68350b68cfab5c8ce164f84b13d8c99f4d5230fdb228bc29faa17"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "8c608ec09c06f183db013573bc93b37314f654d38ec66fb2a9a52dea2c1e3276",
+   "sequence": 389,
+   "task_id": "ct_c909ecd690550074",
+   "task_sha256": "895f57e5ea61cbaff1375a416eabe285bf0e0cfe2899d0bd8e532c4c2a52c66f"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "4b220cffd3b2547accd6fb1942850eec8bc4705b1097b186b3c065325f559a09",
+   "sequence": 390,
+   "task_id": "ct_c9687c04df8d9184",
+   "task_sha256": "b1dbca29613df1b1fa5d3dac984e7c9aa029b1296120e40ebda249a01def9130"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "422b4762446c66fa13ac8ad7f88ff1bdf7db5d2b8eef181b98554879d8f9070b",
+   "sequence": 391,
+   "task_id": "ct_c9ce062984fe7a11",
+   "task_sha256": "4b4caeca79bd2668ece0266d7cb3f3751ec326106b52e97d1812fe62599f73e0"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "9ea37a21f580ae112419ac3c14268442c53fe5cc501ebb6f309e4c00c1c1f246",
+   "sequence": 392,
+   "task_id": "ct_c9ded1b94c31aa30",
+   "task_sha256": "0153eee08faa1134f21ea0f74bbd7c4b223d811a7b1f128764d318ff35109e0b"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "f13174fabb6044dcd706f75377999e0993a8f8e0a1221f3a3052570ff143f377",
+   "sequence": 393,
+   "task_id": "ct_ca0ff04d47038d32",
+   "task_sha256": "ab57c23baae418f0debc47f655e0784af0182f7e47aba25d0e079c940a4d53a0"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "269b8a5964fc0e00e093e5c4550c28ef4db757921b9aae6098c19506cc564b50",
+   "sequence": 394,
+   "task_id": "ct_ca5bd7ce8fe4c64e",
+   "task_sha256": "1ba8a3237aa9ec95e39325b836f487bf8ea39ee79186aeca8acf3015fbf59f9b"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "d640cd2135199ebb93a4604d9bf40f51df39336f9f7a54df30aff80ff5ebd1a2",
+   "sequence": 395,
+   "task_id": "ct_cb4c789e69fe2779",
+   "task_sha256": "ee1b103d80ef7d191c2a0e7fc69f498711f6bdad4f54d0da976b208712789be1"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "62b48227b86ed8ed5d1844c2b938c2ab7e21473f413fa453ef731f9fd4153dbf",
+   "sequence": 396,
+   "task_id": "ct_cbdf7218251dbcb0",
+   "task_sha256": "7886e9ad24879593f78e9d92dda15db0672122f943dfcbc474c5318aed18fe43"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "e88eff6407e44f4c45c93fd98ab8ff0f31a36f43114672c2c58634bf0343262a",
+   "sequence": 397,
+   "task_id": "ct_cc299b082db75624",
+   "task_sha256": "4a1df6a3de088f0d1ed68fb7744ad1945587a0baae30fe23be56779a4d879f61"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "867d2b5468f475cd0b80dd9249cc944cf9301344f32f830ba859dd47854a6476",
+   "sequence": 398,
+   "task_id": "ct_cc36ca00aeac57b8",
+   "task_sha256": "2d6b5b24b5bdc658f50e321e269a04a510fa6d620a28dbcffca6b30c3773a9db"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "b40664dad263adb89c557abb1fbb906a7f92fafd0ba6f2293c653733e17dbf8e",
+   "sequence": 399,
+   "task_id": "ct_ccaafcb19c84af27",
+   "task_sha256": "51f237c8795c693ae528ba2ba72e769265705bfb527d30c8424424cf2d36880c"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "026034cdc6243ad2b5c2f4448c5d6ab9781afeea0f5957522a982b5e5a322605",
+   "sequence": 400,
+   "task_id": "ct_ccbf84e03029e300",
+   "task_sha256": "51d6625930ac8f7eb0816290b3f15d478a899cd525544ff50f691ece65f4ffd8"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "7efdde314ddd210abc1de5d301112a97b2b71ec5dacf5bedad45cc8c95e40ada",
+   "sequence": 401,
+   "task_id": "ct_cce1669dea393567",
+   "task_sha256": "5d3cd48e451863c97110d73f2f291c56d5107ae4b7c17aa2ed74bd80ac2c647f"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "749725bc862571916fdc396b25097a107d36726ea0a2633e5830249e9487d85f",
+   "sequence": 402,
+   "task_id": "ct_cd610947c0cec95e",
+   "task_sha256": "5d4f2d2b88571fad86b974a9dd22d90798bc47ac503ccd52ebbcf725fb716cda"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "bd27d00d89dbd6a49c4d9c658251e72bc53828b5cdd47f0976ac14b1ab3759d9",
+   "sequence": 403,
+   "task_id": "ct_cdd44db6da3412e3",
+   "task_sha256": "4be3842f9a469c31109d4f59de463a23410d87c4e22fb00b48ea45a6c13adac9"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "470f194185ff9b12d5483e681c5fb213bc6ee51f49d3dae3cae22539b0c1c9d4",
+   "sequence": 404,
+   "task_id": "ct_ce96f64ed2dccc72",
+   "task_sha256": "8a67c81dd5e9dca685f7fb39a393c7c7a4f49599390d05db029f11099fe8d46a"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "c3dd71dcf6876a2e29695e3b758282985b75a153f7ed79df003985b38f21f2bf",
+   "sequence": 405,
+   "task_id": "ct_cf6c0ef46701fb4b",
+   "task_sha256": "fe8ebd42048c7806188c30a3d3c5f17a62beb4f56cdce7be0200c2add8f6923d"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "b491805c2b4746febb7585f212a93381fee61a73177855ebe2d54b088cb044f7",
+   "sequence": 406,
+   "task_id": "ct_cfd4ca1bb464a92d",
+   "task_sha256": "8ce15b3f067e06dfaedf2bafd156c15653fb07b937e8d2ecbcba79856785ad0a"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "89591d22babda9d6a61a53f893a386bbe99a7a9bfcb1603d7819c361d270a12b",
+   "sequence": 407,
+   "task_id": "ct_d014d9aafc01dec5",
+   "task_sha256": "cd7aea8d2dff75834cc5a878cf35cfc0774f7da45f38681740cc8146b2ca4ece"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "2a5ea4e3f86837d3fdcbb94b2801fa8bd591e23060b9cf4e72aac59c882e4b11",
+   "sequence": 408,
+   "task_id": "ct_d03faaecf914f4c8",
+   "task_sha256": "b0289a38a4a26bd6f5fb2de35ec5a8e5caf0da0e76daadb9870dbe95b0ac7e2f"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "d71f311fa057483a48ff1f36d560c4435a17b8eb2c88aca99418cecc8f8202be",
+   "sequence": 409,
+   "task_id": "ct_d1ebf8994e80a946",
+   "task_sha256": "2a0a7e02516322838dc78e66dcceb165651fe5b4bab3cbe09cda2b5d350cf579"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "949767865ae6c5e0053e25f70a0493438d157149311ddbae27403e4ff8885290",
+   "sequence": 410,
+   "task_id": "ct_d224012494969bdf",
+   "task_sha256": "7b04f61017f4889156167c35b52004baf4b18d1c77a00e89fa638b82c4532482"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "ce6c1dd8ee57cdbd023046475ac2275dd8048b358a5c752078905a4d881adaad",
+   "sequence": 411,
+   "task_id": "ct_d35c6e288d5f45bc",
+   "task_sha256": "aadf3569c3ba44bb39e84c2e1c69a28264e9291b4b5acab74c47e013f81b50cf"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "070e32c28693380dd8237c6aacda398adca559678ebb6442ac77bb165c551740",
+   "sequence": 412,
+   "task_id": "ct_d39d26fd8aac9c5b",
+   "task_sha256": "194264623c20adae0606871a233a2f97d20b1fe3b0cc267c4d5a93938ee5246b"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "960acce20fdbadbfd81586eed584d646b89ad1b559cef86a4caab30414150b49",
+   "sequence": 413,
+   "task_id": "ct_d402f59420b176d8",
+   "task_sha256": "a4a80eb0e1d2cbe023204e68f31c6bb1a9b6d03e48a45c8ea4cf516261be8db7"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_bravo_v1",
+   "oracle_sha256": "8e738737326832f612fd270bb57ffc8bc8217e1267451ee0c99e97b410b6d555",
+   "sequence": 414,
+   "task_id": "ct_d48f08d4a80699e0",
+   "task_sha256": "f6c223d510a98bb4e2dc9820c2771b2bd3a917b3cb62a82026c7e6fb263c366e"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "2545bb6741454e7470d06309b4675e4989a7e2279c3842a4d676f46f9e778c09",
+   "sequence": 415,
+   "task_id": "ct_d548a80ce8ba6abf",
+   "task_sha256": "1d6a807b8feecabf79ec2b03f48db6d6f9f9638e1903d54ea95829ab5ad1b355"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "2b003337fa431ed700051f163b9f3f2a4246f507350ecbd490fa71079ce5ec07",
+   "sequence": 416,
+   "task_id": "ct_d58dbf29e911f664",
+   "task_sha256": "5b11ccfb831db35f69769cc2054fd48bf990a4b7c840200235146406a794e9bb"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "0959cc3dee047b3f144d4364b8dd146fa3810d06a41a757af683564e9bab07e9",
+   "sequence": 417,
+   "task_id": "ct_d61dfbd77413b5b0",
+   "task_sha256": "15f9ba0e2872ea4a427fe96c6559efadc483c319b87071b6281d7b543a5f0e30"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "0336aa4bf1a7e43dd28690a50df2d674be9118e5f5653b39851ff2be787dd87f",
+   "sequence": 418,
+   "task_id": "ct_d6c82985be97f3e6",
+   "task_sha256": "6bac37de3d5dcafe97bb3070ac1cdf1bf66b1db576ff034a42ab980b3ad42ddd"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "576e0428097b568c238506850eee0a83d33f496a494be509ee5f5654c21fb8ad",
+   "sequence": 419,
+   "task_id": "ct_d8519634739bcff7",
+   "task_sha256": "f1208530ef003d4c2c08d6d3bc084e539880f3a103b4d3fed042ee8ea7e09d18"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "4bb78ffc0cc8965f4b24294f2ef3a50a4a9f23e2c002d7d1ba3a18b976e28919",
+   "sequence": 420,
+   "task_id": "ct_d8c83717de8d2c36",
+   "task_sha256": "6ad435efbc725c75856a0e7cb7908f99df2d245e5e5b8cad945bc2b6d4c65499"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "130a5e34d8544af6c3e98d9bd67a17660c5926198c0fa04f1c29317f50bbc91f",
+   "sequence": 421,
+   "task_id": "ct_db3c5a9dbde643fb",
+   "task_sha256": "f0bb96d1bbd088e898fa6959bb9a72c830b24297017d1822a96cce00edc76ef1"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "6515b5b110ed4e0da9cb843d5b5c4b61093ca5a051e725fbc0f356907671da49",
+   "sequence": 422,
+   "task_id": "ct_dbf6ab36dd44efba",
+   "task_sha256": "c6799cb0c865a2ba244812f23cfec7a88687968c2665b63bde7e7eb952d2b4ea"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "0690147c9ff393a2af62bd64347b024ea7da0254ff1a3a11b9d266033e1ef351",
+   "sequence": 423,
+   "task_id": "ct_dc7b8937eb4ce1d7",
+   "task_sha256": "6f27311be5ff176aebd9350b6ba5c09b9d5d55c45941ed50d5d9d82f58a5cc24"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "f3608b5bc7cd71af367d66a7c7b3523a6b7e8d37f41e9d450b4be3441d2c92bd",
+   "sequence": 424,
+   "task_id": "ct_dd6fcf30a05cd4dc",
+   "task_sha256": "9eacfb0f058f0d7b2ce07e61da7668ce976465141e697956d1f7f29a5e87092e"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_alpha_v1",
+   "oracle_sha256": "23c8127e0ae4f43d11219cd93434d3e1f84240ec6804bcdf3c4e0e7ebae1c157",
+   "sequence": 425,
+   "task_id": "ct_ddd2147d88d528d8",
+   "task_sha256": "ee15c25f806778087bb375b800f26231c7113861963ed6ad518592febdf7fd08"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "16f3caba0164b0f640bb13ad843d31bee3d0b47b1620dbf449fb3c76d0458291",
+   "sequence": 426,
+   "task_id": "ct_de19cd345b463353",
+   "task_sha256": "46df233bde64a8943a50dce65c1611c147615b98877d0b4ab794783374b5f39a"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "54735c78d0d983c0817cb57214a5927ba1bc5cee7d02964d7f98a6e7df13c42e",
+   "sequence": 427,
+   "task_id": "ct_df10da211bd70132",
+   "task_sha256": "5546f3cef80e6124387c91c96278f0293e3044adab7c8d47fb619c7f6429e0a7"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "7fb263f1ccb7023de07ba5513c4e3774ba10af5c690e69cc7ccf7213ae6a3adf",
+   "sequence": 428,
+   "task_id": "ct_df237e992b731597",
+   "task_sha256": "8d936e2a02945784de7a1a49c2d46a5e4fefedc0db88975476b3fa8a845e2604"
+  },
+  {
+   "episode_id": "episode_reconciliation_echo_v1",
+   "oracle_sha256": "5a2c8e878fb8b47f85e53890ea310d96cd232b7887442ee371926a4bb33b6ca4",
+   "sequence": 429,
+   "task_id": "ct_df56f5d6ba66fc75",
+   "task_sha256": "eed80bb8941a85ded57c6fc4306d9b06b2c20bbbf32be48bbd821178f4d9b88e"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "a2e7c40fb2eae81fde196861da5abfcecc48b077a6f90448a95aa15c1dc9b510",
+   "sequence": 430,
+   "task_id": "ct_dfe20a1b66f64a7a",
+   "task_sha256": "0314883c5e95a8d63f7937e70271dd0c43d12ca8fc285ab8513ed147449d1ac6"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "90f235535059c8ed78e1a351e843364a9f806d53a9a3daca0f10abe24e421b27",
+   "sequence": 431,
+   "task_id": "ct_e011d42771cfd09f",
+   "task_sha256": "b439590621105cbac18ef729d47b04d059760016441dd28816b556c303adaef5"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "f21563e0dcb8f390c65d04a41aa637f7e754846fa0429c5d99510938d3a73fe7",
+   "sequence": 432,
+   "task_id": "ct_e01c3eebcc39216f",
+   "task_sha256": "8e321f7744b15d21a5b06b63660f22e2a0b8b0043918bf495f381da5d2c0657a"
+  },
+  {
+   "episode_id": "episode_lifecycle_alpha_v1",
+   "oracle_sha256": "7d5aa1c32da1babec84e40bfcbbd11bb41d3968c25b57b77bfc427503f464c75",
+   "sequence": 433,
+   "task_id": "ct_e05ee174a94e5140",
+   "task_sha256": "6901ca781ab19aff5d5d8f943c248fc303a98b227746bff09751748fd10077d6"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "8ee94c2bd573a03a8cb4593bc6bde5749c9879a457ce78cf8f9a335917c1e305",
+   "sequence": 434,
+   "task_id": "ct_e10a5484105609c2",
+   "task_sha256": "217607bd44263cd2b3656a789ca19a1e9b898f26b1815f7b7f3efef366ee6598"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "bbc0dd32e144d7e3b5e0eeb891a8b15e35933a96e37f7e336dfca2ec2548f2e1",
+   "sequence": 435,
+   "task_id": "ct_e10c655516f245bb",
+   "task_sha256": "03992f938c68e04021b3a5420fa3280455dc63947587766f9fb3f361ac29b6a3"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "eda067ff873938c3bb33f0e825257ff9884f7f39dd9d59c5772a55620d607730",
+   "sequence": 436,
+   "task_id": "ct_e1e3a0f19c72fa84",
+   "task_sha256": "a52d56bac03ab47ca26a62841231f748be66a79cee9954c70e736e46f460ebcc"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "650b472ad8a57ecf19ccfb6f9d8e0cdf0177c793dfe88224675fb6813fe18f64",
+   "sequence": 437,
+   "task_id": "ct_e2bf43a53aa356cd",
+   "task_sha256": "585c75791b46002cdc610a524a7ed0ec881d256d312d7fb4a19961b842eb87e1"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "3bff4f4a0aab82effe765eb171eda5114204b866410a5c090ce2633627e689d7",
+   "sequence": 438,
+   "task_id": "ct_e316a648cb790098",
+   "task_sha256": "a8ecf0669be92fb5b88e56d974db9f52a498cd7c93bdf1de56e21ebc82f6bb2d"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "97b99691367dab1de85cdbaad67fc3c62d76dfda86e40adbc223d97958dc94ab",
+   "sequence": 439,
+   "task_id": "ct_e40e6c56767296e7",
+   "task_sha256": "2b521ff1e1bcb84ae3941e670c34ade21876cd016e6e0037e19308f77fddbf26"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "07739b6f5885fa6a9f11fa5ea6cf63e001789fdfcfd4108bcc2ca46ca0051bb5",
+   "sequence": 440,
+   "task_id": "ct_e424c291e2d96ddf",
+   "task_sha256": "798cad88c4fbce90e724c63ab695f355c022580124322dee19ff93372ff3f2f6"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "2f6473e2eec10fa1e2e10507515c172ba2e1d71a746e63e95dd9b03d7db6ee9f",
+   "sequence": 441,
+   "task_id": "ct_e42a6ab23d3dd866",
+   "task_sha256": "d7bed07973bb491d51dd9ca20cb7d3dfa624070c11af22fdeeadf6a04e3fa82e"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "0bf5aa62cac10bcb464865b3128b8821ea272e3bde371fbe839e597b75b7120a",
+   "sequence": 442,
+   "task_id": "ct_e44f9d488913933a",
+   "task_sha256": "c38772aa4a86fee1954b4c325952a39c6d6970cab3da15a3369f6d2fbb7fe30c"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "358a3e40333743e799b09c7b78317491117d957d48d9153c4e0868d317b3704c",
+   "sequence": 443,
+   "task_id": "ct_e63147dcbdb69fd7",
+   "task_sha256": "e84f88c6f42132082c2e718bc9d5c94d335b80c3f1c0f1c10e32926157798eeb"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "b878bbd382feb13bb323bedc7dad0813fda65ceef8f0e8b1947e20ff721fe585",
+   "sequence": 444,
+   "task_id": "ct_e6a4d49819d5e0a4",
+   "task_sha256": "fa9aaa24bfb1bd886156006efaf411880f8e9f86e255e2a04bc1a5b50f48279c"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "a94bb20b280059dc4001533a2cc39681b6a21458fcf69ff31cb639b10bc743ad",
+   "sequence": 445,
+   "task_id": "ct_e70df10407e1794a",
+   "task_sha256": "580d66ab9758af27c4c837454664815af57383d63c5c7e16b7476e9b6d75421a"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "413937f86c34ecb5fe87132460149c36b1628260d0c5e0bce028aae917c64b73",
+   "sequence": 446,
+   "task_id": "ct_e790d4da1d559872",
+   "task_sha256": "f0b2ee1411dcf23ca3e8f2bd5a2ffd9821912965f886311bb040877c6f92e005"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "51d7b8987abfd43020ea61d97d6149881ff027103bf65b0b26c99fd21b98ce74",
+   "sequence": 447,
+   "task_id": "ct_e79cd46eca94e642",
+   "task_sha256": "9576e3a3aac8a8c1e55df36483b80afd098f230258d190f3c01a45fe17f54901"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "811a0ccb99afa691a5d495a55e24bf946f36e142042ed92498d627773c1427e3",
+   "sequence": 448,
+   "task_id": "ct_e80308ed795fdc04",
+   "task_sha256": "f3e3cad6eac120bc9d3ccbbd1109c59b9142c5c55d5b95d4191ab68714e18eb0"
+  },
+  {
+   "episode_id": "episode_lifecycle_delta_v1",
+   "oracle_sha256": "62a9da203ad05c7b5f551503bcda2efcbd3a156f3eb53e8985cde5ea3c5c2836",
+   "sequence": 449,
+   "task_id": "ct_e812837a1757f1ff",
+   "task_sha256": "91c0bb9aba7eacf6f5cce93971cdd2cf0edbce59619e8e5f4a8de02a7f5e97d2"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "ec74f99b01120606d0cc2837583169db38649450db43af2665aee4bf28ed1a91",
+   "sequence": 450,
+   "task_id": "ct_e84cb088b40a1eee",
+   "task_sha256": "dede1d797483e5cbdf9fe1075c5c9e841008fd5d8f5924d741b51001e0624d64"
+  },
+  {
+   "episode_id": "episode_temporal_causality_bravo_v1",
+   "oracle_sha256": "6616ccfc15fae4daa90ac33291185d21fa67aedd3a3e28dbee32d3e64364c81d",
+   "sequence": 451,
+   "task_id": "ct_e92c85b7d1135c5a",
+   "task_sha256": "42814805774b195f38394404c1efee826c0edcb3792fe2db5df3860982eeb520"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "f954dd509176f73237089f966edbbe417beea244c35322fe8bd308eeecec9a1e",
+   "sequence": 452,
+   "task_id": "ct_e9852f72162c156e",
+   "task_sha256": "31d2d3b8301fba0b7c4fcd590b0fc319e6498150166936941498ae040ef6f602"
+  },
+  {
+   "episode_id": "episode_booking_allocations_delta_v1",
+   "oracle_sha256": "2d6e92ec4e24fae1a8506a1169c08ef023dd4dfaeaf3d95a04a8dcd8ab5fa74f",
+   "sequence": 453,
+   "task_id": "ct_ea5176d24b74fba3",
+   "task_sha256": "c4ff1cc37ee6f48c4d27cda39fe7e1cc62d177e71892c475a359cff7b157d8fb"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "3ca945acb48aa2dc18fca03623c58d9bddf6885302726cb0d8ba885b12cbe315",
+   "sequence": 454,
+   "task_id": "ct_eb1b78d88d8b78d4",
+   "task_sha256": "89205a35ff9c435d9879ac4189806c1b707ceaeb82cd668ca12a7610514d92a9"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "0d79d567eb14e592995a2f124950c2eb69aec76448b96d9155ef80bc142c97c0",
+   "sequence": 455,
+   "task_id": "ct_eb5bcfbfd04670bc",
+   "task_sha256": "e3b984772328f781cc4f75f824f659804efcfbcf447c5ff0e3c14f89d4f5372d"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "3d83d4fedaf4784562e5c64422ceeb37808709fa9fd0be4226401a0f3f10f98f",
+   "sequence": 456,
+   "task_id": "ct_ebc97e41e7d7b43d",
+   "task_sha256": "d70380979e77e18c9550674c272dea19040562d4f3f1b3f47bd4fd2bd7b31b85"
+  },
+  {
+   "episode_id": "episode_booking_allocations_alpha_v1",
+   "oracle_sha256": "e68d70eb842f60277d3e63197daaa0210a75b3eaf1158e1d5afdc7f1033a9f8b",
+   "sequence": 457,
+   "task_id": "ct_ebf9c1acf7437b3c",
+   "task_sha256": "2a39b043134cd4bfe4b7687af174165fac6ee7d4253d46ba83684818140aec3f"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_delta_v1",
+   "oracle_sha256": "222a696efaecb6765d14d3a22526abb3a9ad16a7bc05187a1a8a06b7e31e610f",
+   "sequence": 458,
+   "task_id": "ct_ec0ae0a1c4a251c1",
+   "task_sha256": "3562f569164f8a0fa8b3fbc9d7633fd376fe45b75b1aab6fdfe8ef30d7f0c466"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "baea8acfd1fee722fc74d1a9f16ed71f3798767b3adaa02638cd4140e9c0d523",
+   "sequence": 459,
+   "task_id": "ct_ec4fc26473c29b6e",
+   "task_sha256": "c91c83b01f80ded1e97ffdc7900df8313379bac5f4eb610c6e5c053809c897c4"
+  },
+  {
+   "episode_id": "episode_reconciliation_charlie_v1",
+   "oracle_sha256": "8134d0424f31bbe6e4f44656d081b01ff18b88638878bf5c364f51daf78e8827",
+   "sequence": 460,
+   "task_id": "ct_ecb7cda6f4989109",
+   "task_sha256": "deeb8feb5ca3abbb7a1821cde4d8d76b59eacc5e7be4b04fa24b7aef9024b456"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "24f0fbee20f2d6a15b8657d50a3771bd1150473c8fb9f66bfe985a7ff876bb52",
+   "sequence": 461,
+   "task_id": "ct_edd2dba8c776411d",
+   "task_sha256": "3344e31b01a5878de35403ab61df3b0374b439f7171f27cb5794a3237c669913"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "1034e16e1380ce1fe26488926e51e6867e0bb23abdcf7e7b89ba480dc8e1f04d",
+   "sequence": 462,
+   "task_id": "ct_ee58d81ae58c5be6",
+   "task_sha256": "c3c2da2c453609635bfdf5b05ffe9c3647ac2b791431db2bb91ffaf80a73bd39"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_echo_v1",
+   "oracle_sha256": "97f932989b435709550c00b4d4f5e9e757532c7506a23a87d1db1933cb7a97e4",
+   "sequence": 463,
+   "task_id": "ct_eeb4d83e015d665f",
+   "task_sha256": "3abbcfc4d84ec692c1994d1f7b2773127d9f871a983946786fbbb8987853ab2c"
+  },
+  {
+   "episode_id": "episode_temporal_causality_delta_v1",
+   "oracle_sha256": "139485e5ca668986d8ccce328c57c7f26f0ccac87c8cf1955b5e03dc85de3944",
+   "sequence": 464,
+   "task_id": "ct_ef3410f2630efcbe",
+   "task_sha256": "5b5f4a743d5e548e2165f2a61327464308b310a359d16205ba5c27a677cf4391"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "f815b3b19c04636bacb9a7ce47b1fa1308d946cee8dbd3c5c6c0ae54983306f0",
+   "sequence": 465,
+   "task_id": "ct_efa5df8aa6e98037",
+   "task_sha256": "03b62850c17dabdfbede6b3944202f05b81a7f8642207995185f60f3d0e85b4f"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "e789d6bd868769e429001ffb0b8da9c0562bcb0e8bd0aee6b61509ed1cdfc961",
+   "sequence": 466,
+   "task_id": "ct_efc69281d019becb",
+   "task_sha256": "575724822e06843d4a4f108c4166be89f21a98fc51874dfe75841a8215b309d3"
+  },
+  {
+   "episode_id": "episode_lifecycle_charlie_v1",
+   "oracle_sha256": "dfceae4602230a578629f04f9fabdc7c2a0048ab133c7a413b287577eb805476",
+   "sequence": 467,
+   "task_id": "ct_f0c8ee20c8ad55ef",
+   "task_sha256": "f39c4682f9b32f48fb2bc2d6c21b0a5d7c8824ec1baecf80cebc709f59a408d8"
+  },
+  {
+   "episode_id": "episode_collateral_margin_delta_v1",
+   "oracle_sha256": "88de4294957a1a4dbc3a8123b3c10e04c1ef216105547760ee5cb44dc0ea469f",
+   "sequence": 468,
+   "task_id": "ct_f0de67f2c4beb1b9",
+   "task_sha256": "0d95550f376640b40ca87e8a5dd7b21178858c80296c83d457671c9814f049b9"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "e42af637b3c617e74e91e1a3683ab4892b58b9895ff95c9bfa0ae3fc187903a8",
+   "sequence": 469,
+   "task_id": "ct_f1a71daf2d3f22c7",
+   "task_sha256": "f1b778f15cbcdad99be258bd0d2acf52cd323e078065bad2cd670c0e73bbacb1"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "2f521f1eb530b1e6bdbbcd5f6ab170090459d5549e1c87ff90aae6246a2bbc8b",
+   "sequence": 470,
+   "task_id": "ct_f1fc7745f386afba",
+   "task_sha256": "33e008d6e6a620b397deff47b532395ae47bbe1e65aff0778f058d144e12d7a6"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "34fda5b9e9db2e4118a8e99ef553214e2169b6c803dfb10135440641fb323304",
+   "sequence": 471,
+   "task_id": "ct_f1fefed4f1e9f19b",
+   "task_sha256": "43199ab76dfc20d2efd532f55524a4dec991cdc597a65551128e5a03d9f34bbb"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "b018647604adf03fa286a8e0c3403366dd2f88c490c424699d49fde33bc46b51",
+   "sequence": 472,
+   "task_id": "ct_f20efcdd9a64460e",
+   "task_sha256": "2d4a45a45f82b5f3e3ff6cff7979b1a960d698369b3affc500c6510c1a0ac660"
+  },
+  {
+   "episode_id": "episode_permissions_release_alpha_v1",
+   "oracle_sha256": "efa4ce9ae8d008d57de4ac2547565d4368be1f2ac9d89bb517bc7e2f11d05dec",
+   "sequence": 473,
+   "task_id": "ct_f247b6c83f4214c9",
+   "task_sha256": "71c04ca9e7d37139347bdbbcc03e15760c1cc15790c78922e2b59ec93d671521"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_charlie_v1",
+   "oracle_sha256": "8dfffcf2660d5bbb16251199ced93b96330b3126c0f9dc921ee4a71184a59d3e",
+   "sequence": 474,
+   "task_id": "ct_f27da4a57865d7c8",
+   "task_sha256": "d9b078aeb5669533e9c8f0c725d0713d6d7ed95b0a541509b1d04538060dc2e5"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_charlie_v1",
+   "oracle_sha256": "0cbf164c9398324ce95e4abc089d212a6969244f642fc11091e23199605d2005",
+   "sequence": 475,
+   "task_id": "ct_f32fa8cd8275b7cf",
+   "task_sha256": "b5b3f80267b627ae2d69c333f3fe452190503f6225c7ce6f868410f430326cb8"
+  },
+  {
+   "episode_id": "episode_lifecycle_echo_v1",
+   "oracle_sha256": "7a003be91c3a6339d00e5585030919b02eb03aa8d501e05fd23c29e7576dce2b",
+   "sequence": 476,
+   "task_id": "ct_f35f7e54c9b838f7",
+   "task_sha256": "00c2c1880f0f5d377ebf1e95673911ccf270f2462e5265137f2c0fbf3c52ae52"
+  },
+  {
+   "episode_id": "episode_permissions_release_echo_v1",
+   "oracle_sha256": "fee1497dd897e8352099715d350426f7cd2087e0bb18b0128fd4def311ad105b",
+   "sequence": 477,
+   "task_id": "ct_f44b6d3346832f44",
+   "task_sha256": "e6857cbe0d85ac291f111a51a4a608ebbb10fc85d952e0d4b876569bf6dced2c"
+  },
+  {
+   "episode_id": "episode_reconciliation_alpha_v1",
+   "oracle_sha256": "2c15f22f1d3ab7e1db22193541805b7134e6407ecc96a083297783f4cf1a11b0",
+   "sequence": 478,
+   "task_id": "ct_f45e533474011f0f",
+   "task_sha256": "1d38cde77c0d453454cd14afc109bd298e06ff3dd1e35022a26f239eb3c8b9ca"
+  },
+  {
+   "episode_id": "episode_permissions_release_charlie_v1",
+   "oracle_sha256": "c3179fad538f59a8840a5ef08547ddb34c46f221049fb26dc91dd650220a46ae",
+   "sequence": 479,
+   "task_id": "ct_f482ffbde6b427d6",
+   "task_sha256": "4995462a487fd05ce5a49607e9f1997bd3a6fb4041eda7a8873c7d853a4ef787"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "68caf1519a38e4b610b197f5b7c96a6e60bc04cc7ae9860fb7302ff58b3bd2c8",
+   "sequence": 480,
+   "task_id": "ct_f4a849e9e5154190",
+   "task_sha256": "f002933b171e80ebeb815a222b78f641ddcbcfd79c07042720356a18064a0c2c"
+  },
+  {
+   "episode_id": "episode_reconciliation_bravo_v1",
+   "oracle_sha256": "77c795d204bea7dff6a82ff5478d4947097802b71a623ae646dcbb2c1bdb7ce8",
+   "sequence": 481,
+   "task_id": "ct_f5936ff13c7df574",
+   "task_sha256": "78f140167b0bddefc1125100856beec074d29e982a4ff489d2745ae486d6a9f5"
+  },
+  {
+   "episode_id": "episode_evidence_sufficiency_bravo_v1",
+   "oracle_sha256": "3175c7394f9481456a29cd0010524591565e6ba0aaf4f014429ee78db2cce20e",
+   "sequence": 482,
+   "task_id": "ct_f63857d56b5f47fa",
+   "task_sha256": "4fa06749a245ccbc0d48e2db0c4e6204b7b6673fee0d4085595d64d3224a6420"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_delta_v1",
+   "oracle_sha256": "a13c56a156cdf222e4f93bc9788b43d3f8fab6dfc0fe7b4d0a84d747fea31039",
+   "sequence": 483,
+   "task_id": "ct_f701ecc770cfe561",
+   "task_sha256": "af47dbd294516047787ca24da2ea1fd453b6b4cf7d5e9d5c33e6223c6bc97c59"
+  },
+  {
+   "episode_id": "episode_collateral_margin_alpha_v1",
+   "oracle_sha256": "884f041f3a421fadc2b2b40e5d64b97cdfa9957ed51f6bbff769a5918f3f456b",
+   "sequence": 484,
+   "task_id": "ct_f78ee90729bbf057",
+   "task_sha256": "a3e70785ad51c5214ca87bf5c5fb1e8ea1bb37848d031333fdb71cba9daf0ee0"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "e1b98fb9412decc8375b8a04c912a3fb5fbf434c37184d4041e4bb67a108bec0",
+   "sequence": 485,
+   "task_id": "ct_f79ef88506239ca5",
+   "task_sha256": "1391829dc36ad3f9573375e5078c167d4d6861cbd4330e7fd873d3805aa0ba1c"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "cb761ecbb6fe019ce714ec4630ea113569941ab009908ef3cb1199193e8ce159",
+   "sequence": 486,
+   "task_id": "ct_f8d8d6f34e4b7323",
+   "task_sha256": "952e801f3e669a04c95b37111690894bb4d4d259c0b4e053b298b998c60dee98"
+  },
+  {
+   "episode_id": "episode_reconciliation_delta_v1",
+   "oracle_sha256": "3129a6f2559845b963dbb09d7c8d1124b8a44b056b1941b24551c8a0b9f26557",
+   "sequence": 487,
+   "task_id": "ct_fae539de95ec6f1b",
+   "task_sha256": "cef4395997ad7bd583e7121fafeeeec86931838383ce7f0363fe0674cef0c974"
+  },
+  {
+   "episode_id": "episode_lifecycle_bravo_v1",
+   "oracle_sha256": "f25b456376194d5bcb5cba5cf75bf964a134606441f6bcaec93ca5318d853c34",
+   "sequence": 488,
+   "task_id": "ct_fb003343c9a09908",
+   "task_sha256": "1c83654ebaa3a90a2f91930d6cad64ae45f78fc5de2a24264921937dc548d82e"
+  },
+  {
+   "episode_id": "episode_collateral_margin_bravo_v1",
+   "oracle_sha256": "e056201e561199f18ec6e74e455b75dd56612a7dff5b7d4036d65aa93370ced5",
+   "sequence": 489,
+   "task_id": "ct_fbd919dc6034c311",
+   "task_sha256": "0977050455632bdbb2a031da09878ae0a10e7a8216c82d15051ef181428400b1"
+  },
+  {
+   "episode_id": "episode_temporal_causality_echo_v1",
+   "oracle_sha256": "5550159eaf018b2fa4eae7d7c4753e37e8ec6e1cee7daa5544c7c6cb0b79db4e",
+   "sequence": 490,
+   "task_id": "ct_fc5c3fee1a9ecec2",
+   "task_sha256": "dc6224feef5508ee2a4f947e412f77ea15a04ac3f816da36a2be11ae558429f0"
+  },
+  {
+   "episode_id": "episode_collateral_margin_echo_v1",
+   "oracle_sha256": "21b528c79b446b180bdb44dc089f3ee9ead0761a23054ca8d8c3b01695c68838",
+   "sequence": 491,
+   "task_id": "ct_fddd39f5b0a1f804",
+   "task_sha256": "77628b20bedf9a8e3928b710f841cbe9cbc15105f4dbe93ede216725569069ce"
+  },
+  {
+   "episode_id": "episode_booking_allocations_bravo_v1",
+   "oracle_sha256": "a4dba3980ab9dbfa7e3ce45d2940780082d852d519c1c5714c766f157378776a",
+   "sequence": 492,
+   "task_id": "ct_fdf9e64c3c656c5c",
+   "task_sha256": "6177357471f7196b4f65b4dfaf835b9be2086f2c91be4000241617cbfe682479"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "8e0758341361c76dd3e4f1bf5a7727dc3e53673ecad9fc859fb0ea694555c8e7",
+   "sequence": 493,
+   "task_id": "ct_fe673eaad1c1def3",
+   "task_sha256": "f76c32bdc3cae240a31e5cbceef7b438d9a8d116160710987cdeebfbf1053083"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_alpha_v1",
+   "oracle_sha256": "a6c152a0fe5c39cfe28af8e40c83103c833abae7fa1b3d31eecd010eb67fdef8",
+   "sequence": 494,
+   "task_id": "ct_fe6b8e7a5c1d33ce",
+   "task_sha256": "2a7021cf2607b5e364b4010f2ffe7a093f95c6fdb5757f5eea1319e37aa244eb"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "11c1108487c5e184d53846c98cc7d8ba6aab1bcecf7722e3663953c1f0316da3",
+   "sequence": 495,
+   "task_id": "ct_feb07ced6d620813",
+   "task_sha256": "7241bce60a560a305a8a11b5ed06031c9071d186e6a361083f11f404f92089fe"
+  },
+  {
+   "episode_id": "episode_temporal_causality_charlie_v1",
+   "oracle_sha256": "785abbe53fd08131162bd4870a30c92b3cc807e59a24994ac5b79f4668286ad5",
+   "sequence": 496,
+   "task_id": "ct_feb2a8d38f765cdf",
+   "task_sha256": "eb065e405ef4eaf3a0a91ea9f9d07690e7f13053179354445fc2c204ee035e93"
+  },
+  {
+   "episode_id": "episode_booking_allocations_echo_v1",
+   "oracle_sha256": "7ac8ed52950274ffbd952daf3647362cc0ada0a3a71573e3d0c6fbc4208e57f0",
+   "sequence": 497,
+   "task_id": "ct_fee01d353e439ccb",
+   "task_sha256": "754d03103a1ebe643f7570f98c96ada17ce4738dd5566ccaef53392cea303785"
+  },
+  {
+   "episode_id": "episode_permissions_release_delta_v1",
+   "oracle_sha256": "4246de425c821a62e9eda0910395600d838bc88020af2d811d9452cf77c8307b",
+   "sequence": 498,
+   "task_id": "ct_ff3b57f8d80b588c",
+   "task_sha256": "6f49c502c345733eb01fb5731b4a9ca920ee744401e193fc98b8ccd6b7918cd1"
+  },
+  {
+   "episode_id": "episode_booking_allocations_charlie_v1",
+   "oracle_sha256": "10cddacd8fb92f4ec879ea632c7277b08488c4fc1499fa9305b313fed78c5b1a",
+   "sequence": 499,
+   "task_id": "ct_ff9f7d4dd4be85ce",
+   "task_sha256": "ee2e946d86d3d69b6bf1aedce33e894f43922ee356e8e8d672b6271b93b363fc"
+  },
+  {
+   "episode_id": "episode_settlement_exceptions_echo_v1",
+   "oracle_sha256": "5cad2780530d5957e5e3341a2686aad6308591e1314ec4ea8200328a2315e709",
+   "sequence": 500,
+   "task_id": "ct_ffa829ac1ff17344",
+   "task_sha256": "b473a60f0a40d898100fa7b0bcc6945063b6fc127529fedf63ab8ca0a7e2b6c3"
+  }
+ ],
+ "task_list_sha256": "632528b729b8a4a08793b0ea84818e8d54eb0aaa634f4c949a7affe842217527"
+}

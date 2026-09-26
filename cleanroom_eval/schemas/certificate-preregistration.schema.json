@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bankingenv.example/schemas/bankingenv-certificate-preregistration-v1",
+  "title": "BankingEnv task-certificate preregistration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "preregistration_id",
+    "classification",
+    "status",
+    "episode_set",
+    "arms",
+    "models",
+    "grading",
+    "issue_rule",
+    "missing_result_policy",
+    "analysis_lock",
+    "halt_conditions"
+  ],
+  "properties": {
+    "schema": {"const": "bankingenv.certificate-preregistration/v1"},
+    "preregistration_id": {
+      "const": "bankingenv_task_certificate_v1"
+    },
+    "classification": {"const": "CLEANROOM_SYNTHETIC"},
+    "status": {
+      "enum": ["DRAFT", "FROZEN_BEFORE_RUN"]
+    },
+    "episode_set": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["set_id", "dir", "episode_count", "manifest"],
+      "properties": {
+        "set_id": {"type": "string"},
+        "dir": {"type": "string"},
+        "episode_count": {"const": 40},
+        "manifest": {"type": "string"}
+      }
+    },
+    "arms": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "requirement", "pass_when", "boundary_access"],
+        "properties": {
+          "id": {"type": "string"},
+          "requirement": {"type": "string"},
+          "pass_when": {"type": "string"},
+          "boundary_access": {"enum": ["none", "none_plus_retrieval", "oracle_script"]}
+        }
+      }
+    },
+    "models": {
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["slot", "selection_rule", "temperature"],
+        "properties": {
+          "slot": {"type": "string"},
+          "selection_rule": {"type": "string"},
+          "temperature": {"type": "number"},
+          "env_prefix": {"type": "string"}
+        }
+      }
+    },
+    "grading": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "primary",
+        "dual_judge_when_llm_used",
+        "byte_identical_retries",
+        "reward"
+      ],
+      "properties": {
+        "primary": {"type": "string"},
+        "dual_judge_when_llm_used": {"type": "string"},
+        "byte_identical_retries": {"type": "integer", "minimum": 1},
+        "reward": {"type": "string"}
+      }
+    },
+    "issue_rule": {"type": "string", "minLength": 40},
+    "missing_result_policy": {"type": "string", "minLength": 20},
+    "analysis_lock": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "episode_exclusions_after_run",
+        "metric_redefinition_after_run",
+        "invented_outcomes_forbidden"
+      ],
+      "properties": {
+        "episode_exclusions_after_run": {"const": 0},
+        "metric_redefinition_after_run": {"const": false},
+        "invented_outcomes_forbidden": {"const": true}
+      }
+    },
+    "halt_conditions": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"type": "string"}
+    },
+    "how_to_run": {
+      "type": "array",
+      "items": {"type": "string"}
+    }
+  }
+}

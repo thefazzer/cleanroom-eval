@@ -84,6 +84,25 @@ class Policy(Protocol):
 # Policies
 # ---------------------------------------------------------------------------
 
+class RefusePolicy:
+    """Fail-closed null policy: never invokes a tool surface.
+
+    Used for the BankingEnv certificate unaided and naive-retrieval arms,
+    where the requirement is ``reward != 1`` (episode not complete). The
+    policy returns ``{"surface": None}`` immediately, so no state changes
+    and the episode cannot reach its sealed final state. Deterministic and
+    byte-identical across retries given the same ``run_salt``.
+    """
+
+    name = "refuse"
+
+    def reset(self) -> None:
+        pass
+
+    def propose(self, card: Mapping[str, Any], observation: Mapping[str, Any], turn: int) -> Mapping[str, Any]:
+        return {"surface": None}
+
+
 class ScriptedPolicy:
     """Boundary-only search: tries every (actor, action, surface) until one applies.
 
@@ -544,6 +563,12 @@ def run(
             for o in outcomes
         ],
     }
+    try:
+        from .strategy_metrics import analyze_run
+
+        metrics["strategy"] = {k: v for k, v in analyze_run(run_dir).items() if k not in ("schema", "run_id")}
+    except Exception as exc:  # metrics are additive; never fail a run over them
+        metrics["strategy"] = {"error": str(exc)}
     (run_dir / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n", encoding="utf-8")
     metrics["scores"] = write_scores(run_dir, metrics, [episode for episode, _ in pairs])
     metrics["aiuc1"] = emit_bundle(run_dir, metrics, transcript)
@@ -581,7 +606,7 @@ def _merge_counts(groups: Any) -> dict[str, int]:
 
 def _main() -> int:
     parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    parser.add_argument("--policy", choices=("scripted", "chat"), default="scripted")
+    parser.add_argument("--policy", choices=("scripted", "chat", "refuse"), default="scripted")
     parser.add_argument("--episode-dir", type=Path, default=ASSET_DIR / "episodes_v2")
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--run-id", required=True)
@@ -593,6 +618,10 @@ def _main() -> int:
         policy: Policy = ChatCompletionsPolicy(config)
         commitment = config.commitment()
         turn_limit = args.turn_limit or config.turn_limit
+    elif args.policy == "refuse":
+        policy = RefusePolicy()
+        commitment = {}
+        turn_limit = args.turn_limit or 24
     else:
         policy = ScriptedPolicy()
         commitment = {}

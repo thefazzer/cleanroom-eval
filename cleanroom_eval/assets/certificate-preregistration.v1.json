@@ -1,0 +1,71 @@
+{
+  "schema": "bankingenv.certificate-preregistration/v1",
+  "preregistration_id": "bankingenv_task_certificate_v1",
+  "classification": "CLEANROOM_SYNTHETIC",
+  "status": "FROZEN_BEFORE_RUN",
+  "frozen_at": "2026-09-20",
+  "manifest_sha256": "6ec55d20e790b05f61885ce658fac522437a1db7c9a6f8939020aeb85cb51b26",
+  "episode_set": {
+    "set_id": "cmo_cleanroom_sealed_v2",
+    "dir": "assets/episodes_v2",
+    "episode_count": 40,
+    "manifest": "cleanroom_eval/assets/sealed-set.manifest.v2.json"
+  },
+  "arms": [
+    {
+      "id": "unaided_fails",
+      "requirement": "Model plus instruction only; no environment or retrieval pack.",
+      "pass_when": "reward != 1 on every required replicate",
+      "boundary_access": "none"
+    },
+    {
+      "id": "naive_retrieval_fails",
+      "requirement": "Same model with a lexical public-evidence pack; no boundary tools.",
+      "pass_when": "reward != 1 on every required replicate",
+      "boundary_access": "none_plus_retrieval"
+    },
+    {
+      "id": "oracle_passes",
+      "requirement": "Sealed scripted policy through the boundary against the frozen episode.",
+      "pass_when": "reward == 1 (episode complete under scripted_boundary_search)",
+      "boundary_access": "oracle_script"
+    }
+  ],
+  "models": [
+    {
+      "slot": "frontier",
+      "selection_rule": "Current frontier chat model authorised for cleanroom; freeze id before run.",
+      "temperature": 0.0,
+      "env_prefix": "CLEANROOM_POLICY_FRONTIER"
+    },
+    {
+      "slot": "open_weight",
+      "selection_rule": "Current open-weight chat model authorised for cleanroom; freeze id before run.",
+      "temperature": 0.0,
+      "env_prefix": "CLEANROOM_POLICY_OPEN_WEIGHT"
+    }
+  ],
+  "grading": {
+    "primary": "cleanroom episode complete flag / reward from free_run metrics",
+    "dual_judge_when_llm_used": "Required when an LLM grades free-form answers; not used for scripted oracle.",
+    "byte_identical_retries": 1,
+    "reward": "1.0 iff episode complete under the arm policy; else not 1.0"
+  },
+  "issue_rule": "ISSUED only when unaided_fails, naive_retrieval_fails and oracle_passes each have non-null executed evidence for the named model and date; never invent arm outcomes.",
+  "missing_result_policy": "Leave result and evidence null; keep status NOT_ISSUED; record halt.todo.",
+  "analysis_lock": {
+    "episode_exclusions_after_run": 0,
+    "metric_redefinition_after_run": false,
+    "invented_outcomes_forbidden": true
+  },
+  "halt_conditions": [
+    "Provider unavailable or identity unbound for either model slot",
+    "Sealed-set or baseline-v2 metrics hash mismatch against evidence-manifest",
+    "Attempt to mark ISSUED while any required arm result is null",
+    "Attempt to map frontier/open_weight full-boundary gate runs onto unaided or naive arms"
+  ],
+  "how_to_run": [
+    "python -m cleanroom_eval.issue_certificates --bind-oracle-only",
+    "Live unaided and naive arms require new free_run policies and provider capacity; do not freeze this prereg until those policies land."
+  ]
+}
