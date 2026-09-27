@@ -21,10 +21,10 @@ from .contract import (
 
 
 ASSET_ROOT = Path(__file__).with_name("assets")
-MANIFEST_PATH = ASSET_ROOT / "citation-tasks.manifest.v1.json"
+MANIFEST_PATH = ASSET_ROOT / "citation-tasks.manifest.v2.json"
 SOURCE_MANIFEST_PATH = ASSET_ROOT / "sealed-set.manifest.v1.json"
-TASK_PATH = ASSET_ROOT / "citation_tasks" / "citation-tasks.v1.jsonl"
-ORACLE_PATH = ASSET_ROOT / "citation_tasks" / "citation-task-oracle.v1.jsonl"
+TASK_PATH = ASSET_ROOT / "citation_tasks" / "citation-tasks.v2.jsonl"
+ORACLE_PATH = ASSET_ROOT / "citation_tasks" / "citation-task-oracle.v2.jsonl"
 EXPECTED_CATEGORIES = {
     "supported_claim": 100,
     "unsupported_addition_guard": 80,
@@ -125,9 +125,10 @@ def _verify_assets(
     *,
     asset_root: Path,
 ) -> None:
+    version = "v2" if str(manifest.get("schema", "")).endswith("/v2") else "v1"
     expected_paths = {
-        "citation_tasks/citation-tasks.v1.jsonl",
-        "citation_tasks/citation-task-oracle.v1.jsonl",
+        f"citation_tasks/citation-tasks.{version}.jsonl",
+        f"citation_tasks/citation-task-oracle.{version}.jsonl",
     }
     assets = {item["path"]: item for item in manifest["assets"]}
     if set(assets) != expected_paths:
@@ -170,7 +171,8 @@ def verify_citation_task_set(
     """Recompute every count, hash and semantic oracle invariant."""
 
     manifest = load_json(manifest_path)
-    validate_schema(manifest, "citation-task-set.schema.json")
+    version = "v2" if str(manifest.get("schema", "")).endswith("/v2") else "v1"
+    validate_schema(manifest, "citation-task-set-v2.schema.json" if version == "v2" else "citation-task-set.schema.json")
     asset_root = manifest_path.parent
     source = manifest["source_sealed_set"]
     expected_source_path = "cleanroom_eval/assets/sealed-set.manifest.v1.json"
@@ -185,10 +187,10 @@ def verify_citation_task_set(
     _verify_assets(manifest, asset_root=asset_root)
 
     tasks = load_provider_tasks(
-        asset_root / "citation_tasks" / "citation-tasks.v1.jsonl"
+        asset_root / "citation_tasks" / f"citation-tasks.{version}.jsonl"
     )
     oracles = load_task_oracle(
-        asset_root / "citation_tasks" / "citation-task-oracle.v1.jsonl"
+        asset_root / "citation_tasks" / f"citation-task-oracle.{version}.jsonl"
     )
     if len(tasks) != 500 or len(oracles) != 500:
         raise ContractError("citation task set does not contain exactly 500 records")
@@ -204,20 +206,20 @@ def verify_citation_task_set(
             evidence_records=task["evidence"],
         )
         _assert_rejected_additions(task, oracle)
-        ledger.append(
-            {
-                "sequence": sequence,
-                "task_id": task["task_id"],
-                "task_sha256": digest(task),
-                "oracle_sha256": digest(oracle),
-                "episode_id": oracle["episode_id"],
+        entry = {
+            "sequence": sequence,
+            "task_id": task["task_id"],
+            "task_sha256": digest(task),
+            "oracle_sha256": digest(oracle),
+            "episode_id": oracle["episode_id"],
+        }
+        if version == "v1":
+            entry.update({
                 "scenario_family": oracle["scenario_family"],
                 "category": oracle["category"],
-                "expected_answer_kind": oracle["expected_selection"][
-                    "answer_kind"
-                ],
-            }
-        )
+                "expected_answer_kind": oracle["expected_selection"]["answer_kind"],
+            })
+        ledger.append(entry)
     if ledger != manifest["task_ledger"]:
         raise ContractError("citation task manifest ledger does not reproduce")
     task_list = "".join(

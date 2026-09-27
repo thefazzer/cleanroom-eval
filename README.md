@@ -11,6 +11,32 @@ reward-hacking gates (hidden-field probes, canary echoes, out-of-contract
 state changes), and an evidence pipeline that binds every reported number to
 run bytes by hash.
 
+**New in 1.2.0:** synced to the current FinExhaust upstream through its
+allowlisted release builder (evaluator-only oracles and the private-set
+recipe stay excluded).
+
+- **Per-run salted canaries now actually ship.** Releases 1.1.0 and 1.1.1
+  described them, but the public `runner.py` still derived each canary from
+  the public episode id. `runner.py` now mints a salt per run
+  (`episode_canary(run_salt, episode_id)`), so the published assets alone no
+  longer determine the trap value.
+- **Citation tasks v2.** `citation-tasks.v2.jsonl` and
+  `citation-tasks.manifest.v2.json` reseal the set with category-free ids and
+  gold-adjacent fields removed from public surfaces. v1 remains in the tree;
+  the v2 manifest's supersession block names the v1 digest.
+- **Task-certificate tooling (preview).** `issue_certificates.py`,
+  `certify.py`, the frozen `certificate-preregistration.v1.json` and its
+  schemas, and a fail-closed `--policy refuse` arm in `free_run`. The
+  unaided and naive-retrieval arms currently use that refuse policy, so they
+  fail by construction and are not model measurements. No certificate results
+  ship in this release.
+- **`compare.py`** for run-to-run comparison, and a campaign-parametrized
+  evidence binder (`--run-ids`, `--episode-set`). The default arguments still
+  reproduce the committed 2026-08 gates pack; its evidence manifest now also
+  binds the certificate preregistration by hash.
+- Run metrics now include the strategy-locking summary from
+  `strategy_metrics` automatically.
+
 **New in 1.1.1:** two honesty fixes prompted by an external adversarial
 audit. The harness-v2 adapter code (rejection feedback in observations,
 optimistic-concurrency version checks) is restored — a packaging regression
@@ -93,16 +119,29 @@ issue on this repository to talk.
 MIT — see `LICENSE`. `SECURITY-RELEASE.md` documents what this archive
 deliberately excludes (evaluator-only oracles, private gold).
 
-## Status, 3 September 2026
+## Status, 26 September 2026
 
-This repository is release 1.1.1 of the sealed evaluation package. The
-evaluation ledger for the preregistered runs (T4 to T7), the Harbor-format
-packaging note and the exporter skeleton now live in the maintained
+This repository is release 1.2.0 of the sealed evaluation package. The
+evaluation ledger for the preregistered calibration lane (T4 to T8), the
+Harbor-format packaging note and the exporter skeleton live in the maintained
 environment repository:
 
 - Ledger: https://github.com/thefazzer/bankingenv/blob/main/docs/EVAL-LEDGER.md
 - Packaging: https://github.com/thefazzer/bankingenv/blob/main/docs/HARBOR-PACKAGING.md
 - Exporter: https://github.com/thefazzer/bankingenv/blob/main/scripts/export_harbor.py
 
-Results there are labelled per the ledger's discipline: three preregistered
-runs, canonical claims not passed, one terminal test in flight.
+Results there follow the ledger's own labels: T4 v8, T5-v1, T6-v2 and T8-v1
+did not pass their canonical claims; T7-v3 passed narrowly; the T8-v1
+one-shot replication on a second, untouched corpus did not pass, and the
+union line is closed. That lane runs on private corpora and is calibration
+evidence, not a result on the episodes in this repository.
+
+## Related: BankingOps Coverage Grid
+
+The companion capital-markets division taxonomy is the BankingOps Coverage
+Grid (BOCG), currently v0.6.2:
+https://github.com/thefazzer/bankingops-coverage-grid. BOCG's
+`docs/downstream-evidence.md` records which of its division keys the
+calibration lane above has exercised. The grid is a model-consensus prior and
+its live run is still marked provisional; nothing in this repository
+validates it.

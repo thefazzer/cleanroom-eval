@@ -53,7 +53,16 @@ MAX_WORKERS = 16
 MAX_REQUESTS_PER_SECOND = 100.0
 RUN_SCHEMA = "cleanroom.citation-acceptance-execution/v1"
 RECORD_SCHEMA = "cleanroom.citation-acceptance-call-record/v1"
-CANONICAL_MANIFEST_SHA256 = "ae162bb9ec60c2234e0000ea8e5d9f328f0f4f48adb46dac589a5f63a1cbb80e"
+# Pins the exact bytes of the canonical frozen manifest that MANIFEST_PATH
+# resolves to. f1d74d8 moved MANIFEST_PATH to the v2 reseal but left this pin
+# on v1, so every acceptance run failed "canonical frozen manifest digest
+# differs". Repinned to v2 on 2026-09-03 against the supersession chain, not
+# against whatever happened to be on disk: the v2 manifest's
+# supersession.superseded_manifest_sha256 is ae162bb9... , which is both the
+# previous value of this constant and the digest of the v1 manifest still in
+# the tree. Update this ONLY together with a manifest whose supersession block
+# names the outgoing digest.
+CANONICAL_MANIFEST_SHA256 = "8e8b38c849527329ecd9f938cab9cd1c7212ff7b135d6547b785e65c6589739f"
 ATTESTATION_PRIVATE_KEY_ENV = "CLEANROOM_CITATION_ATTESTATION_PRIVATE_KEY"
 ATTESTATION_PUBLIC_KEY_ENV = "CLEANROOM_CITATION_ATTESTATION_PUBLIC_KEY"
 
@@ -132,10 +141,10 @@ def _load_frozen_bundle(
     manifest = load_json(manifest_path)
     asset_root = manifest_path.parent
     tasks = load_provider_tasks(
-        asset_root / "citation_tasks" / "citation-tasks.v1.jsonl"
+        asset_root / "citation_tasks" / "citation-tasks.v2.jsonl"
     )
     oracles = load_task_oracle(
-        asset_root / "citation_tasks" / "citation-task-oracle.v1.jsonl"
+        asset_root / "citation_tasks" / "citation-task-oracle.v2.jsonl"
     )
     if len(tasks) != REQUIRED_ACCEPTANCE_CALLS or len(oracles) != len(tasks):
         raise ContractError("frozen citation bundle does not contain exactly 500 pairs")

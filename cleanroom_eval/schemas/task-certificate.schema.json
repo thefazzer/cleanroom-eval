@@ -1,0 +1,111 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bankingenv.example/schemas/bankingenv-task-certificate-v1",
+  "title": "BankingEnv per-task certificate",
+  "description": "Model-indexed, dated admission certificate for one sealed episode. NOT_ISSUED until all three required arms have executed evidence; never invent outcomes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "episode_id",
+    "sealed_episode_sha256",
+    "status",
+    "required",
+    "issued_at",
+    "issuer",
+    "protocol"
+  ],
+  "properties": {
+    "schema": {"const": "bankingenv.task-certificate/v1"},
+    "episode_id": {"type": "string", "minLength": 8},
+    "sealed_episode_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "status": {"enum": ["NOT_ISSUED", "ISSUED"]},
+    "model": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["id", "id_sha256"],
+      "properties": {
+        "id": {"type": "string", "minLength": 1},
+        "id_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "provider_endpoint": {"type": ["string", "null"]}
+      }
+    },
+    "required": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "description", "result", "evidence"],
+        "properties": {
+          "id": {
+            "enum": [
+              "unaided_fails",
+              "naive_retrieval_fails",
+              "oracle_passes"
+            ]
+          },
+          "description": {"type": "string", "minLength": 20},
+          "result": {"type": ["boolean", "null"]},
+          "evidence": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "required": [
+              "arm",
+              "run_at",
+              "reward",
+              "trajectory_sha256",
+              "grader"
+            ],
+            "properties": {
+              "arm": {"type": "string"},
+              "run_at": {"type": "string", "minLength": 10},
+              "reward": {"type": ["number", "null"]},
+              "trajectory_sha256": {
+                "type": ["string", "null"],
+                "pattern": "^[0-9a-f]{64}$"
+              },
+              "grader": {"type": "string", "minLength": 8},
+              "requirement_met": {"type": ["boolean", "null"]},
+              "notes": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "issued_at": {"type": ["string", "null"]},
+    "issuer": {"type": ["string", "null"]},
+    "protocol": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": [
+        "preregistration_id",
+        "preregistration_sha256",
+        "set_id"
+      ],
+      "properties": {
+        "preregistration_id": {"type": "string"},
+        "preregistration_sha256": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{64}$"
+        },
+        "set_id": {"type": "string"}
+      }
+    },
+    "halt": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "properties": {
+        "reason": {"type": "string"},
+        "todo": {"type": "string"}
+      }
+    }
+  }
+}

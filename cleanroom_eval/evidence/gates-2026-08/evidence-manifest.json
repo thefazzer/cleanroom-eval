@@ -36,6 +36,8 @@
   },
   "preregistration_id": "cmo_cleanroom_gates_v1",
   "preregistration_sha256": "9314caee6be1cdee2fb9240851aa5809f14c16c3535d13ce412d19b25ba60208",
+  "bankingenv_certificate_preregistration_id": "bankingenv_task_certificate_v1",
+  "bankingenv_certificate_preregistration_sha256": "6ded0ccc26848176908cc77af6507e360f78ac0ec49f0d352d01b577b9a3b3db",
   "report_hashes": {
     "gates-preregistration.v1.json": "9314caee6be1cdee2fb9240851aa5809f14c16c3535d13ce412d19b25ba60208",
     "gates_report.json": "fd686d9869f3ca23984139ac268eae3e33b6245827330a54c79967c86f178c0d",
