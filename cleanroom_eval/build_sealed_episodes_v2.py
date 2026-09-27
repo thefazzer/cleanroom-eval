@@ -573,8 +573,8 @@ def build(
     """Build a sealed set. Defaults regenerate the committed v2 set byte-for-byte.
 
     A non-default ``set_tag`` shifts every episode id, world, namespace,
-    scenario lineage and seed-ordered selection (mutations, traps) — and the
-    run-time canaries, which derive from episode ids — producing a disjoint
+    scenario lineage and seed-ordered selection (mutations, traps), and the
+    run-time canaries, which derive from episode ids, producing a disjoint
     private set into ``episode_root``.
     """
     episode_root = episode_root or EPISODE_ROOT_V2

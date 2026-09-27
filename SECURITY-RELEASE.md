@@ -3,14 +3,14 @@
 This archive contains ONLY the clean-room evaluation environment: code,
 schemas, fictitious CLEANROOM_SYNTHETIC episodes, task contracts, the
 content-safe evidence summary, and this statement. It is built from an
-explicit allowlist — never from the source repository's history.
+explicit allowlist, never from the source repository's history.
 
 - Every episode, name, institution and identifier is invented. The evidence
   summary binds results by hash and contains no transcripts, credentials or
   source-derived records.
 - Episodes deliberately embed canary values and reward traps; they are part
   of the published task boundary. A model trained on this release loses
-  canary-based contamination detection — the standard public-benchmark
+  canary-based contamination detection; this is the standard public-benchmark
   caveat.
 - The evaluator-only citation oracle and all private gold are excluded and
   their absence is enforced by the release audit's leakage gate. The README

@@ -4,7 +4,7 @@ A sealed episode (``schemas/episode.schema.json``) is the evaluator's record:
 it carries the oracle (``final_state``, every scripted mutation, expected
 receipts, traps). Nothing in it is meant to be handed to an agent as-is.
 
-This module derives a *task card* per sealed episode — the clean-room
+This module derives a *task card* per sealed episode: the clean-room
 equivalent of Harvey LAB's ``task.json``: what the agent is asked to do, on
 which surfaces, with which request shape, what it must deliver, which
 deterministic checks grade it, and which disclosure barrier applies. The card

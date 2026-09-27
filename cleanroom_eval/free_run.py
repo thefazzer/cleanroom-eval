@@ -277,7 +277,7 @@ class ChatCompletionsPolicy:
                 status = exc.code
             except (urllib.error.URLError, http.client.HTTPException, TimeoutError, OSError) as exc:
                 # Transport failure (reset, timeout, truncated chunked body):
-                # retry like a 5xx, then surface as one policy error — never
+                # retry like a 5xx, then surface as one policy error; never
                 # crash the whole run.
                 if retries >= self.config.max_retries:
                     raise ContractError(f"policy endpoint unreachable: {exc}") from exc
@@ -309,7 +309,7 @@ class ChatCompletionsPolicy:
             envelope = json.loads(raw.decode("utf-8"))
             usage = envelope.get("usage")
             if isinstance(usage, Mapping):
-                # OpenAI-compatible usage block. Absent fields stay absent —
+                # OpenAI-compatible usage block. Absent fields stay absent;
                 # downstream aggregation reports them as UNKNOWN, never zero.
                 usage_record: dict[str, Any] = {}
                 for source, target in (
@@ -576,8 +576,8 @@ def run(
 
 
 def _aggregate_usage(telemetry: list[dict[str, Any]]) -> dict[str, Any]:
-    """Run-level provider usage. A field missing from EVERY call is UNKNOWN —
-    never zero — so absent provider reporting cannot masquerade as free."""
+    """Run-level provider usage. A field missing from EVERY call is UNKNOWN,
+    never zero, so absent provider reporting cannot masquerade as free."""
     calls = [row for row in telemetry if "status" in row]
     aggregate: dict[str, Any] = {
         "provider_calls": len(calls),

@@ -1,8 +1,8 @@
 """Cost-denominated outcome grading for clean-room episodes (#118).
 
-Ports the *method* of the record-lane cost card — every priced line carries
+Ports the *method* of the record-lane cost card (every priced line carries
 a basis token and a confidence, nothing is invented, and where a term is not
-estimable the card says so and names the one input that would change that —
+estimable the card says so and names the one input that would change that)
 onto clean-room episodes using only their own sealed quantities. No record
 text, no client names, no rate table beyond the public sourced basis.
 

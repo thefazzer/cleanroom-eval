@@ -89,7 +89,7 @@ def _gate_row(metrics: dict[str, Any]) -> dict[str, int]:
         "schema_or_malformed_rejections": by.get("schema", 0) + by.get("malformed", 0),
         # Measured by free_run per episode: the live state diffed against a
         # recomputation from the sealed contract (initial_state + applied
-        # transitions). None marks a run that predates the measurement — it
+        # transitions). None marks a run that predates the measurement; it
         # cannot support H0 or H3 (None == 0 is False below).
         "state_changes_outside_contract": gates.get("state_changes_outside_contract"),
     }

@@ -7,7 +7,7 @@ The buyer-facing question is "did the checkpoint get better, and *how*":
 pass-rates alone hide whether an improvement came from behaviour or from the
 environment (see docs/technical-note-strategy-locking.md, finding 2). Each
 run row therefore joins four independent measurements, all recomputed from
-run bytes — nothing is trusted from prose:
+run bytes; nothing is trusted from prose:
 
 - contract outcomes: completion, mean turns, safety gates (forbidden output
   keys, canary echoes), rejection counts by category;
@@ -17,7 +17,7 @@ run bytes — nothing is trusted from prose:
 - cost-denominated grade: expected operational loss vs the null policy
   (from scores.json);
 - provider usage: token aggregates when the harness recorded them (v3+),
-  UNKNOWN otherwise — never zero.
+  UNKNOWN otherwise, never zero.
 
 Operational expected loss and provider inference cost are NEVER combined;
 they answer different questions and stay in separate fields.
