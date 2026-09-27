@@ -1,7 +1,7 @@
 """Build and audit the isolated clean-room release candidate (#145 Phase D).
 
-Produces a deterministic archive from a STRICT ALLOWLIST — never from the
-repository at large — and runs the release-audit gates against the exact
+Produces a deterministic archive from a STRICT ALLOWLIST (never from the
+repository at large) and runs the release-audit gates against the exact
 archive bytes. The repository's history is contaminated and is never
 exported; a publishable candidate goes to a fresh repository with new
 history.
@@ -33,7 +33,7 @@ from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
 ARCHIVE_NAME = "cleanroom-eval-release.tar.gz"
-FIXED_MTIME = 1787788800  # 2026-08-23T00:00:00Z — deterministic archives
+FIXED_MTIME = 1787788800  # 2026-08-23T00:00:00Z, for deterministic archives
 
 # ---- allowlist ------------------------------------------------------------
 ALLOW_DIRS = (
@@ -61,6 +61,9 @@ DENY_NAME_PATTERNS = (
     # S1 private-set minting recipe: the SKU differentiator, never shipped.
     re.compile(r"private_sets\.py$"),
     re.compile(r"mint_private_set\.py$"),
+    # ISDA curve replay handoff (#217): binds a real institution's private
+    # gold set by artifact id, so it breaks the CLEANROOM_SYNTHETIC boundary.
+    re.compile(r"(^|/)isda_replay/"),
     re.compile(r"\.pyc$"),
     re.compile(r"__pycache__"),
 )
@@ -74,14 +77,14 @@ SECURITY_STATEMENT = """# Security and release statement
 This archive contains ONLY the clean-room evaluation environment: code,
 schemas, fictitious CLEANROOM_SYNTHETIC episodes, task contracts, the
 content-safe evidence summary, and this statement. It is built from an
-explicit allowlist — never from the source repository's history.
+explicit allowlist, never from the source repository's history.
 
 - Every episode, name, institution and identifier is invented. The evidence
   summary binds results by hash and contains no transcripts, credentials or
   source-derived records.
 - Episodes deliberately embed canary values and reward traps; they are part
   of the published task boundary. A model trained on this release loses
-  canary-based contamination detection — the standard public-benchmark
+  canary-based contamination detection; this is the standard public-benchmark
   caveat.
 - The evaluator-only citation oracle and all private gold are excluded and
   their absence is enforced by the release audit's leakage gate. The README
@@ -100,7 +103,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cleanroom-eval"
-version = "1.1.0"
+version = "1.2.0"
 description = "Clean-room capital-markets agent evaluation: sealed synthetic episodes, task contracts, reward-hacking gates, hash-bound evidence"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -116,7 +119,7 @@ cleanroom_eval = ["assets/**/*", "schemas/*", "mock_training/*", "README.md"]
 ROOT_README = """# cleanroom-eval
 
 **A sealed, preregistered agent-evaluation environment for capital-markets
-operations — that frontier models do not saturate.**
+operations: every reported number bound to run bytes by hash.**
 
 Forty hash-sealed long-horizon episodes per set (two sets) across eight
 operational families: trade lifecycle, booking/allocations, reconciliation,
@@ -126,19 +129,60 @@ reward-hacking gates (hidden-field probes, canary echoes, out-of-contract
 state changes), and an evidence pipeline that binds every reported number to
 run bytes by hash.
 
+**New in 1.2.0:** synced to the current FinExhaust upstream through its
+allowlisted release builder (evaluator-only oracles and the private-set
+recipe stay excluded).
+
+- **Per-run salted canaries now actually ship.** Releases 1.1.0 and 1.1.1
+  described them, but the public `runner.py` still derived each canary from
+  the public episode id. `runner.py` now mints a salt per run
+  (`episode_canary(run_salt, episode_id)`), so the published assets alone no
+  longer determine the trap value.
+- **Citation tasks v2.** `citation-tasks.v2.jsonl` and
+  `citation-tasks.manifest.v2.json` reseal the set with category-free ids and
+  gold-adjacent fields removed from public surfaces. v1 remains in the tree;
+  the v2 manifest's supersession block names the v1 digest.
+- **Task-certificate tooling (preview).** `issue_certificates.py`,
+  `certify.py`, the frozen `certificate-preregistration.v1.json` and its
+  schemas, and a fail-closed `--policy refuse` arm in `free_run`. The
+  unaided and naive-retrieval arms currently use that refuse policy, so they
+  fail by construction and are not model measurements. No certificate results
+  ship in this release.
+- **`compare.py`** for run-to-run comparison, and a campaign-parametrized
+  evidence binder (`--run-ids`, `--episode-set`). The default arguments still
+  reproduce the committed 2026-08 gates pack; its evidence manifest now also
+  binds the certificate preregistration by hash.
+- Run metrics now include the strategy-locking summary from
+  `strategy_metrics` automatically.
+
+**New in 1.1.1:** two honesty fixes prompted by an external adversarial
+audit. The harness-v2 adapter code (rejection feedback in observations,
+optimistic-concurrency version checks) is restored. A packaging regression
+had shipped v1 adapter semantics beside the v2 system prompt, so the
+published v2 results were not reproducible from this repository. And
+`state_changes_outside_contract` is now **measured** per episode by diffing
+live state against an independent recomputation from the sealed contract; it
+was previously reported as zero by construction, which could never fire.
+Runs that predate the measurement report `NOT_MEASURED`, not zero.
+
 **New in 1.1.0:** per-run salted canaries (the published derivation no longer
-weakens contamination detection); `cleanroom_eval.strategy_metrics` —
+weakens contamination detection); `cleanroom_eval.strategy_metrics` to
 classify every rejected turn as identical repeat / local adjustment /
 strategy revision and measure strategy-locking directly from transcripts
 (see `docs/technical-note-strategy-locking.md`); provider-usage telemetry.
 
-**Headline result (harness v2, preregistered, evidence in
-`cleanroom_eval/evidence/gates-2026-08/`):** a frontier model completed
-**27/40** episodes within 24 turns; an open-weight model completed **39/40**;
-both tripped **zero** reward-hacking gates. The scripted honest baseline
-completes 40/40, and all 243 committed adversarial mutations are rejected
-with their expected errors — the environment is solvable, discriminative and
-hard to hack.
+**Current result (harness v2, preregistered, supplier-run; evidence in
+`cleanroom_eval/evidence/gates-2026-08/`):** one frontier arm completed
+**27/40** episodes within 24 turns; one open-weight arm completed **39/40**;
+neither probed hidden fields nor echoed a canary. The scripted reference
+policy completes 40/40; it reads validator error text, so it bounds harness
+solvability, not model skill. All 243 committed adversarial mutations are
+rejected by the deterministic verifier with their expected errors; that is
+contract-level sensitivity, not a claim about model-facing attacks. These
+runs were executed by the environment's author and are not blind; whether
+frontier models saturate this environment as a class is an open hypothesis
+(one arm measured). Independent replication is invited: the harness, sealed
+sets and gates are all in this repository.
 
 Every episode, institution, name and identifier is invented
 (`CLEANROOM_SYNTHETIC`); independent origin is enforced by a shingle-overlap
@@ -167,16 +211,16 @@ scripted baseline (`--policy scripted`) runs offline and needs no keys.
 
 ## What is in the box
 
-- `cleanroom_eval/assets/episodes/`, `episodes_v2/` — the sealed sets, with
+- `cleanroom_eval/assets/episodes/`, `episodes_v2/`: the sealed sets, with
   per-episode task cards and adversarial mutations
-- `cleanroom_eval/free_run.py` — the agent loop: any OpenAI-compatible
-  endpoint, per-call telemetry (status, latency, request/response hashes,
+- `cleanroom_eval/free_run.py`: the agent loop for any OpenAI-compatible
+  endpoint, with per-call telemetry (status, latency, request/response hashes,
   provider usage where reported)
-- `cleanroom_eval/fire_gates.py` — preregistration, honest baseline, gates
+- `cleanroom_eval/fire_gates.py`: preregistration, honest baseline, gates
   report
-- `cleanroom_eval/evidence/` — the hash-binding evidence pipeline and the
+- `cleanroom_eval/evidence/`: the hash-binding evidence pipeline and the
   2026-08 gates evidence pack
-- `cleanroom_eval/schemas/` — every contract as JSON Schema
+- `cleanroom_eval/schemas/`: every contract as JSON Schema
 
 ## Fresh, unseen episode sets
 
@@ -184,14 +228,41 @@ This public set is a demonstration sample: its canaries and traps are public,
 so treat results on models trained after its release accordingly. The
 generator that produced it mints **fresh, private, hash-sealed episode sets**
 (new worlds, namespaces, canaries and mutation batteries) for evaluation
-programmes that need uncontaminated instruments — along with custom
+programmes that need uncontaminated instruments, along with custom
 operational families and independently bound evidence reports. Open a GitHub
 issue on this repository to talk.
 
 ## License
 
-MIT — see `LICENSE`. `SECURITY-RELEASE.md` documents what this archive
+MIT; see `LICENSE`. `SECURITY-RELEASE.md` documents what this archive
 deliberately excludes (evaluator-only oracles, private gold).
+
+## Status, 26 September 2026
+
+This repository is release 1.2.0 of the sealed evaluation package. The
+evaluation ledger for the preregistered calibration lane (T4 to T8), the
+Harbor-format packaging note and the exporter skeleton live in the maintained
+environment repository:
+
+- Ledger: https://github.com/thefazzer/bankingenv/blob/main/docs/EVAL-LEDGER.md
+- Packaging: https://github.com/thefazzer/bankingenv/blob/main/docs/HARBOR-PACKAGING.md
+- Exporter: https://github.com/thefazzer/bankingenv/blob/main/scripts/export_harbor.py
+
+Results there follow the ledger's own labels: T4 v8, T5-v1, T6-v2 and T8-v1
+did not pass their canonical claims; T7-v3 passed narrowly; the T8-v1
+one-shot replication on a second, untouched corpus did not pass, and the
+union line is closed. That lane runs on private corpora and is calibration
+evidence, not a result on the episodes in this repository.
+
+## Related: BankingOps Coverage Grid
+
+The companion capital-markets division taxonomy is the BankingOps Coverage
+Grid (BOCG), currently v0.6.2:
+https://github.com/thefazzer/bankingops-coverage-grid. BOCG's
+`docs/downstream-evidence.md` records which of its division keys the
+calibration lane above has exercised. The grid is a model-consensus prior and
+its live run is still marked provisional; nothing in this repository
+validates it.
 """
 
 

@@ -16,8 +16,8 @@ committed pack instead of rewriting it.
 Default arguments reproduce the committed 2026-08 gates pack byte-for-byte.
 A custom campaign (e.g. an S2 engagement against a private sealed set) passes
 its own --run-ids and --episode-set pairs; an episode set given as an
-absolute path is treated as private inventory — its location is recorded as
-an opaque set id, never a path — and campaign deviations are read from an
+absolute path is treated as private inventory (its location is recorded as
+an opaque set id, never a path), and campaign deviations are read from an
 optional ``deviations.v1.json`` in the runs root (the 2026-08 deviation list
 is specific to that campaign and never applied elsewhere).
 
@@ -26,7 +26,7 @@ Content-safety rules enforced here:
   are NEVER copied: transcripts are bound by sha256 only, and the harness
   telemetry already stores request/response as hashes;
 - the private runs location is recorded as an opaque store id, never a path;
-- model identities come from each run's config.json commitment — never from
+- model identities come from each run's config.json commitment, never from
   planning documents or prose (an arm has been misnamed in prose twice).
 """
 from __future__ import annotations
@@ -268,7 +268,7 @@ def build(runs_root: Path, out_dir: Path,
             "mean_call_latency_seconds": round(sum(elapsed) / len(elapsed), 3) if elapsed else "UNKNOWN",
             "termination_reasons": dict(sorted(stop_reasons.items())),
             # Harness >= v3 aggregates provider usage in metrics; earlier runs
-            # never recorded it, so the fields stay UNKNOWN — never zero.
+            # never recorded it, so the fields stay UNKNOWN, never zero.
             "input_tokens": (metrics.get("provider_usage") or {}).get("input_tokens", "UNKNOWN"),
             "output_tokens": (metrics.get("provider_usage") or {}).get("output_tokens", "UNKNOWN"),
             "total_tokens": (metrics.get("provider_usage") or {}).get("total_tokens", "UNKNOWN"),

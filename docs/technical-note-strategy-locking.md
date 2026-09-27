@@ -5,11 +5,11 @@
 A recent empirical study of autonomous post-training agents (Lim et al.,
 [arXiv:2608.19072](https://arxiv.org/abs/2608.19072)) reports that agents lock
 a strategy at the start of a run and spend their remaining budget on local
-adjustments inside it — and that what is missing is a mechanism for
+adjustments inside it, and that what is missing is a mechanism for
 evidence-driven strategy re-evaluation during execution.
 
 We measure that behaviour directly, per tool call, in a contract-governed
-agent environment — and we find both phenotypes the paper predicts, one per
+agent environment, and we find both phenotypes the paper predicts, one per
 model, on identical tasks.
 
 ## Setup
@@ -20,7 +20,7 @@ sees a task card and an observable boundary, proposes tool calls, and a
 deterministic contract accepts each call or rejects it with a reason
 (authorization, stale versions, unmet preconditions, ungrounded evidence).
 Every turn is transcribed. Because rejections carry reasons, the transcript
-records what a policy *does with negative evidence* — the exact quantity the
+records what a policy *does with negative evidence*, the exact quantity the
 paper says is unmeasured.
 
 We classify every rejected turn by the policy's next request in the same
@@ -50,7 +50,7 @@ reproducible from the public repository.
 
 ## Three findings
 
-**1. Strategy-locking is a stable, model-level trait — not a harness
+**1. Strategy-locking is a stable, model-level trait, not a harness
 artifact.** gpt-5.2 repeats identically after 80–82% of rejections with
 20+-turn identical streaks *in both harness versions*. Feeding the rejection
 text into its observation did not change its post-rejection behaviour.
@@ -58,7 +58,7 @@ text into its observation did not change its post-rejection behaviour.
 **2. What fixed gpt-5.2's completion was the environment, not the model.**
 Its jump from 12.5% → 67.5% came almost entirely from the harness dropping a
 class of rejections (correct-but-over-specified version assertions), i.e.
-fewer occasions to loop — not from looping less. Improvement without
+fewer occasions to loop, not from looping less. Improvement without
 behavioural change is exactly the paper's "execution gains without strategy
 re-evaluation," observed here from the environment side.
 
@@ -67,7 +67,7 @@ other, on the same tasks.** deepseek-v4-flash converts the same rejection
 feedback into parameter changes (63%) and genuine approach changes (20%),
 revises after fewer than two rejections on average, and completes 97.5%.
 Strategy re-evaluation is not missing from LLM agents in general; it is
-unevenly distributed — and it is measurable per model, per episode, from
+unevenly distributed, and it is measurable per model, per episode, from
 transcripts alone.
 
 ## Why this matters for post-training

@@ -11,11 +11,11 @@ Every rejected turn is classified by what the policy does NEXT, inside the
 same episode:
 
 - ``repeat``            the next request is identical in surface, action,
-                        actor and object-version assertions — pure loop;
+                        actor and object-version assertions: pure loop;
 - ``local_adjustment``  same surface and action, different parameters
-                        (versions/evidence) — execution-level iteration
+                        (versions/evidence): execution-level iteration
                         within the locked strategy;
-- ``revision``          a different action or surface — a strategy-level
+- ``revision``          a different action or surface: a strategy-level
                         change of approach;
 - ``abandon``           the episode ends (stop, error or turn budget) on
                         that rejection.
