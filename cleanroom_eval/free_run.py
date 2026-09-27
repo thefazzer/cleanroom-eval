@@ -568,7 +568,7 @@ def run(
 
         metrics["strategy"] = {k: v for k, v in analyze_run(run_dir).items() if k not in ("schema", "run_id")}
     except Exception as exc:  # metrics are additive; never fail a run over them
-        metrics["strategy"] = {"error": str(exc)}
+        metrics["strategy"] = {"status": "ERROR", "error": str(exc)}
     (run_dir / "metrics.json").write_text(json.dumps(metrics, indent=2) + "\n", encoding="utf-8")
     metrics["scores"] = write_scores(run_dir, metrics, [episode for episode, _ in pairs])
     metrics["aiuc1"] = emit_bundle(run_dir, metrics, transcript)

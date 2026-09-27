@@ -42,7 +42,7 @@ from pathlib import Path
 from typing import Any
 
 from . import free_run
-from .contract import file_sha256, load_json
+from .contract import file_sha256, load_json, validate_schema
 from .issue_certificates import (
     DEFAULT_EVIDENCE,
     DEFAULT_OUT,
@@ -153,13 +153,26 @@ def _verify_prereg_binding(prereg_path: Path, evidence: dict) -> None:
 
 
 def _verify_sealed_binding(prereg: dict, sealed_path: Path) -> None:
-    expected = prereg.get("episode_set", {}).get("manifest_sha256")
-    if not expected:
-        # Fallback: preregistration may not record the manifest hash.
-        return
-    actual = _sha256_file(sealed_path)
-    if actual != expected:
-        raise CertificationError(f"sealed manifest hash mismatch: expected {expected}, got {actual}")
+    """Fail closed unless the preregistration binds the sealed set it names.
+
+    The frozen v1 preregistration records the sealed-set manifest's
+    ``asset_list_sha256`` at top level as ``manifest_sha256``; a raw file
+    digest under ``episode_set.manifest_sha256`` is also accepted.
+    """
+    raw_expected = prereg.get("episode_set", {}).get("manifest_sha256")
+    asset_list_expected = prereg.get("manifest_sha256")
+    if not raw_expected and not asset_list_expected:
+        raise CertificationError("preregistration does not bind a sealed-set manifest")
+    if raw_expected:
+        actual = _sha256_file(sealed_path)
+        if actual != raw_expected:
+            raise CertificationError(f"sealed manifest hash mismatch: expected {raw_expected}, got {actual}")
+    if asset_list_expected:
+        actual = load_json(sealed_path).get("asset_list_sha256")
+        if actual != asset_list_expected:
+            raise CertificationError(
+                f"sealed manifest asset_list_sha256 mismatch: expected {asset_list_expected}, got {actual}"
+            )
 
 
 def _model_env(prefix: str) -> tuple[str, str]:
@@ -187,6 +200,7 @@ def run_certification(
 ) -> dict[str, Any]:
     """Run all certificate arms and issue the ledger."""
     prereg = load_json(prereg_path)
+    validate_schema(prereg, "certificate-preregistration.schema.json")
     if prereg.get("preregistration_id") != "bankingenv_task_certificate_v1":
         raise CertificationError("unexpected preregistration_id")
     if prereg.get("status") != "FROZEN_BEFORE_RUN":

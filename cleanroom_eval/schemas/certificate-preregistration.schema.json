@@ -27,6 +27,16 @@
     "status": {
       "enum": ["DRAFT", "FROZEN_BEFORE_RUN"]
     },
+    "frozen_at": {
+      "type": "string",
+      "format": "date",
+      "description": "Date the preregistration was frozen, before any certificate run."
+    },
+    "manifest_sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$",
+      "description": "asset_list_sha256 of the sealed-set manifest named in episode_set.manifest (the digest verify-set recomputes over the episode assets), not the raw sha256 of the manifest file."
+    },
     "episode_set": {
       "type": "object",
       "additionalProperties": false,
