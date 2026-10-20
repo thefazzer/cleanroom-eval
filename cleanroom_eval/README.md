@@ -1,3 +1,10 @@
+# Current environment: BankingEnv v3
+
+The current document-grounded runtime, generation and evaluation instructions
+are in [BankingEnv v3](../docs/bankingenv-v3.md). The contract below describes
+the historical v1/v2 fixtures, retained for reproduction. Historical results
+do not describe the regenerated dataset.
+
 # Clean-room capital-markets evaluation contract
 
 This directory defines the evaluation boundary independently of any corpus
