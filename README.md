@@ -1,147 +1,124 @@
-# cleanroom-eval
+# BankingEnv / cleanroom-eval 2.0
 
-**A sealed, preregistered agent-evaluation environment for capital-markets
-operations: every reported number bound to run bytes by hash.**
+Document-grounded synthetic banking operations, dataset v3.
+The two public repositories now ship the same runtime and development dataset
+from one allowlisted build. The historical 40-case fixtures remain available
+for reproduction; they are no longer the current benchmark.
 
-Forty hash-sealed long-horizon episodes per set (two sets) across eight
-operational families: trade lifecycle, booking/allocations, reconciliation,
-collateral/margin, settlement exceptions, permissions/release, temporal
-causality and evidence sufficiency. Six tool-surface contracts, armed
-reward-hacking gates (hidden-field probes, canary echoes, out-of-contract
-state changes), and an evidence pipeline that binds every reported number to
-run bytes by hash.
+## Dataset and task contract
 
-**New in 1.2.0:** synced to the current FinExhaust upstream through its
-allowlisted release builder (evaluator-only oracles and the private-set
-recipe stay excluded).
+The default generation produces 384 cases: 192 public development cases and
+192 private compositional evaluation cases, across settlement, allocations,
+reconciliation, margin, permissions, lifecycle, evidence and temporal workflows.
+Every case has 7 or 8 hashed documents, including a current house policy, an
+operational record, a control review, historical/future material and an
+untrusted urgent request. There are 16 control combinations per family and
+three numeric variants per combination. These are generated variants of eight
+authored workflow primitives, not 384 independently authored tasks.
 
-- **Per-run salted canaries now actually ship.** Releases 1.1.0 and 1.1.1
-  described them, but the public `runner.py` still derived each canary from
-  the public episode id. `runner.py` now mints a salt per run
-  (`episode_canary(run_salt, episode_id)`), so the published assets alone no
-  longer determine the trap value.
-- **Citation tasks v2.** `citation-tasks.v2.jsonl` and
-  `citation-tasks.manifest.v2.json` reseal the set with category-free ids and
-  gold-adjacent fields removed from public surfaces. v1 remains in the tree;
-  the v2 manifest's supersession block names the v1 digest.
-- **Task-certificate tooling (preview).** `issue_certificates.py`,
-  `certify.py`, the frozen `certificate-preregistration.v1.json` and its
-  schemas, and a fail-closed `--policy refuse` arm in `free_run`. The
-  unaided and naive-retrieval arms currently use that refuse policy, so they
-  fail by construction and are not model measurements. No certificate results
-  ship in this release.
-- **`compare.py`** for run-to-run comparison, and a campaign-parametrized
-  evidence binder (`--run-ids`, `--episode-set`). The default arguments still
-  reproduce the committed 2026-08 gates pack; its evidence manifest now also
-  binds the certificate preregistration by hash.
-- Run metrics now include the strategy-locking summary from
-  `strategy_metrics` automatically.
+Each case requires eight rubric checks: authoritative evidence, calculation,
+exception diagnosis, routing, approval, correct state change, inspection of
+the resulting receipt, and closure. These checks are related; do not describe
+them as eight independent decisions. The expected routing mix is 50% owned
+escalation with no mutation, 25% approval then execution, and 25% execution
+within authority. All successful outcomes retain a system receipt or ticket.
 
-**New in 1.1.1:** two honesty fixes prompted by an external adversarial
-audit. The harness-v2 adapter code (rejection feedback in observations,
-optimistic-concurrency version checks) is restored. A packaging regression
-had shipped v1 adapter semantics beside the v2 system prompt, so the
-published v2 results were not reproducible from this repository. And
-`state_changes_outside_contract` is now **measured** per episode by diffing
-live state against an independent recomputation from the sealed contract; it
-was previously reported as zero by construction, which could never fire.
-Runs that predate the measurement report `NOT_MEASURED`, not zero.
+The arithmetic differs by family: outstanding settlement amount, allocation
+residual, ledger adjustment, margin/MTA calculation, permission bitmask,
+effective amendment, independent proof count, or contiguous sequence.
+Policies and thresholds are fictional house rules, not assertions about law
+or regulatory requirements. No private calibration material or external
+source document is used to generate this release.
 
-**New in 1.1.0:** per-run salted canaries (the published derivation no longer
-weakens contamination detection); `cleanroom_eval.strategy_metrics` to
-classify every rejected turn as identical repeat / local adjustment /
-strategy revision and measure strategy-locking directly from transcripts
-(see `docs/technical-note-strategy-locking.md`); provider-usage telemetry.
+## Run
 
-**Current result (harness v2, preregistered, supplier-run; evidence in
-`cleanroom_eval/evidence/gates-2026-08/`):** one frontier arm completed
-**27/40** episodes within 24 turns; one open-weight arm completed **39/40**;
-neither probed hidden fields nor echoed a canary. The scripted reference
-policy completes 40/40; it reads validator error text, so it bounds harness
-solvability, not model skill. All 243 committed adversarial mutations are
-rejected by the deterministic verifier with their expected errors; that is
-contract-level sensitivity, not a claim about model-facing attacks. These
-runs were executed by the environment's author and are not blind; whether
-frontier models saturate this environment as a class is an open hypothesis
-(one arm measured). Independent replication is invited: the harness, sealed
-sets and gates are all in this repository.
-
-Every episode, institution, name and identifier is invented
-(`CLEANROOM_SYNTHETIC`); independent origin is enforced by a shingle-overlap
-release gate. See `SECURITY-RELEASE.md` for the exact boundary.
-
-## Evaluate your model in three commands
-
-```bash
+```sh
 pip install -e .
-python -m cleanroom_eval.contract verify-set          # verify the sealed set
-python -m cleanroom_eval.fire_gates preregister --out runs
+python -m banking_v3 run --dataset banking_v3/data/development \
+  --policy reference --out /tmp/banking-reference-run
 ```
 
-Then point the harness at any OpenAI-compatible endpoint:
+All commands run through Prefect. Configure `PREFECT_API_URL` for your server;
+otherwise Prefect uses its local server. Output directories must be new.
+The reference policy knows the evaluator answer. It demonstrates mechanical
+solvability and is never reported as an AI model score.
 
-```bash
-export CLEANROOM_POLICY_BASE_URL=https://api.your-provider.com/v1
-export CLEANROOM_POLICY_API_KEY=...
-export CLEANROOM_POLICY_MODEL=your-model
-python -m cleanroom_eval.free_run --policy chat --out runs --run-id my-model
-python -m cleanroom_eval.fire_gates report --out runs --runs my-model
+For a real model, configure `CLEANROOM_POLICY_BASE_URL`,
+`CLEANROOM_POLICY_API_KEY`, and `CLEANROOM_POLICY_MODEL`, then:
+
+```sh
+python -m banking_v3 run --dataset banking_v3/data/development \
+  --policy live --turn-limit 24 --out /tmp/banking-model-run
 ```
 
-The report shows completion rate, mean turns and every gate count. The
-scripted baseline (`--policy scripted`) runs offline and needs no keys.
+The runner freezes case IDs, grader/code digest, model identity, turn budget
+and missing-result policy before the first call. Tool failures remain in the
+trajectory. Provider failures remain in the denominator and cause a nonzero
+CLI exit; they are not silently dropped or called model failures. Each run
+saves per-case grades, transcripts, aggregate failure patterns and telemetry.
+Credentials and HTTP error bodies never enter reports.
 
-## What is in the box
+Regrade saved trajectories without trusting their recorded rewards:
 
-- `cleanroom_eval/assets/episodes/`, `episodes_v2/`: the sealed sets, with
-  per-episode task cards and adversarial mutations
-- `cleanroom_eval/free_run.py`: the agent loop for any OpenAI-compatible
-  endpoint, with per-call telemetry (status, latency, request/response hashes,
-  provider usage where reported)
-- `cleanroom_eval/fire_gates.py`: preregistration, honest baseline, gates
-  report
-- `cleanroom_eval/evidence/`: the hash-binding evidence pipeline and the
-  2026-08 gates evidence pack
-- `cleanroom_eval/schemas/`: every contract as JSON Schema
+```sh
+python -m banking_v3 grade --dataset banking_v3/data/development \
+  --transcripts /tmp/banking-model-run/trajectories --out /tmp/banking-regrade
+```
 
-## Fresh, unseen episode sets
+Missing trajectories remain in the denominator as incomplete cases.
 
-This public set is a demonstration sample: its canaries and traps are public,
-so treat results on models trained after its release accordingly. The
-generator that produced it mints **fresh, private, hash-sealed episode sets**
-(new worlds, namespaces, canaries and mutation batteries) for evaluation
-programmes that need uncontaminated instruments, along with custom
-operational families and independently bound evidence reports. Open a GitHub
-issue on this repository to talk.
+To generate a fresh dataset outside the repository:
 
-## License
+```sh
+python -m banking_v3 regenerate --out /tmp/banking-fresh-dataset
+```
 
-MIT; see `LICENSE`. `SECURITY-RELEASE.md` documents what this archive
-deliberately excludes (evaluator-only oracles, private gold).
+Only `development/` may be exported publicly. `evaluation/` and `evaluator/`
+remain private, including the randomly generated evaluation seed, answers,
+and reference trajectories. `receipt.json` contains publishable counts and
+hash commitments. Regeneration does not overwrite prior runs.
 
-## Status, 26 September 2026
+## Evaluation boundary and split
 
-This repository is release 1.2.0 of the sealed evaluation package. The
-evaluation ledger for the preregistered calibration lane (T4 to T8), the
-Harbor-format packaging note and the exporter skeleton live in the maintained
-environment repository:
+The model receives a case brief, document index, its own working state and
+seven tool schemas. It must read documents to access their contents. Tools
+never return gold answers, scores or the next required action. Assessment
+records a judgment without saying whether it is correct. Mutations enforce
+versions, idempotency, policy authority, evidence availability and approval;
+final grading independently checks the calculation and resulting state.
+The model adapter receives only `observe()` and `step()` outputs; it must not
+be given Python/filesystem access to the evaluator process or private files.
+This is an API boundary, not a sandbox for arbitrary model-authored code.
 
-- Ledger: https://github.com/thefazzer/bankingenv/blob/main/docs/EVAL-LEDGER.md
-- Packaging: https://github.com/thefazzer/bankingenv/blob/main/docs/HARBOR-PACKAGING.md
-- Exporter: https://github.com/thefazzer/bankingenv/blob/main/scripts/export_harbor.py
+Development and evaluation have disjoint case, document and world IDs and
+disjoint combinations of stale policy, duplicate event, materiality and
+missing evidence. Both share workflow primitives and renderers. This tests
+compositional transfer, not unseen-family generalization. The public data is
+contaminable; private seeds are not published. Cryptographic hashes bind bytes;
+they do not establish realism, difficulty or independent review.
 
-Results there follow the ledger's own labels: T4 v8, T5-v1, T6-v2 and T8-v1
-did not pass their canonical claims; T7-v3 passed narrowly; the T8-v1
-one-shot replication on a second, untouched corpus did not pass, and the
-union line is closed. That lane runs on private corpora and is calibration
-evidence, not a result on the episodes in this repository.
+## Validation and honest status
 
-## Related: BankingOps Coverage Grid
+Each generated answer is checked against separately constructed arithmetic.
+Every case gets an evaluator-informed successful replay and single-fault
+adversarial trajectories for wrong calculation, policy, diagnosis, routing,
+evidence, approval, operation, owner, version, receipt and closure as applicable.
+The receipt reports actual denominators and counts, with private case details
+excluded. Mechanical checks are not independent human validation.
 
-The companion capital-markets division taxonomy is the BankingOps Coverage
-Grid (BOCG), currently v0.6.2:
-https://github.com/thefazzer/bankingops-coverage-grid. BOCG's
-`docs/downstream-evidence.md` records which of its division keys the
-calibration lane above has exercised. The grid is a model-consensus prior and
-its live run is still marked provisional; nothing in this repository
-validates it.
+No model-difficulty or human-certification claim is made without a new receipt.
+Legacy August scores (27/40 and 39/40) apply only to the historical v2 set.
+The legacy `cleanroom_eval.certify` entry point is disabled because it used
+scripted refusals in place of model measurements. There are no issued v3
+certificates. Admission still requires real model runs and independent domain
+review; a mechanically passing generated case is a development artifact.
+
+## Reproduction and release
+
+Run `python -m pytest banking_v3/tests -q`. The canonical release builder
+exports explicit code/data directories, excludes evaluation seeds, private
+answers and evaluator-only historical assets, and writes a byte manifest.
+Both public repositories consume that same archive. Runtime version 2.0 and
+dataset version 3 intentionally distinguish software from fixture versions.
+
+MIT. Every generated document is marked `CLEANROOM_SYNTHETIC`.
